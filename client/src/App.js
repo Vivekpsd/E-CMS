@@ -1,9 +1,12 @@
 import React from 'react';
+import Landing from './components/layouts/landing';
+import Navbar from './components/layouts/navbar';
 
 export default function App() {
   return (
     <div>
-      <h1>Running..</h1>
+      <Navbar />
+      <Landing />
     </div>
   );
 }
