@@ -10,4 +10,8 @@ app.get('/', (req, res) => {
   res.send('App Running!');
 });
 
+//Define Routes
+app.use('/api/users', require('./routes/users'));
+app.use('/api/auth', require('./routes/auth'));
+
 app.listen(PORT, () => console.log(`Server Running on port ${PORT}!`));
