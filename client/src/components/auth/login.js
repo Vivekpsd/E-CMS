@@ -12,8 +12,7 @@ const Login = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    //   if (password !== password2) {
-    //   //   setAlert('Password do not match', 'danger');
+    //
     //   } else {
     //     const newUser = {
     //       name,
@@ -44,7 +43,7 @@ const Login = () => {
     <Fragment>
       <h1 className='large text-primary'>Login</h1>
       <p className='lead'>
-        <i className=''>Login</i>
+        <i className=''>Login Here</i>
       </p>
       <form className='form' onSubmit={(e) => onSubmit(e)}>
         <div className='form-group'>
@@ -68,7 +67,7 @@ const Login = () => {
             required
           />
         </div>
-        <input type='submit' className='btn btn-primary' value='Register ' />
+        <input type='submit' className='btn btn-primary' value='login' />
       </form>
     </Fragment>
   );
