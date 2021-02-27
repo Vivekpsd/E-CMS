@@ -5,16 +5,14 @@ const ProfileSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'user',
   },
-  handle: {
-    type: String,
-    required: true,
-    max: 40,
+  enrolledCourse: {
+    type: [String],
   },
-  course: {
-    type: String,
+  assignment: {
+    type: [String],
   },
-  location: {
-    type: String,
+  notification: {
+    type: [String],
   },
   skills: {
     type: [String],
@@ -42,6 +40,27 @@ const ProfileSchema = new mongoose.Schema({
       },
     },
   ],
+  social: {
+    youtube: {
+      type: String,
+    },
+    twitter: {
+      type: String,
+    },
+    facebook: {
+      type: String,
+    },
+    linkedin: {
+      type: String,
+    },
+    instagram: {
+      type: String,
+    },
+  },
+  date: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
 module.exports = Profile = mongoose.model('profile', ProfileSchema);
