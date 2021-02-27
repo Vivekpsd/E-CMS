@@ -10,7 +10,18 @@ const { check, validationResult } = require('express-validator');
 //@route  GET api/auth
 //@Desc   Test Route
 //@Access Public
+
+router.use(function (req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Auth-Token, Content-Type, Accept'
+  );
+  next();
+});
+
 router.get('/', auth, async (req, res) => {
+  res.header('Access-Control-Allow-Origin', '*');
   try {
     const user = await User.findById(req.user.id).select('-password');
     res.json(user);

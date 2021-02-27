@@ -4,11 +4,20 @@ const gravatar = require('gravatar');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const config = require('config');
-const app = express();
 
 const { check, validationResult } = require('express-validator');
 
 const User = require('../../models/User');
+
+router.use(function (req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Auth-Token, Content-Type, Accept'
+  );
+
+  next();
+});
 
 //@route  POST api/users
 //@Desc   Register User
@@ -24,7 +33,6 @@ router.post(
     ).isLength({ min: 6 }),
   ],
   async (req, res) => {
-    console.log(req.body.name);
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
