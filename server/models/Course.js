@@ -9,19 +9,16 @@ const CourseSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  content: {
-    type: String,
-    required: true,
-  },
   img: {
-    type: Image,
+    data: Buffer,
+    contentType: String,
   },
   teacher: {
     type: String,
     required: true,
   },
   prerequisite: {
-    type: String,
+    type: [String],
     required: true,
   },
   content: {
@@ -30,11 +27,9 @@ const CourseSchema = new mongoose.Schema({
   },
   rating: {
     type: Number,
-    required: true,
   },
   review: {
     type: [String],
-    require: true,
   },
   startDate: {
     type: Date,
