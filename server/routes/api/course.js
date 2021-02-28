@@ -10,7 +10,7 @@ const Course = require('../../models/Course');
 // @route   GET api/course/me
 // @desc
 // @access  Public
-router.get('/', (req, res) => res.json({ msg: 'Course Works' }));
+//router.get('/', (req, res) => res.json({ msg: 'Course Works' }));
 
 // @route    POST api/course
 // @desc     Create or update Course
@@ -82,5 +82,57 @@ router.post(
     }
   }
 );
+
+// @route    GET api/course
+// @desc     Get all Course
+// @access   Public
+router.get('/', async (req, res) => {
+  try {
+    const courses = await Course.find();
+    res.json(courses);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
+// @route    GET api/course/course/:course_id
+// @desc     Get course by course ID
+// @access   Public
+
+router.get('/id/:course_id', async (req, res) => {
+  try {
+    const course = await Course.findById(req.params.course_id);
+
+    if (!course)
+      return res
+        .status(400)
+        .json({ msg: 'There is no course with this course ID' });
+    res.json(course);
+  } catch (err) {
+    console.error(err.message);
+    if (err.kind == 'ObjectId') {
+      return res
+        .status(400)
+        .json({ msg: 'There is no course with this course ID' });
+    }
+    res.status(500).send('Server Error');
+  }
+});
+
+// @route    DELETE api/course
+// @desc     DELETE course
+// @access   Private
+
+router.delete('/:course_id', auth, async (req, res) => {
+  try {
+    //Remove Course
+    await Course.findByIdAndRemove(req.params.course_id);
+    res.json({ msg: 'Course Deleted' });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
 
 module.exports = router;
