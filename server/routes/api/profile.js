@@ -43,7 +43,7 @@ router.get('/me', auth, async (req, res) => {
 
 router.post(
   '/',
-  [auth, [check('skills', 'Skills is required').notEmpty()]],
+  [auth, [check('skills', 'Skills are required').notEmpty()]],
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -80,7 +80,7 @@ router.post(
     if (twitter) profileFields.social.twitter = twitter;
     if (facebook) profileFields.social.facebook = facebook;
     if (instagram) profileFields.social.instagram = instagram;
-    if (linkedin) profileFields.social.youtube = linkedin;
+    if (linkedin) profileFields.social.linkedin = linkedin;
 
     try {
       let profile = await Profile.findOne({ user: req.user.id });

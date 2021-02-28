@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getCurrentProfile } from '../../actions/profile';
+import DashboardActions from './DashboardAction';
 import Spinner from '../layouts/Spinner';
 
 const Dashboard = ({
@@ -23,6 +24,7 @@ const Dashboard = ({
       </p>
       {profile !== null ? (
         <Fragment>
+          <DashboardActions />
           <div className='my-2'>
             <button className='btn btn-danger'>
               <i className='' /> Delete My Account

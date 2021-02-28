@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import PrivateRoute from './components/routing/PrivateRoute';
 import CreateProfile from './components/profile-forms/CreateProfile';
+import EditProfile from './components/profile-forms/EditProfile';
 //Redux
 import { Provider } from 'react-redux';
 import store from './store';
@@ -39,6 +40,7 @@ export default function App() {
               path='/create-profile'
               component={CreateProfile}
             />
+            <PrivateRoute exact path='/edit-profile' component={EditProfile} />
           </Switch>
         </section>
       </Router>
