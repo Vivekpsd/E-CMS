@@ -11,6 +11,15 @@ const User = require('../../models/User');
 
 //router.get('/test', auth, (req, res) => res.json({ msg: 'Profile Works' }));
 
+router.use(function (req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Auth-Token, Content-Type, Accept'
+  );
+  next();
+});
+
 router.get('/me', auth, async (req, res) => {
   try {
     const profile = await Profile.findOne({
@@ -145,5 +154,22 @@ router.delete('/', auth, async (req, res) => {
     res.status(500).send('Server Error');
   }
 });
+//--------------------------------------TODO------------------------------------
+// @route    PUT api/profile/enrolled
+// @desc     ADD Profile Enrolled Courses
+// @access   Private
+// router.put('/courses', auth, async (req, res) => {
+
+//   const newCourse = {
+//     title,
+//     ...
+//   }
+//   try {
+//     const profile = await Profile.findOne({ user: req.user.id });
+
+//     profile.enrolledCourse(newCourse);
+//     await profile.save();
+//   } catch (error) {}
+// });
 
 module.exports = router;
