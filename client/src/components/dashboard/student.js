@@ -23,6 +23,8 @@ const Student = ({
         <i className='' /> Welcome {user && user.name}
         <br></br>
         <span className='badge badge-info'>Role : {user.role}</span>
+        <br></br>
+        <span className='badge badge-info'>Route: Student</span>
       </p>
       {profile !== null ? (
         <Fragment>

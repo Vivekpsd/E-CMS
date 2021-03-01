@@ -1,8 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, Fragment } from 'react';
 import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getCurrentProfile } from '../../actions/profile';
+import Spinner from '../../components/layouts/Spinner';
 
 const Dashboard = ({
   getCurrentProfile,
@@ -12,12 +13,19 @@ const Dashboard = ({
   useEffect(() => {
     getCurrentProfile();
   }, [getCurrentProfile]);
+
   return (
-    <div>
-      {user.role === 'admin' && <Redirect to='/admin' />}
-      {user.role === 'student' && <Redirect to='/student' />}
-      {user.role === 'teacher' && <Redirect to='/teacher' />}
-    </div>
+    <Fragment>
+      {loading ? (
+        <Spinner />
+      ) : (
+        <div>
+          {user.role === 'admin' && <Redirect to='/admin' />}
+          {user.role === 'student' && <Redirect to='/student' />}
+          {user.role === 'teacher' && <Redirect to='/teacher' />}
+        </div>
+      )}
+    </Fragment>
   );
 };
 
