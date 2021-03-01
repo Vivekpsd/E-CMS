@@ -39,56 +39,66 @@ const CreateProfile = ({ createProfile, history }) => {
 
   return (
     <Fragment>
-      <h1 className='large text-primary'>Edit Your Profile</h1>
+      <h1 className='large text-primary'>Create Your Profile</h1>
       <p className='lead'>
-        <i className='fas fa-user' /> Add some changes to your profile
+        <i className='fas fa-user' /> Create your profile here
       </p>
-      <small>* = required field</small>
       <form className='form' onSubmit={onSubmit}>
         <div className='form-group'>
+          <label for='skills'>Skills</label>
           <input
+            id='skills'
+            className='form-control'
             type='text'
-            placeholder='* Skills'
+            placeholder='Skills'
             name='skills'
             value={skills}
             onChange={onChange}
           />
-          <small className='form-text'>
+          <small className='form-text text-muted'>
             Please use comma separated values (eg. HTML,CSS,JavaScript,PHP)
           </small>
         </div>
         <div className='form-group'>
+          <label for='gituser'>Github Username</label>
           <input
+            id='gituser'
+            className='form-control'
             type='text'
             placeholder='Github Username'
             name='githubusername'
             value={githubusername}
             onChange={onChange}
           />
-          <small className='form-text'>
+          <small className='form-text text-muted'>
             If you want your latest repos and a Github link, include your
             username
           </small>
         </div>
         <div className='form-group'>
+          <label for='bio'>Bio</label>
           <textarea
             placeholder='A short bio of yourself'
+            id='bio'
+            className='form-control'
             name='bio'
             value={bio}
             onChange={onChange}
           />
-          <small className='form-text'>Tell us a little about yourself</small>
+          <small className='form-text text-muted'>
+            Tell us a little about yourself
+          </small>
         </div>
 
         <div className='my-2'>
           <button
             onClick={() => toggleSocialInputs(!displaySocialInputs)}
             type='button'
-            className='btn btn-light'
+            className='btn btn-secondary'
           >
             Add Social Network Links
           </button>
-          <span>Optional</span>
+          <span className='form-text text-muted'>Optional</span>
         </div>
 
         {displaySocialInputs && (
@@ -101,6 +111,7 @@ const CreateProfile = ({ createProfile, history }) => {
                 name='twitter'
                 value={twitter}
                 onChange={onChange}
+                className='form-control'
               />
             </div>
 
@@ -112,6 +123,7 @@ const CreateProfile = ({ createProfile, history }) => {
                 name='facebook'
                 value={facebook}
                 onChange={onChange}
+                className='form-control'
               />
             </div>
 
@@ -123,6 +135,7 @@ const CreateProfile = ({ createProfile, history }) => {
                 name='youtube'
                 value={youtube}
                 onChange={onChange}
+                className='form-control'
               />
             </div>
 
@@ -134,6 +147,7 @@ const CreateProfile = ({ createProfile, history }) => {
                 name='linkedin'
                 value={linkedin}
                 onChange={onChange}
+                className='form-control'
               />
             </div>
 
@@ -145,12 +159,13 @@ const CreateProfile = ({ createProfile, history }) => {
                 name='instagram'
                 value={instagram}
                 onChange={onChange}
+                className='form-control'
               />
             </div>
           </Fragment>
         )}
 
-        <input type='submit' className='btn btn-primary my-1' />
+        <input type='submit' className='btn btn-primary my-1 mr-2' />
         <Link className='btn btn-light my-1' to='/dashboard'>
           Go Back
         </Link>
