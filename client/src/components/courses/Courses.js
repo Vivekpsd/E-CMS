@@ -1,15 +1,15 @@
 import React, { Fragment, useEffect } from 'react';
 import Spinner from '../layouts/Spinner';
-import { getProfiles } from '../../actions/profile';
+import { getCourses } from '../../actions/course';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import ProfileItem from './ProfileItem';
 
-const Profiles = ({ getProfiles, profile: { profiles, loading } }) => {
+import CourseItem from './CourseItem';
+
+const Courses = ({ getCourses, course: { courses, loading } }) => {
   useEffect(() => {
-    getProfiles();
-  }, [getProfiles]);
-
+    getCourses();
+  }, [getCourses]);
   return (
     <Fragment>
       {loading ? (
@@ -22,12 +22,12 @@ const Profiles = ({ getProfiles, profile: { profiles, loading } }) => {
             developers
           </p>
           <div className='profiles'>
-            {profiles.length > 0 ? (
-              profiles.map((profile) => (
-                <ProfileItem key={profile._id} profile={profile} />
+            {courses.length > 0 ? (
+              courses.map((course) => (
+                <CourseItem key={course._id} course={course} />
               ))
             ) : (
-              <h4>No profiles found...</h4>
+              <h4>No courses found...</h4>
             )}
           </div>
         </Fragment>
@@ -36,13 +36,13 @@ const Profiles = ({ getProfiles, profile: { profiles, loading } }) => {
   );
 };
 
-Profiles.propTypes = {
-  getProfiles: PropTypes.func.isRequired,
-  profile: PropTypes.object.isRequired,
+Courses.propTypes = {
+  getCourses: PropTypes.func.isRequired,
+  course: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  profile: state.profile,
+  course: state.course,
 });
 
-export default connect(mapStateToProps, { getProfiles })(Profiles);
+export default connect(mapStateToProps, { getCourses })(Courses);

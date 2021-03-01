@@ -13,6 +13,8 @@ import Admin from './components/dashboard/Admin';
 import Student from './components/dashboard/Student';
 import Teacher from './components/dashboard/Teacher';
 import Profile from './components/profile/Profile';
+import Courses from './components/courses/Courses';
+import Course from './components/course/Course';
 
 //Redux
 import { Provider } from 'react-redux';
@@ -41,6 +43,8 @@ export default function App() {
             <Route exact path='/register' component={Register} />
             <Route exact path='/login' component={Login} />
             <Route exact path='/profiles' component={Profiles} />
+            <Route exact path='/courses' component={Courses} />
+            <Route exact path='/course/:id' component={Course} />
             <Route exact path='/admin' component={Admin} />
             <Route exact path='/student' component={Student} />
             <Route exact path='/teacher' component={Teacher} />

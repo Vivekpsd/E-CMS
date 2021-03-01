@@ -3,6 +3,15 @@ const router = express.Router();
 const auth = require('../../middleware/auth');
 const { check, validationResult } = require('express-validator');
 const Course = require('../../models/Course');
+
+router.use(function (req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Auth-Token, Content-Type, Accept'
+  );
+  next();
+});
 //All course
 
 //CourseDetails
