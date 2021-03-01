@@ -7,7 +7,7 @@ import Spinner from '../../components/layouts/Spinner';
 
 const Dashboard = ({
   getCurrentProfile,
-  auth: { user },
+  auth: {},
   profile: { profile, loading },
 }) => {
   useEffect(() => {
@@ -20,9 +20,9 @@ const Dashboard = ({
         <Spinner />
       ) : (
         <div>
-          {user.role === 'admin' && <Redirect to='/admin' />}
-          {user.role === 'student' && <Redirect to='/student' />}
-          {user.role === 'teacher' && <Redirect to='/teacher' />}
+          {profile.user.role === 'admin' && <Redirect to='/admin' />}
+          {profile.user.role === 'student' && <Redirect to='/student' />}
+          {profile.user.role === 'teacher' && <Redirect to='/teacher' />}
         </div>
       )}
     </Fragment>
