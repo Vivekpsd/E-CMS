@@ -21,6 +21,8 @@ const Dashboard = ({
       <h1 className='large text-primary'>Dashboard</h1>
       <p className='lead'>
         <i className='' /> Welcome {user && user.name}
+        <br></br>
+        <span className='badge badge-info'>Role : {user.role}</span>
       </p>
       {profile !== null ? (
         <Fragment>
