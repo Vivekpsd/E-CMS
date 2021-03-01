@@ -37,8 +37,8 @@ export const register = ({ name, email, password }) => async (dispatch) => {
       'Content-Type': 'application/json',
     },
   };
-
-  const body = { name, email, password };
+  const role = 'student';
+  const body = { name, email, password, role };
 
   try {
     const res = await axios.post(
