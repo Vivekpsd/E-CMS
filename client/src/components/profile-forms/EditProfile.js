@@ -50,7 +50,7 @@ const EditProfile = ({
       linkedin: loading || !profile.social ? '' : profile.social.linkedin,
       youtube: loading || !profile.social ? '' : profile.social.youtube,
     });
-  }, [loading]);
+  }, [loading, getCurrentProfile]);
 
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });

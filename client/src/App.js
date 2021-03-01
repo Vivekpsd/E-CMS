@@ -9,6 +9,10 @@ import PrivateRoute from './components/routing/PrivateRoute';
 import CreateProfile from './components/profile-forms/CreateProfile';
 import EditProfile from './components/profile-forms/EditProfile';
 import Profiles from './components/profiles/Profiles';
+import Admin from './components/dashboard/Admin';
+import Student from './components/dashboard/Student';
+import Teacher from './components/dashboard/Teacher';
+import Profile from './components/profile/Profile';
 
 //Redux
 import { Provider } from 'react-redux';
@@ -37,6 +41,10 @@ export default function App() {
             <Route exact path='/register' component={Register} />
             <Route exact path='/login' component={Login} />
             <Route exact path='/profiles' component={Profiles} />
+            <Route exact path='/admin' component={Admin} />
+            <Route exact path='/student' component={Student} />
+            <Route exact path='/teacher' component={Teacher} />
+            <Route exact path='/profile/:id' component={Profile} />
             <PrivateRoute exact path='/dashboard' component={Dashboard} />
             <PrivateRoute
               exact
