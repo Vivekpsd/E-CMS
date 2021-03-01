@@ -13,6 +13,9 @@ const DashboardActions = () => {
       <Link to='/assigment' className='btn btn-light mr-3'>
         <i className='text-primary' /> Assigment
       </Link>
+      <Link to='/profiles' className='btn btn-light mr-3'>
+        <i className=' text-primary' /> View All Users
+      </Link>
     </div>
   );
 };

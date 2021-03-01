@@ -2,6 +2,8 @@ import React, { useState, Fragment, useEffect } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { FaTwitter } from 'react-icons/fa';
+
 import { createProfile, getCurrentProfile } from '../../actions/profile';
 
 const EditProfile = ({
@@ -125,7 +127,7 @@ const EditProfile = ({
         {displaySocialInputs && (
           <Fragment>
             <div className='form-group social-input'>
-              <i className='fab fa-twitter fa-2x' />
+              <FaTwitter />
               <input
                 type='text'
                 placeholder='Twitter URL'
