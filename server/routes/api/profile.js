@@ -168,7 +168,7 @@ router.put(
     auth,
     [
       check('message', 'Write a Message').not().notEmpty(),
-      check('sentBy', 'Writr Sender name').not().notEmpty(),
+      check('sentBy', 'Write Sender name').not().notEmpty(),
     ],
   ],
   async (req, res) => {
@@ -178,10 +178,11 @@ router.put(
     }
 
     const { message, sentBy } = req.body;
-
+    const senderID = req.user.id;
     const newMsg = {
       message,
       sentBy,
+      senderID,
     };
 
     try {
@@ -195,10 +196,7 @@ router.put(
           await profile.save();
         });
       });
-      // await Profile.find.forEach(async (profilea) => {
-      //   //profile.messages.unshift(newMsg);
-      //   console.log(profilea._id);
-      // });
+
       res.json('Completed');
     } catch (err) {
       console.error(err.message);
