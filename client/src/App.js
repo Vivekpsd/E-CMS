@@ -18,6 +18,7 @@ import Teacher from './components/dashboard/Teacher';
 import Profile from './components/profile/Profile';
 import Courses from './components/courses/Courses';
 import Course from './components/course/Course';
+import Messages from './components/message/Messages';
 
 //Redux
 import { Provider } from 'react-redux';
@@ -75,6 +76,7 @@ export default function App() {
               component={CreateProfile}
             />
             <PrivateRoute exact path='/edit-profile' component={EditProfile} />
+            <PrivateRoute exact path='/message' component={Messages} />
           </Switch>
         </section>
       </Router>
