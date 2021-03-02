@@ -16,11 +16,6 @@ router.use(function (req, res, next) {
 
 //CourseDetails
 
-// @route   GET api/course/me
-// @desc
-// @access  Public
-//router.get('/', (req, res) => res.json({ msg: 'Course Works' }));
-
 // @route    POST api/course
 // @desc     Create or update Course
 // @access   Private
@@ -62,12 +57,7 @@ router.post(
     if (description) courseFields.description = description;
     if (startDate) courseFields.startDate = startDate;
     if (endDate) courseFields.endDate = endDate;
-    if (prerequisite) {
-      courseFields.prerequisite = prerequisite
-        .split(',')
-        .map((preq) => preq.trim());
-    }
-    console.log(courseFields.prerequisite);
+    if (prerequisite) courseFields.prerequisite = prerequisite;
 
     try {
       let course = await Course.findOne({ title });

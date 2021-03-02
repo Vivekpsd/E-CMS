@@ -3,6 +3,7 @@ import Spinner from '../layouts/Spinner';
 import { getCourses } from '../../actions/course';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import CourseItem from './CourseItem';
 
@@ -16,11 +17,24 @@ const Courses = ({ getCourses, course: { courses, loading } }) => {
         <Spinner />
       ) : (
         <Fragment>
-          <h1 className='large text-primary'>Developers</h1>
+          <h1 className='large text-primary'>Courses</h1>
           <p className='lead'>
             <i className='fab fa-connectdevelop' /> Browse and connect with
             developers
           </p>
+
+          <div>
+            <p className=''></p>
+            <Link to='/create-course' className='btn btn-primary'>
+              Add Course
+            </Link>
+            &nbsp;
+            <Link to='/dashboard' className='btn btn-secondary'>
+              Go Back To Dashboard
+            </Link>
+          </div>
+
+          <br></br>
           <div className='profiles'>
             {courses.length > 0 ? (
               courses.map((course) => (

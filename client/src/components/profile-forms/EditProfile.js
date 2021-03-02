@@ -68,7 +68,7 @@ const EditProfile = ({
       </p>
       <form className='form' onSubmit={onSubmit}>
         <div className='form-group'>
-          <label for='skills'>Skills</label>
+          <label htmlFor='skills'>Skills</label>
           <input
             id='skills'
             className='form-control'
@@ -83,7 +83,7 @@ const EditProfile = ({
           </small>
         </div>
         <div className='form-group'>
-          <label for='gituser'>Github Username</label>
+          <label htmlFor='gituser'>Github Username</label>
           <input
             id='gituser'
             className='form-control'
@@ -99,7 +99,7 @@ const EditProfile = ({
           </small>
         </div>
         <div className='form-group'>
-          <label for='bio'>Bio</label>
+          <label htmlFor='bio'>Bio</label>
           <textarea
             placeholder='A short bio of yourself'
             id='bio'

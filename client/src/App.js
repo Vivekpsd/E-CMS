@@ -6,8 +6,11 @@ import Register from './components/auth/register';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import PrivateRoute from './components/routing/PrivateRoute';
+import RoleRoute from './components/routing/RoleRoute';
 import CreateProfile from './components/profile-forms/CreateProfile';
 import EditProfile from './components/profile-forms/EditProfile';
+import CreateCourse from './components/course-forms/CreateCourse';
+import EditCourse from './components/course-forms/EditCourse';
 import Profiles from './components/profiles/Profiles';
 import Admin from './components/dashboard/Admin';
 import Student from './components/dashboard/Student';
@@ -45,11 +48,27 @@ export default function App() {
             <Route exact path='/profiles' component={Profiles} />
             <Route exact path='/courses' component={Courses} />
             <Route exact path='/course/:id' component={Course} />
-            <Route exact path='/admin' component={Admin} />
-            <Route exact path='/student' component={Student} />
-            <Route exact path='/teacher' component={Teacher} />
-            <Route exact path='/profile/:id' component={Profile} />
+            <RoleRoute exact path='/admin' role='admin' component={Admin} />
+            <RoleRoute
+              exact
+              path='/student'
+              role='student'
+              component={Student}
+            />
+            <RoleRoute
+              exact
+              path='/teacher'
+              role='teacher'
+              component={Teacher}
+            />
+            <PrivateRoute exact path='/profile/:id' component={Profile} />
             <PrivateRoute exact path='/dashboard' component={Dashboard} />
+            <PrivateRoute
+              exact
+              path='/create-course'
+              component={CreateCourse}
+            />
+            <PrivateRoute exact path='/editcourse/:id' component={EditCourse} />
             <PrivateRoute
               exact
               path='/create-profile'

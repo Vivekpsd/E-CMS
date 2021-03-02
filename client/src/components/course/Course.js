@@ -19,7 +19,7 @@ const Course = ({ match, getCourseById, course: { course, loading } }) => {
             Back To All Courses
           </Link>
 
-          <Link to='/edit-course' className='btn btn-dark'>
+          <Link to={`/editcourse/${course._id}`} className='btn btn-dark'>
             Edit Course
           </Link>
 
