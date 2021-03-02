@@ -22,9 +22,10 @@ const Profiles = ({ getProfiles, profile: { profiles, loading } }) => {
             <i className='fab fa-connectdevelop' /> Browse and connect with
             developers
           </p>
-          <Link to='/dashboard' className='btn btn-secondary'>
+          <Link to='/dashboard' className='btn btn-dark'>
             Back To Dashboard
           </Link>
+          <hr></hr>
           <br></br>
           <div className='profiles'>
             {profiles.length > 0 ? (

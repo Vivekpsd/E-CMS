@@ -3,6 +3,7 @@ import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { login } from '../../actions/auth';
+import { FaUser, FaCode } from 'react-icons/fa';
 
 const Login = ({ login, isAuthenticated }) => {
   const [formData, setFormData] = useState({
@@ -26,34 +27,62 @@ const Login = ({ login, isAuthenticated }) => {
 
   return (
     <Fragment>
-      <h1 className='large text-primary'>Login</h1>
-      <p className='lead'>
-        <i className=''>Login Here</i>
-      </p>
-      <form className='form' onSubmit={(e) => onSubmit(e)}>
-        <div className='form-group'>
-          <input
-            type='email'
-            placeholder='Email Address'
-            name='email'
-            value={email}
-            onChange={(e) => onChange(e)}
-            required
-          />
+      <div className='container'>
+        <div className='row'>
+          <div className='col-sm-6 mx-auto mt-4'>
+            <div className='card text-dark bg-light mb-3 shadow p-3 mb-5 bg-white rounded'>
+              <h1 className='display-4 text-center'>Login</h1>
+              <div className='card-body'>
+                <span className='card-text'>
+                  <hr></hr>
+                  <form className='form' onSubmit={(e) => onSubmit(e)}>
+                    <div className='form-group'>
+                      <label htmlFor='email'>
+                        {' '}
+                        <FaUser />
+                        &nbsp; Email
+                      </label>
+                      <input
+                        id='email'
+                        type='email'
+                        className='form-control'
+                        placeholder='Email Address'
+                        name='email'
+                        value={email}
+                        onChange={(e) => onChange(e)}
+                        required
+                      />
+                    </div>
+                    <div className='form-group'>
+                      <label htmlFor='password'>
+                        <FaCode />
+                        &nbsp;Password
+                      </label>
+                      <input
+                        id='password'
+                        type='password'
+                        placeholder='Password'
+                        className='form-control'
+                        name='password'
+                        value={password}
+                        minLength='6'
+                        onChange={(e) => onChange(e)}
+                        required
+                      />
+                    </div>
+                    <br></br>
+                    <input
+                      type='submit'
+                      className='btn btn-info btn-block'
+                      value='login'
+                    />
+                  </form>
+                </span>
+              </div>
+            </div>
+          </div>
         </div>
-        <div className='form-group'>
-          <input
-            type='password'
-            placeholder='Password'
-            name='password'
-            value={password}
-            minLength='6'
-            onChange={(e) => onChange(e)}
-            required
-          />
-        </div>
-        <input type='submit' className='btn btn-primary' value='login' />
-      </form>
+      </div>
     </Fragment>
   );
 };

@@ -15,13 +15,14 @@ const Messages = ({ getCurrentProfile, profile: { profile, loading } }) => {
     <Fragment>
       <h1 className='large text-primary'>All Messages</h1>
       <p className='lead'>
-        <i className='fab fa-connectdevelop' /> See all messages
+        <i className='fab fa-connectdevelop' /> See all messages here
       </p>
-      <Link to='/dashboard' className='btn btn-secondary'>
+      <Link to='/dashboard' className='btn btn-dark'>
         Back To Dashboard
       </Link>
       <br></br>
-      <div className='profiles'>
+      <br></br>
+      <div className='messages'>
         {profile.messages.length > 0 ? (
           profile.messages.map((message) => (
             <MessageItem key={message._id} message={message} />

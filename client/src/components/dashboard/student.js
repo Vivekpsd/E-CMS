@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { getCurrentProfile } from '../../actions/profile';
 import DashboardActions from './DashboardAction';
 import Spinner from '../layouts/Spinner';
+import ProfilePic from '../layouts/ProfilePic';
 
 const Student = ({
   getCurrentProfile,
@@ -18,26 +19,50 @@ const Student = ({
     <Spinner />
   ) : (
     <Fragment>
-      <h1 className='large text-primary'>Dashboard</h1>
-      <p className='lead'>
-        <i className='' /> Welcome {user && user.name}
-        <br></br>
-        <span className='badge badge-info'>Role : {user.role}</span>
-        <br></br>
-        <span className='badge badge-info'>Route: Student</span>
-      </p>
-      {profile !== null ? (
-        <Fragment>
-          <DashboardActions />
-        </Fragment>
-      ) : (
-        <Fragment>
-          <p>You have not yet setup a profile, please add some info</p>
-          <Link to='/create-profile' className='btn btn-primary my-1'>
-            Create Profile
-          </Link>
-        </Fragment>
-      )}
+      <h1 className='display-4'>Dashboard</h1>
+      <hr></hr>
+      <br></br>
+      <div className='card text-dark bg-light mb-3 shadow p-3 mb-5 bg-white rounded'>
+        <div className='card-body'>
+          <p className='card-text'>
+            <div className='container'>
+              <div className='row'>
+                <div className='col-3'>
+                  <ProfilePic />
+                </div>
+                <div className='col-9'>
+                  <p className='lead'>
+                    <i className='' /> Welcome <b>{user && user.name}</b>
+                    <br></br>
+                    <i className='' /> Bio - {profile && profile.bio}
+                    <br></br>
+                    <span className='badge badge-info'>Role : {user.role}</span>
+                    <br></br>
+                    <span className='badge badge-info'>Route: Student</span>
+                  </p>
+                  {profile !== null ? (
+                    <Fragment>
+                      <DashboardActions />
+                    </Fragment>
+                  ) : (
+                    <Fragment>
+                      <p>
+                        You have not yet setup a profile, please add some info
+                      </p>
+                      <Link
+                        to='/create-profile'
+                        className='btn btn-outline-dark my-1'
+                      >
+                        Create Profile
+                      </Link>
+                    </Fragment>
+                  )}
+                </div>
+              </div>
+            </div>
+          </p>
+        </div>
+      </div>
     </Fragment>
   );
 };

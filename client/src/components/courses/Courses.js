@@ -25,11 +25,11 @@ const Courses = ({ getCourses, course: { courses, loading } }) => {
 
           <div>
             <p className=''></p>
-            <Link to='/create-course' className='btn btn-primary'>
+            <Link to='/create-course' className='btn btn-info'>
               Add Course
             </Link>
             &nbsp;
-            <Link to='/dashboard' className='btn btn-secondary'>
+            <Link to='/dashboard' className='btn btn-dark'>
               Go Back To Dashboard
             </Link>
           </div>
