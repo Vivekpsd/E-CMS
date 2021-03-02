@@ -2,10 +2,17 @@ import React, { Fragment, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Spinner from '../layouts/Spinner';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { getCourseById } from '../../actions/course';
+import { deleteCourse } from '../../actions/course';
 
-const Course = ({ match, getCourseById, course: { course, loading } }) => {
+const Course = ({
+  match,
+  getCourseById,
+  course: { course, loading },
+  deleteCourse,
+  history,
+}) => {
   useEffect(() => {
     getCourseById(match.params.id);
   }, [getCourseById]);
@@ -23,6 +30,13 @@ const Course = ({ match, getCourseById, course: { course, loading } }) => {
             Edit Course
           </Link>
 
+          <button
+            onClick={() => deleteCourse(course._id, history)}
+            className='btn btn-danger'
+          >
+            Delete Course
+          </button>
+
           <div className='course-grid my-1'>
             {course.title && <h1> Course Title = {course.title} </h1>}
             <h1> Content - {course.content}</h1>
@@ -37,6 +51,7 @@ const Course = ({ match, getCourseById, course: { course, loading } }) => {
 Course.propTypes = {
   getCourseById: PropTypes.func.isRequired,
   course: PropTypes.object.isRequired,
+  deleteCourse: PropTypes.func.isRequired,
 };
 const mapSatateToProps = (state) => ({
   course: state.course,
@@ -44,4 +59,5 @@ const mapSatateToProps = (state) => ({
 
 export default connect(mapSatateToProps, {
   getCourseById,
-})(Course);
+  deleteCourse,
+})(withRouter(Course));

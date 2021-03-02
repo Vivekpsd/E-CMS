@@ -41,7 +41,7 @@ const CreateCourse = ({ createCourse, history }) => {
       </p>
       <form className='form' onSubmit={onSubmit}>
         <div className='form-group'>
-          <label for='title'>Course Title</label>
+          <label htmlFor='title'>Course Title</label>
           <input
             id='title'
             className='form-control'
@@ -54,7 +54,7 @@ const CreateCourse = ({ createCourse, history }) => {
         </div>
 
         <div className='form-group'>
-          <label for='descirption'>Description</label>
+          <label htmlFor='descirption'>Description</label>
           <textarea
             placeholder='A breif intro of the course'
             id='description'
@@ -66,7 +66,7 @@ const CreateCourse = ({ createCourse, history }) => {
           <small className='form-text text-muted'>Description of Project</small>
         </div>
         <div className='form-group'>
-          <label for='content'>Course Content</label>
+          <label htmlFor='content'>Course Content</label>
           <input
             id='content'
             className='form-control'
@@ -78,7 +78,7 @@ const CreateCourse = ({ createCourse, history }) => {
           />
         </div>
         <div className='form-group'>
-          <label for='teacher'>Teacher Name</label>
+          <label htmlFor='teacher'>Teacher Name</label>
           <input
             id='teacher'
             className='form-control'
@@ -90,7 +90,7 @@ const CreateCourse = ({ createCourse, history }) => {
           />
         </div>
         <div className='form-group'>
-          <label for='bio'>Start Date</label>
+          <label htmlFor='bio'>Start Date</label>
           <input
             id='startDate'
             type='date'
@@ -101,7 +101,7 @@ const CreateCourse = ({ createCourse, history }) => {
           />
         </div>
         <div className='form-group'>
-          <label for='endDate'>End Date</label>
+          <label htmlFor='endDate'>End Date</label>
           <input
             id='endDate'
             type='date'
@@ -113,7 +113,7 @@ const CreateCourse = ({ createCourse, history }) => {
         </div>
 
         <div className='form-group'>
-          <label for='prerequisite'>Prerequisite</label>
+          <label htmlFor='prerequisite'>Prerequisite</label>
           <input
             placeholder='A breif intro of the course'
             id='prerequisite'

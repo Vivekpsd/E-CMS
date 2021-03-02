@@ -4,6 +4,7 @@ import { getProfiles } from '../../actions/profile';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import ProfileItem from './ProfileItem';
+import { Link } from 'react-router-dom';
 
 const Profiles = ({ getProfiles, profile: { profiles, loading } }) => {
   useEffect(() => {
@@ -21,6 +22,10 @@ const Profiles = ({ getProfiles, profile: { profiles, loading } }) => {
             <i className='fab fa-connectdevelop' /> Browse and connect with
             developers
           </p>
+          <Link to='/dashboard' className='btn btn-secondary'>
+            Back To Dashboard
+          </Link>
+          <br></br>
           <div className='profiles'>
             {profiles.length > 0 ? (
               profiles.map((profile) => (

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { setAlert } from './alert';
 
-import { COURSES_ERROR, GET_COURSES, GET_COURSE } from './types';
+import { COURSES_ERROR, GET_COURSES, GET_COURSE, CLEAR_COURSE } from './types';
 
 //Get all Courses
 export const getCourses = () => async (dispatch) => {
@@ -75,5 +75,24 @@ export const createCourse = (formData, history, edit = false) => async (
       type: COURSES_ERROR,
       payload: { msg: err.response.statusText, status: err.response.status },
     });
+  }
+};
+
+//Delete Course
+
+export const deleteCourse = (courseId, history) => async (dispatch) => {
+  if (window.confirm('Are You Sure?')) {
+    try {
+      await axios.delete(`http://localhost:5000/api/course/${courseId}`);
+
+      dispatch({ type: CLEAR_COURSE });
+      dispatch(setAlert('Course Removed', 'success'));
+      history.push('/courses');
+    } catch (err) {
+      dispatch({
+        type: COURSES_ERROR,
+        payload: { msg: err.response.statusText, status: err.response.status },
+      });
+    }
   }
 };

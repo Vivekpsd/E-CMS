@@ -29,11 +29,6 @@ const Student = ({
       {profile !== null ? (
         <Fragment>
           <DashboardActions />
-          <div className='my-2'>
-            <button className='btn btn-danger'>
-              <i className='' /> Delete My Account
-            </button>
-          </div>
         </Fragment>
       ) : (
         <Fragment>
