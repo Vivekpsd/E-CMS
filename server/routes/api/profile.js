@@ -158,6 +158,55 @@ router.delete('/', auth, async (req, res) => {
     res.status(500).send('Server Error');
   }
 });
+
+// @route    PUT api/profile/msg
+// @desc     Add  message
+// @access   Private
+router.put(
+  '/message',
+  [
+    auth,
+    [
+      check('message', 'Write a Message').not().notEmpty(),
+      check('sentBy', 'Writr Sender name').not().notEmpty(),
+    ],
+  ],
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+    const { message, sentBy } = req.body;
+
+    const newMsg = {
+      message,
+      sentBy,
+    };
+
+    try {
+      Profile.find({}, (err, profile) => {
+        if (err) {
+          console.log('Error :(');
+        }
+
+        profile.map(async (profile) => {
+          profile.messages.unshift(newMsg);
+          await profile.save();
+        });
+      });
+      // await Profile.find.forEach(async (profilea) => {
+      //   //profile.messages.unshift(newMsg);
+      //   console.log(profilea._id);
+      // });
+      res.json('Completed');
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send('Server Error');
+    }
+  }
+);
+
 //--------------------------------------TODO------------------------------------
 // @route    PUT api/profile/enrolled
 // @desc     ADD Profile Enrolled Courses

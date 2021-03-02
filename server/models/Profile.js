@@ -40,6 +40,22 @@ const ProfileSchema = new mongoose.Schema({
       },
     },
   ],
+  messages: [
+    {
+      message: {
+        type: String,
+        required: true,
+      },
+      sentBy: {
+        type: String,
+        required: true,
+      },
+      date: {
+        type: Date,
+        default: Date.now,
+      },
+    },
+  ],
   social: {
     youtube: {
       type: String,
