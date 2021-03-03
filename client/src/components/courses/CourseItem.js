@@ -26,7 +26,7 @@ const CourseItem = ({
                 <ProfilePic />
               </div>
               <div className='col-4'>
-                <h2>{title}</h2>
+                <h3>{title}</h3>
                 <p>{content}</p>
                 <hr></hr>
                 <p className='text-muted'>{description}</p>

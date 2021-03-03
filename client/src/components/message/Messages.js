@@ -25,7 +25,11 @@ const Messages = ({ getCurrentProfile, profile: { profile, loading } }) => {
       <div className='messages'>
         {profile.messages.length > 0 ? (
           profile.messages.map((message) => (
-            <MessageItem key={message._id} message={message} />
+            <MessageItem
+              key={message._id}
+              message={message}
+              profile={profile}
+            />
           ))
         ) : (
           <h4>No messages found...</h4>

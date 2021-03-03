@@ -5,7 +5,7 @@ import ProfilePic from '../layouts/ProfilePic';
 import { FcBookmark } from 'react-icons/fc';
 const ProfileItem = ({
   profile: {
-    user: { _id, name, avatar },
+    user: { _id, name, avatar, role },
     bio,
     skills,
     githubusername,
@@ -21,7 +21,7 @@ const ProfileItem = ({
                 <ProfilePic />
               </div>
               <div className='col-4 ml-5'>
-                <h2>{name}</h2>
+                <h3>{name}</h3>
                 <p>About - {bio}</p>
                 <p>GitHub Username - {githubusername}</p>
                 <hr></hr>
@@ -40,6 +40,19 @@ const ProfileItem = ({
                     </li>
                   ))}
                 </ul>
+              </div>
+              <div className='col-1'>
+                {role === 'admin' && (
+                  <div className='badge badge-danger p-2 mt-2 mb-2'>Admin</div>
+                )}
+                {role === 'student' && (
+                  <div className='badge badge-info p-2 mt-2 mb-2'>Student</div>
+                )}
+                {role === 'teacher' && (
+                  <div className='badge badge-warning p-2 mt-2 mb-2'>
+                    Teacher
+                  </div>
+                )}
               </div>
             </div>
           </div>

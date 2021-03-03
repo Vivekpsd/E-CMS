@@ -24,7 +24,7 @@ const Student = ({
       <br></br>
       <div className='card text-dark bg-light mb-3 shadow p-3 mb-5 bg-white rounded'>
         <div className='card-body'>
-          <p className='card-text'>
+          <span className='card-text'>
             <div className='container'>
               <div className='row'>
                 <div className='col-3'>
@@ -60,7 +60,7 @@ const Student = ({
                 </div>
               </div>
             </div>
-          </p>
+          </span>
         </div>
       </div>
     </Fragment>

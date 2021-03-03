@@ -61,7 +61,7 @@ router.post(
     if (prerequisite) courseFields.prerequisite = prerequisite;
 
     try {
-      let course = await Course.findOne({ title });
+      let course = await Course.findOne(req.id);
 
       if (course) {
         //update
