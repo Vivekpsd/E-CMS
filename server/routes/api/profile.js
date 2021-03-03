@@ -17,6 +17,7 @@ router.use(function (req, res, next) {
     'Access-Control-Allow-Headers',
     'Origin, X-Auth-Token, Content-Type, Accept'
   );
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
   next();
 });
 
@@ -205,6 +206,29 @@ router.put(
   }
 );
 
+// @route    PUT api/profile/Enroll
+// @desc     Add Enrolled Course to Profile
+// @access   Private
+router.put('/enroll/:course_id', auth, async (req, res) => {
+  const user = req.user.id;
+  const courseID = req.params.course_id;
+
+  try {
+    const profile = await Profile.findOne({ user: req.user.id });
+    // const enrollCheck = profile.enrolledCourse.forEach((course) => {
+    //   course === courseID ? true : false;
+    // });
+    //if (enrollCheck) {
+    profile.enrolledCourse.unshift(courseID);
+    await profile.save();
+    //}
+
+    res.json(profile);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
 //--------------------------------------TODO------------------------------------
 // @route    PUT api/profile/enrolled
 // @desc     ADD Profile Enrolled Courses

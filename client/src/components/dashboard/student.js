@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getCurrentProfile } from '../../actions/profile';
-import DashboardActions from './DashboardAction';
+import DashboardStudent from './DashboardStudent';
 import Spinner from '../layouts/Spinner';
 import ProfilePic from '../layouts/ProfilePic';
-
+const { v4: uuidv4 } = require('uuid');
 const Student = ({
   getCurrentProfile,
   auth: { user },
@@ -42,7 +42,7 @@ const Student = ({
                   </p>
                   {profile !== null ? (
                     <Fragment>
-                      <DashboardActions />
+                      <DashboardStudent />
                     </Fragment>
                   ) : (
                     <Fragment>
@@ -58,6 +58,28 @@ const Student = ({
                     </Fragment>
                   )}
                 </div>
+              </div>
+            </div>
+          </span>
+        </div>
+      </div>
+      <div className='card text-dark bg-light mb-3 shadow p-3 mb-5 bg-white rounded'>
+        <div className='card-body'>
+          <span className='card-text'>
+            Your Enrolled Courses<hr></hr>
+            <div className='container'>
+              <div className='row'>
+                {profile.enrolledCourse.length > 0 ? (
+                  profile.enrolledCourse.map((course) => (
+                    <div className='card col-12 col-md-3 mt-3' key={uuidv4()}>
+                      <div className='card-body'>
+                        <p>{course}</p>
+                      </div>
+                    </div>
+                  ))
+                ) : (
+                  <h4>No courses found...</h4>
+                )}
               </div>
             </div>
           </span>

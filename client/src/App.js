@@ -10,6 +10,7 @@ import RoleRoute from './components/routing/RoleRoute';
 import CreateProfile from './components/profile-forms/CreateProfile';
 import EditProfile from './components/profile-forms/EditProfile';
 import CreateCourse from './components/course-forms/CreateCourse';
+import StudentCourses from './components/courses/StudentCourses';
 import EditCourse from './components/course-forms/EditCourse';
 import Profiles from './components/profiles/Profiles';
 import Admin from './components/dashboard/Admin';
@@ -19,7 +20,8 @@ import Profile from './components/profile/Profile';
 import Courses from './components/courses/Courses';
 import Course from './components/course/Course';
 import Messages from './components/message/Messages';
-
+import SendMessage from './components/message/SendMessage';
+import StudentCourse from './components/course/StudentCourse';
 //Redux
 import { Provider } from 'react-redux';
 import store from './store';
@@ -48,6 +50,8 @@ export default function App() {
             <Route exact path='/login' component={Login} />
             <Route exact path='/profiles' component={Profiles} />
             <Route exact path='/courses' component={Courses} />
+            <Route exact path='/student-courses' component={StudentCourses} />
+            <Route exact path='/studentcourse/:id' component={StudentCourse} />
             <Route exact path='/course/:id' component={Course} />
             <RoleRoute exact path='/admin' role='admin' component={Admin} />
             <RoleRoute
@@ -77,6 +81,7 @@ export default function App() {
             />
             <PrivateRoute exact path='/edit-profile' component={EditProfile} />
             <PrivateRoute exact path='/message' component={Messages} />
+            <PrivateRoute exact path='/sendmessage' component={SendMessage} />
           </Switch>
         </section>
       </Router>

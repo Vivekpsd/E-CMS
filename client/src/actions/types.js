@@ -15,3 +15,5 @@ export const GET_COURSES = 'GET_COURSES';
 export const COURSES_ERROR = 'COURSES_ERROR';
 export const GET_COURSE = 'GET_COURSE';
 export const CLEAR_COURSE = 'CLEAR_COURSE';
+export const UPDATE_PROFILE = 'UPDATE_PROFILE';
+export const UPDATE_COURSE = 'UPDATE_COURSE';

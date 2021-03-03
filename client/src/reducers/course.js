@@ -3,6 +3,7 @@ import {
   COURSES_ERROR,
   GET_COURSE,
   CLEAR_COURSE,
+  UPDATE_COURSE,
 } from '../actions/types';
 
 const initialState = {
@@ -29,6 +30,7 @@ export default function (state = initialState, action) {
         loading: false,
       };
     case GET_COURSE:
+    case UPDATE_COURSE:
       return {
         ...state,
         course: payload,

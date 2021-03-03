@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect } from 'react';
-import Spinner from '../layouts/Spinner';
+
 import { getCurrentProfile } from '../../actions/profile';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -20,6 +20,12 @@ const Messages = ({ getCurrentProfile, profile: { profile, loading } }) => {
       <Link to='/dashboard' className='btn btn-dark'>
         Back To Dashboard
       </Link>
+      &nbsp;
+      {profile.user.role === 'admin' && (
+        <Link to='/sendmessage' className='btn btn-danger'>
+          Send Message
+        </Link>
+      )}
       <br></br>
       <br></br>
       <div className='messages'>

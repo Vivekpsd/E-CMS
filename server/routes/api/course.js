@@ -135,4 +135,31 @@ router.delete('/:course_id', auth, async (req, res) => {
   }
 });
 
+// @route    PUT api/course/enroll
+// @desc     Add enrolled student in Courses
+// @access   Private
+router.put('/enroll/:course_id', auth, async (req, res) => {
+  const courseID = req.params.course_id;
+  const user = req.user.id;
+
+  try {
+    let course = await Course.findById(courseID);
+    if (course) {
+      // const enrollCheck = course.enrolledStudent.forEach((student) => {
+      //   student === user && true;
+      // });
+
+      // if (enrollCheck !== true) {
+      course.enrolledStudent.unshift(user);
+      await course.save();
+      //}
+    }
+
+    res.json(course);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
 module.exports = router;

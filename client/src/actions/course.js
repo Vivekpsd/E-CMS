@@ -1,7 +1,13 @@
 import axios from 'axios';
 import { setAlert } from './alert';
 
-import { COURSES_ERROR, GET_COURSES, GET_COURSE, CLEAR_COURSE } from './types';
+import {
+  COURSES_ERROR,
+  GET_COURSES,
+  GET_COURSE,
+  CLEAR_COURSE,
+  UPDATE_COURSE,
+} from './types';
 
 //Get all Courses
 export const getCourses = () => async (dispatch) => {
@@ -88,6 +94,36 @@ export const deleteCourse = (courseId, history) => async (dispatch) => {
       dispatch({ type: CLEAR_COURSE });
       dispatch(setAlert('Course Removed', 'success'));
       history.push('/courses');
+    } catch (err) {
+      dispatch({
+        type: COURSES_ERROR,
+        payload: { msg: err.response.statusText, status: err.response.status },
+      });
+    }
+  }
+};
+
+// Add Profile into course
+
+export const enrollCourse = (courseID, history) => async (dispatch) => {
+  if (window.confirm('Are You Sure?')) {
+    try {
+      const config = {
+        header: {
+          'Content-Type': 'application/json',
+        },
+      };
+
+      const res = await axios.put(
+        `http://localhost:5000/api/course/enroll/${courseID}`,
+        courseID,
+        config
+      );
+      dispatch({
+        type: UPDATE_COURSE,
+        payload: res.data,
+      });
+      history.push('/student-courses');
     } catch (err) {
       dispatch({
         type: COURSES_ERROR,
