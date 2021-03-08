@@ -32,50 +32,75 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
   }
   return (
     <Fragment>
-      <h1 className='large text-primary'>Sign Up</h1>
-      <p className='lead'>
-        <i className=''>Create Your Account</i>
-      </p>
-      <form className='form' onSubmit={(e) => onSubmit(e)}>
-        <div className='form-group'>
-          <input
-            type='text'
-            placeholder='Name'
-            name='name'
-            value={name}
-            onChange={(e) => onChange(e)}
-          />
+      <div className='container'>
+        <div className='row'>
+          <div className='col-sm-6 mx-auto mt-4'>
+            <div className='card text-dark bg-light mb-3 shadow p-3 mb-5 bg-white rounded'>
+              <h1 className='display-4 text-center'>Sign Up</h1>
+              <div className='card-body'>
+                <span className='card-text'>
+                  <form className='form' onSubmit={(e) => onSubmit(e)}>
+                    <div className='form-group'>
+                      <label htmlFor='name'>Name</label>
+                      <input
+                        type='text'
+                        placeholder='Name'
+                        id='name'
+                        name='name'
+                        value={name}
+                        className='form-control'
+                        onChange={(e) => onChange(e)}
+                      />
+                    </div>
+                    <div className='form-group'>
+                      <label htmlFor='email'>Email</label>
+                      <input
+                        type='email'
+                        placeholder='Email Address'
+                        name='email'
+                        id='email'
+                        className='form-control'
+                        value={email}
+                        onChange={(e) => onChange(e)}
+                      />
+                    </div>
+                    <div className='form-group'>
+                      <label htmlFor='pass'>Password</label>
+                      <input
+                        type='password'
+                        placeholder='Password'
+                        name='password'
+                        id='pass'
+                        className='form-control'
+                        value={password}
+                        onChange={(e) => onChange(e)}
+                      />
+                    </div>
+                    <div className='form-group'>
+                      <label htmlFor='pass2'>Confirm Password</label>
+                      <input
+                        type='password'
+                        placeholder='Confirm Password'
+                        name='password2'
+                        id='pass2'
+                        className='form-control'
+                        value={password2}
+                        minLength='6'
+                        onChange={(e) => onChange(e)}
+                      />
+                    </div>
+                    <input
+                      type='submit'
+                      className='btn btn-info btn-block'
+                      value='Register '
+                    />
+                  </form>
+                </span>
+              </div>
+            </div>
+          </div>
         </div>
-        <div className='form-group'>
-          <input
-            type='email'
-            placeholder='Email Address'
-            name='email'
-            value={email}
-            onChange={(e) => onChange(e)}
-          />
-        </div>
-        <div className='form-group'>
-          <input
-            type='password'
-            placeholder='Password'
-            name='password'
-            value={password}
-            onChange={(e) => onChange(e)}
-          />
-        </div>
-        <div className='form-group'>
-          <input
-            type='password'
-            placeholder='Password'
-            name='password2'
-            value={password2}
-            minLength='6'
-            onChange={(e) => onChange(e)}
-          />
-        </div>
-        <input type='submit' className='btn btn-primary' value='Register ' />
-      </form>
+      </div>
     </Fragment>
   );
 };

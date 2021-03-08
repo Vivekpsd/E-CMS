@@ -19,8 +19,7 @@ const Courses = ({ getCourses, course: { courses, loading } }) => {
         <Fragment>
           <h1 className='large text-primary'>Courses</h1>
           <p className='lead'>
-            <i className='fab fa-connectdevelop' /> Browse and connect with
-            developers
+            <i className='fab fa-connectdevelop' /> Browse our Courses
           </p>
 
           <div>
