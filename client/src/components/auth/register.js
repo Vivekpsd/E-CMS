@@ -3,6 +3,7 @@ import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { setAlert } from '../../actions/alert';
 import { register } from '../../actions/auth';
+import { FaAddressBook, FaUser, FaCode } from 'react-icons/fa';
 
 import PropTypes from 'prop-types';
 
@@ -41,7 +42,11 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
                 <span className='card-text'>
                   <form className='form' onSubmit={(e) => onSubmit(e)}>
                     <div className='form-group'>
-                      <label htmlFor='name'>Name</label>
+                      <label htmlFor='name'>
+                        <FaAddressBook />
+                        &nbsp; Name
+                      </label>
+
                       <input
                         type='text'
                         placeholder='Name'
@@ -53,7 +58,10 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
                       />
                     </div>
                     <div className='form-group'>
-                      <label htmlFor='email'>Email</label>
+                      <label htmlFor='email'>
+                        <FaUser />
+                        &nbsp; Email
+                      </label>
                       <input
                         type='email'
                         placeholder='Email Address'
@@ -65,7 +73,10 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
                       />
                     </div>
                     <div className='form-group'>
-                      <label htmlFor='pass'>Password</label>
+                      <label htmlFor='pass'>
+                        <FaCode />
+                        &nbsp;Password
+                      </label>
                       <input
                         type='password'
                         placeholder='Password'
@@ -77,7 +88,10 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
                       />
                     </div>
                     <div className='form-group'>
-                      <label htmlFor='pass2'>Confirm Password</label>
+                      <label htmlFor='pass2'>
+                        <FaCode />
+                        &nbsp;Confirm Password
+                      </label>
                       <input
                         type='password'
                         placeholder='Confirm Password'

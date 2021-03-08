@@ -2,7 +2,13 @@ import React, { useState, Fragment, useEffect } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { FaTwitter } from 'react-icons/fa';
+import {
+  FaTwitter,
+  FaFacebook,
+  FaYoutube,
+  FaLinkedin,
+  FaInstagram,
+} from 'react-icons/fa';
 
 import { createProfile, getCurrentProfile } from '../../actions/profile';
 
@@ -117,7 +123,7 @@ const EditProfile = ({
           <button
             onClick={() => toggleSocialInputs(!displaySocialInputs)}
             type='button'
-            className='btn btn-secondary'
+            className='btn btn-warning'
           >
             Add Social Network Links
           </button>
@@ -127,9 +133,14 @@ const EditProfile = ({
         {displaySocialInputs && (
           <Fragment>
             <div className='form-group social-input'>
-              <FaTwitter />
+              <label htmlFor='twitter'>
+                <FaTwitter />
+                &nbsp; Twitter
+              </label>
+
               <input
                 type='text'
+                id='twitter'
                 placeholder='Twitter URL'
                 name='twitter'
                 value={twitter}
@@ -139,7 +150,10 @@ const EditProfile = ({
             </div>
 
             <div className='form-group social-input'>
-              <i className='fab fa-facebook fa-2x' />
+              <label htmlFor='facebook'>
+                {' '}
+                <FaFacebook /> Facebook
+              </label>
               <input
                 type='text'
                 placeholder='Facebook URL'
@@ -151,7 +165,10 @@ const EditProfile = ({
             </div>
 
             <div className='form-group social-input'>
-              <i className='fab fa-youtube fa-2x' />
+              <label htmlFor='youtube'>
+                <FaYoutube />
+                &nbsp; Youtube
+              </label>
               <input
                 type='text'
                 placeholder='YouTube URL'
@@ -163,7 +180,10 @@ const EditProfile = ({
             </div>
 
             <div className='form-group social-input'>
-              <i className='fab fa-linkedin fa-2x' />
+              <label htmlFor='linkedin'>
+                <FaLinkedin />
+                &nbsp; LinkedIn
+              </label>
               <input
                 type='text'
                 placeholder='Linkedin URL'
@@ -175,7 +195,10 @@ const EditProfile = ({
             </div>
 
             <div className='form-group social-input'>
-              <i className='fab fa-instagram fa-2x' />
+              <label htmlFor='instagram'>
+                <FaInstagram />
+                &nbsp; Instagram
+              </label>
               <input
                 type='text'
                 placeholder='Instagram URL'
