@@ -1,6 +1,5 @@
 import React, { Fragment } from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+
 import { FcCalendar, FcInfo } from 'react-icons/fc';
 
 const MessageItem = ({

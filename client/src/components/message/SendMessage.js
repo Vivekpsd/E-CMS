@@ -1,14 +1,25 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { sendMessage } from '../../actions/profile';
-const SendMessage = ({ sendMessage, history }) => {
+import { getCourses } from '../../actions/course';
+
+const SendMessage = ({
+  getCourses,
+  course: { courses },
+  sendMessage,
+  history,
+}) => {
   const [formData, setFormData] = useState({
     message: '',
     sentBy: 'Test',
     senderID: '01',
+    typeMsg: '',
   });
-  const { message, sentBy, senderID } = formData;
+  const { message, sentBy, senderID, typeMsg } = formData;
+  useEffect(() => {
+    getCourses();
+  }, [getCourses]);
 
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -43,6 +54,29 @@ const SendMessage = ({ sendMessage, history }) => {
                         This field is required
                       </small>
                     </div>
+                    <div className='form-group col-md-4'>
+                      <label htmlFor='typeMsg'>Choose Course</label>
+                      <select
+                        id='typeMsg'
+                        className='form-control'
+                        name='typeMsg'
+                        onChange={(e) => onChange(e)}
+                      >
+                        <option value='' defaultValue>
+                          All
+                        </option>
+                        {courses.length > 0 ? (
+                          courses.map((course) => (
+                            <option value={course._id} key={course._id}>
+                              {course.title}
+                            </option>
+                          ))
+                        ) : (
+                          <option></option>
+                        )}
+                      </select>
+                    </div>
+                    <br></br>
                     <input
                       type='submit'
                       className='btn btn-info btn-block'
@@ -61,6 +95,13 @@ const SendMessage = ({ sendMessage, history }) => {
 
 SendMessage.propTypes = {
   sendMessage: PropTypes.func.isRequired,
+  getCourses: PropTypes.func.isRequired,
 };
 
-export default connect(null, { sendMessage })(SendMessage);
+const mapStateToProps = (state) => ({
+  course: state.course,
+});
+
+export default connect(mapStateToProps, { sendMessage, getCourses })(
+  SendMessage
+);

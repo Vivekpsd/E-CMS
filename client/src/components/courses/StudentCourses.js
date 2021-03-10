@@ -1,15 +1,21 @@
 import React, { Fragment, useEffect } from 'react';
 import Spinner from '../layouts/Spinner';
 import { getCourses } from '../../actions/course';
+import { getCurrentProfile } from '../../actions/profile';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import ProfilePic from '../layouts/ProfilePic';
 
-const Courses = ({ getCourses, course: { courses, loading } }) => {
+const Courses = ({
+  getCourses,
+  course: { course, courses, loading },
+  profile: { profile },
+}) => {
   useEffect(() => {
     getCourses();
-  }, [getCourses]);
+    getCurrentProfile();
+  }, [getCourses, getCurrentProfile]);
   return (
     <Fragment>
       {loading ? (
@@ -63,11 +69,15 @@ const Courses = ({ getCourses, course: { courses, loading } }) => {
 
 Courses.propTypes = {
   getCourses: PropTypes.func.isRequired,
+  getCurrentProfile: PropTypes.func.isRequired,
   course: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   course: state.course,
+  profile: state.profile,
 });
 
-export default connect(mapStateToProps, { getCourses })(Courses);
+export default connect(mapStateToProps, { getCourses, getCurrentProfile })(
+  Courses
+);

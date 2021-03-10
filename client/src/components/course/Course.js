@@ -8,6 +8,7 @@ import { deleteCourse } from '../../actions/course';
 
 const Course = ({
   match,
+  profile: { profile },
   getCourseById,
   course: { course, loading },
   deleteCourse,

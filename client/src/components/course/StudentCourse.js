@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import Spinner from '../layouts/Spinner';
 import { Link, withRouter } from 'react-router-dom';
 import { getCourseById } from '../../actions/course';
+import { getCurrentProfile } from '../../actions/profile';
 import ProfilePic from '../layouts/ProfilePic';
 import { enrollStudent } from '../../actions/profile';
 import { enrollCourse } from '../../actions/course';
@@ -15,10 +16,13 @@ const StudentCourse = ({
   enrollCourse,
   history,
   enrollStudent,
+  getCurrentProfile,
+  profile: { profile },
 }) => {
   useEffect(() => {
     getCourseById(match.params.id);
-  }, [getCourseById, enrollCourse, enrollStudent]);
+    getCurrentProfile();
+  }, [getCourseById, enrollCourse, enrollStudent, getCurrentProfile]);
   const onClick = (e) => {
     e.preventDefault();
     enrollStudent(match.params.id, history);
@@ -50,12 +54,22 @@ const StudentCourse = ({
                     <p className='text-muted'>{course.teacher}</p>
                     <p>Rating **</p>
                     <p>Price</p>
-                    <button
-                      className='btn btn-primary'
-                      onClick={(e) => onClick(e)}
-                    >
-                      Enroll
-                    </button>
+                    {course.enrolledStudent.find((enrolledStudent) => {
+                      if (enrolledStudent === profile.user._id) {
+                        return true;
+                      }
+                    }) ? (
+                      <button className='btn btn-secondary disabled'>
+                        Already Enrolled
+                      </button>
+                    ) : (
+                      <button
+                        className='btn btn-primary'
+                        onClick={(e) => onClick(e)}
+                      >
+                        Enroll
+                      </button>
+                    )}
                   </div>
                 </div>
               </div>
@@ -69,16 +83,19 @@ const StudentCourse = ({
 
 StudentCourse.propTypes = {
   getCourseById: PropTypes.func.isRequired,
+  getCurrentProfile: PropTypes.func.isRequired,
   course: PropTypes.object.isRequired,
   enrollCourse: PropTypes.func.isRequired,
   enrollStudent: PropTypes.func.isRequired,
 };
 const mapSatateToProps = (state) => ({
   course: state.course,
+  profile: state.profile,
 });
 
 export default connect(mapSatateToProps, {
   getCourseById,
   enrollCourse,
   enrollStudent,
+  getCurrentProfile,
 })(withRouter(StudentCourse));

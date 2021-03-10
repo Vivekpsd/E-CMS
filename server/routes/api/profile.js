@@ -178,7 +178,7 @@ router.put(
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { message, sentBy } = req.body;
+    const { message, sentBy, typeMsg } = req.body;
     const senderID = req.user.id;
     const newMsg = {
       message,
@@ -186,22 +186,40 @@ router.put(
       senderID,
     };
 
-    try {
-      Profile.find({}, (err, profile) => {
-        if (err) {
-          console.log('Error :(');
-        }
+    if (typeMsg.length == 0) {
+      try {
+        Profile.find({}, (err, profile) => {
+          if (err) {
+            console.log('Error :(');
+          }
 
-        profile.map(async (profile) => {
+          profile.map(async (profile) => {
+            profile.messages.unshift(newMsg);
+            await profile.save();
+          });
+        });
+
+        res.json('Completed');
+      } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error');
+      }
+    } else {
+      try {
+        let course = await Course.findById(typeMsg);
+        course.enrolledStudent.map(async (enrolledStudent) => {
+          const profile = await Profile.findOne({
+            user: enrolledStudent,
+          });
           profile.messages.unshift(newMsg);
           await profile.save();
         });
-      });
 
-      res.json('Completed');
-    } catch (err) {
-      console.error(err.message);
-      res.status(500).send('Server Error');
+        res.json('Completed');
+      } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error');
+      }
     }
   }
 );
