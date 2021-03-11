@@ -8,7 +8,6 @@ import { deleteCourse } from '../../actions/course';
 
 const Course = ({
   match,
-  profile: { profile },
   getCourseById,
   course: { course, loading },
   deleteCourse,
@@ -26,18 +25,21 @@ const Course = ({
           <Link to='/courses' className='btn btn-light'>
             Back To All Courses
           </Link>
-
+          &nbsp;
           <Link to={`/editcourse/${course._id}`} className='btn btn-dark'>
             Edit Course
           </Link>
-
+          &nbsp;
+          <Link to={`/viewstudent/${course._id}`} className='btn btn-warning'>
+            View Student
+          </Link>
+          &nbsp;
           <button
             onClick={() => deleteCourse(course._id, history)}
             className='btn btn-danger'
           >
             Delete Course
           </button>
-
           <div className='course-grid my-1'>
             {course.title && <h1> Course Title = {course.title} </h1>}
             <h1> Content - {course.content}</h1>

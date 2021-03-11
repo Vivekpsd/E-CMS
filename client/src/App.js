@@ -22,6 +22,7 @@ import Course from './components/course/Course';
 import Messages from './components/message/Messages';
 import SendMessage from './components/message/SendMessage';
 import StudentCourse from './components/course/StudentCourse';
+import EnrolledStudent from './components/enrolled/EnrolledStudent';
 //Redux
 import { Provider } from 'react-redux';
 import store from './store';
@@ -82,6 +83,11 @@ export default function App() {
             <PrivateRoute exact path='/edit-profile' component={EditProfile} />
             <PrivateRoute exact path='/message' component={Messages} />
             <PrivateRoute exact path='/sendmessage' component={SendMessage} />
+            <PrivateRoute
+              exact
+              path='/viewstudent/:id'
+              component={EnrolledStudent}
+            />
           </Switch>
         </section>
       </Router>
