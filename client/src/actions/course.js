@@ -61,6 +61,7 @@ export const createCourse = (formData, history, edit = false) => async (
       formData,
       config
     );
+
     dispatch({
       type: GET_COURSE,
       payload: res.data,

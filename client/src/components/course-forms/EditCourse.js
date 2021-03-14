@@ -18,6 +18,7 @@ const EditCourse = ({
     startDate: '',
     endDate: '',
     prerequisite: '',
+    courseID: null,
   });
 
   useEffect(() => {
@@ -30,6 +31,7 @@ const EditCourse = ({
       startDate: loading || !course.startDate ? '' : course.startDate,
       endDate: loading || !course.endDate ? '' : course.endDate,
       prerequisite: loading || !course.prerequisite ? '' : course.prerequisite,
+      courseID: course._id,
     });
   }, [loading]);
 

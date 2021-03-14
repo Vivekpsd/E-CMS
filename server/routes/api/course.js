@@ -48,6 +48,7 @@ router.post(
       startDate,
       endDate,
       prerequisite,
+      courseID,
     } = req.body;
 
     //Build Course Object
@@ -61,12 +62,12 @@ router.post(
     if (prerequisite) courseFields.prerequisite = prerequisite;
 
     try {
-      let course = await Course.findOne(req.id);
+      let course = await Course.findById(courseID);
 
       if (course) {
         //update
         course = await Course.findOneAndUpdate(
-          { id: req.id },
+          { _id: courseID },
           { $set: courseFields },
           { new: true }
         );

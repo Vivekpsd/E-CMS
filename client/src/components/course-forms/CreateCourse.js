@@ -13,6 +13,7 @@ const CreateCourse = ({ createCourse, history }) => {
     startDate: '',
     endDate: '',
     prerequisite: '',
+    courseID: null,
   });
 
   const {
