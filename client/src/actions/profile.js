@@ -173,3 +173,33 @@ export const enrollStudent = (courseID, history) => async (dispatch) => {
     });
   }
 };
+
+// Add Course in profile(teacher)
+
+export const enrollTeacher = (courseID, history) => async (dispatch) => {
+  try {
+    const config = {
+      header: {
+        'Content-Type': 'application/json',
+      },
+    };
+
+    const res = await axios.put(
+      `http://localhost:5000/api/profile/enroll/${courseID}`,
+      courseID,
+      config
+    );
+    console.log(courseID);
+    dispatch({
+      type: UPDATE_PROFILE,
+      payload: res.data,
+    });
+    
+  } catch (err) {
+    console.log('error');
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status },
+    });
+  }
+};

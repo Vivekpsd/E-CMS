@@ -3,13 +3,20 @@ import { Link, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createCourse, getCourseById } from '../../actions/course';
+import { getProfiles } from '../../actions/profile';
 
 const EditCourse = ({
   course: { course, loading },
   createCourse,
   getCourseById,
   history,
+  getProfiles,
+  profile: { profiles },
 }) => {
+  useEffect(() => {
+    getProfiles();
+  }, [getProfiles]);
+
   const [formData, setFormData] = useState({
     title: '',
     description: '',
@@ -97,17 +104,29 @@ const EditCourse = ({
             onChange={onChange}
           />
         </div>
-        <div className='form-group'>
-          <label htmlFor='teacher'>Teacher Name</label>
-          <input
+
+        <div className='form-group col-md-4'>
+          <label htmlFor='typeMsg'>Choose Teacher</label>
+          <select
             id='teacher'
             className='form-control'
-            type='text'
-            placeholder='teacher'
             name='teacher'
+            onChange={(e) => onChange(e)}
             value={teacher}
-            onChange={onChange}
-          />
+          >
+            {profiles.length > 0 ? (
+              profiles.map(
+                (profile) =>
+                  profile.user.role === 'teacher' && (
+                    <option value={profile.user.name} key={profile._id}>
+                      {profile.user.name}
+                    </option>
+                  )
+              )
+            ) : (
+              <option></option>
+            )}
+          </select>
         </div>
         <div className='form-group'>
           <label htmlFor='bio'>Start Date</label>
@@ -164,8 +183,11 @@ EditCourse.propTypes = {
 
 const mapStateToProps = (state) => ({
   course: state.course,
+  profile: state.profile,
 });
 
-export default connect(mapStateToProps, { createCourse, getCourseById })(
-  withRouter(EditCourse)
-);
+export default connect(mapStateToProps, {
+  createCourse,
+  getCourseById,
+  getProfiles,
+})(withRouter(EditCourse));

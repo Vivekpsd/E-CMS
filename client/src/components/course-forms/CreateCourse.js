@@ -1,10 +1,21 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState, Fragment, useEffect } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createCourse } from '../../actions/course';
+import { getProfiles } from '../../actions/profile';
+import { enrollTeacher } from '../../actions/profile';
 
-const CreateCourse = ({ createCourse, history }) => {
+const CreateCourse = ({
+  createCourse,
+  getProfiles,
+  profile: { profiles },
+  history,
+}) => {
+  useEffect(() => {
+    getProfiles();
+  }, [getProfiles]);
+
   const [formData, setFormData] = useState({
     title: '',
     description: '',
@@ -78,18 +89,30 @@ const CreateCourse = ({ createCourse, history }) => {
             onChange={onChange}
           />
         </div>
-        <div className='form-group'>
-          <label htmlFor='teacher'>Teacher Name</label>
-          <input
+
+        <div className='form-group col-md-4'>
+          <label htmlFor='typeMsg'>Choose Teacher</label>
+          <select
             id='teacher'
             className='form-control'
-            type='text'
-            placeholder='teacher'
             name='teacher'
-            value={teacher}
-            onChange={onChange}
-          />
+            onChange={(e) => onChange(e)}
+          >
+            {profiles.length > 0 ? (
+              profiles.map(
+                (profile) =>
+                  profile.user.role === 'teacher' && (
+                    <option value={profile.user.name} key={profile._id}>
+                      {profile.user.name}
+                    </option>
+                  )
+              )
+            ) : (
+              <option></option>
+            )}
+          </select>
         </div>
+
         <div className='form-group'>
           <label htmlFor='bio'>Start Date</label>
           <input
@@ -141,8 +164,10 @@ CreateCourse.propTypes = {
   createCourse: PropTypes.func.isRequired,
 };
 
-// const mapStateToProps = state => ({
-//     profile: state.profile
-//   });
+const mapStateToProps = (state) => ({
+  profile: state.profile,
+});
 
-export default connect(null, { createCourse })(withRouter(CreateCourse));
+export default connect(mapStateToProps, { createCourse, getProfiles })(
+  withRouter(CreateCourse)
+);
