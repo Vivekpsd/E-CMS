@@ -194,7 +194,6 @@ export const enrollTeacher = (courseID, history) => async (dispatch) => {
       type: UPDATE_PROFILE,
       payload: res.data,
     });
-    
   } catch (err) {
     console.log('error');
     dispatch({
