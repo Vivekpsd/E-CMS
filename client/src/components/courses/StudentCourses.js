@@ -39,21 +39,58 @@ const Courses = ({
             <div className='row'>
               {courses.length > 0 ? (
                 courses.map((course) => (
-                  <div className='card col-12 col-md-3 mt-3' key={course._id}>
-                    <div className='card-body'>
-                      <ProfilePic />
-                      <hr></hr>
-                      <h6 className='card-title'>{course.title}</h6>
-                      <p className='text-muted'>{course.teacher}</p>
-                      <p>Rating **</p>
-                      <p>Price</p>
+                  <div
+                    className='card mb-3 mr-4'
+                    style={{ maxWidth: '250px' }}
+                    key={course._id}
+                  >
+                    <div className='col-md-12'>
                       <Link
                         to={`/studentcourse/${course._id}`}
-                        className='btn btn-primary '
+                        className='text-dark'
+                        style={{ textDecoration: 'none' }}
                       >
-                        View / Enroll
+                        <div className='card-body'>
+                          <span>
+                            <ProfilePic />
+                          </span>
+                          <hr></hr>
+
+                          <h6 className='card-title'>{course.title}</h6>
+
+                          <p className='card-text text-muted'>
+                            {course.teacher}
+                          </p>
+                          <p className='card-text'>
+                            4.7 *****{'  '} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span className='badge badge-warning badge-lg'>
+                              Bestseller
+                            </span>
+                          </p>
+
+                          <hr></hr>
+                          <h4 className='text-center'>
+                            <span className='badge badge-light'>₹ 500</span>
+                          </h4>
+                        </div>
                       </Link>
                     </div>
+                    {/* // <div className='card col-12 col-md-3 mt-3' key={course._id}>
+                    //   <div className='card-body'>
+                    //     <ProfilePic />
+                    //     <hr></hr>
+                    //     <h6 className='card-title'>{course.title}</h6>
+                    //     <p className='text-muted'>{course.teacher}</p>
+                    //     <p>Rating **</p>
+                    //     <p>Price</p>
+                    //     <Link
+                    //       to={`/studentcourse/${course._id}`}
+                    //       className='btn btn-primary '
+                    //     >
+                    //       View / Enroll
+                    //     </Link>
+                    //   </div>
+                    // </div> */}
                   </div>
                 ))
               ) : (
