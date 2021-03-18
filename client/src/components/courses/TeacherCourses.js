@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import ProfilePic from '../layouts/ProfilePic';
 
-const Courses = ({
+const TeacherCourses = ({
   getCourses,
   course: { course, courses, loading },
   profile: { profile },
@@ -100,5 +100,5 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps, { getCourses, getCurrentProfile })(
-  Courses
+  TeacherCourses
 );

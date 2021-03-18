@@ -21,11 +21,12 @@ const Messages = ({ getCurrentProfile, profile: { profile, loading } }) => {
         Back To Dashboard
       </Link>
       &nbsp;
-      {profile.user.role === 'admin' && (
-        <Link to='/sendmessage' className='btn btn-danger'>
-          Send Message
-        </Link>
-      )}
+      {profile.user.role === 'admin' ||
+        (profile.user.role === 'teacher' && (
+          <Link to='/sendmessage' className='btn btn-danger'>
+            Send Message
+          </Link>
+        ))}
       <br></br>
       <br></br>
       <div className='messages'>

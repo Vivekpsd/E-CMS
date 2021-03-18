@@ -46,7 +46,7 @@ export const getCourseById = (courseId) => async (dispatch) => {
 };
 
 //Create or Update course
-export const createCourse = (formData, history, edit = false) => async (
+export const createCourse = (formData, history, userID, edit = false) => async (
   dispatch
 ) => {
   try {
@@ -61,6 +61,16 @@ export const createCourse = (formData, history, edit = false) => async (
       formData,
       config
     );
+    const body = { courseID: res.data._id, userID: userID };
+    console.log(userID);
+    //Get Current Profile
+    const res2 = await axios.put(
+      `http://localhost:5000/api/profile/enroll/${res.data._id}`,
+      body,
+      config
+    );
+
+    console.log(res2);
 
     dispatch({
       type: GET_COURSE,
@@ -120,6 +130,7 @@ export const enrollCourse = (courseID, history) => async (dispatch) => {
         courseID,
         config
       );
+
       dispatch({
         type: UPDATE_COURSE,
         payload: res.data,

@@ -37,12 +37,24 @@ const CreateCourse = ({
     prerequisite,
   } = formData;
 
+  const [userID, setUserID] = useState(0);
+
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
+  const onChange2 = (e) => {
+    profiles.map((profile) => {
+      if (profile.user._id === e.target.value) {
+        setFormData({ ...formData, [e.target.name]: profile.user.name });
+        setUserID(profile._id);
+      }
+    });
+  };
+
   const onSubmit = (e) => {
     e.preventDefault();
-    createCourse(formData, history);
+    console.log('Up - ' + userID);
+    createCourse(formData, history, userID);
   };
 
   return (
@@ -96,13 +108,13 @@ const CreateCourse = ({
             id='teacher'
             className='form-control'
             name='teacher'
-            onChange={(e) => onChange(e)}
+            onChange={(e) => onChange2(e)}
           >
             {profiles.length > 0 ? (
               profiles.map(
                 (profile) =>
                   profile.user.role === 'teacher' && (
-                    <option value={profile.user.name} key={profile._id}>
+                    <option value={profile.user._id} key={profile._id}>
                       {profile.user.name}
                     </option>
                   )

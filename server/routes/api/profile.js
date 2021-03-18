@@ -228,11 +228,12 @@ router.put(
 // @desc     Add Enrolled Course to Profile
 // @access   Private
 router.put('/enroll/:course_id', auth, async (req, res) => {
-  const user = req.user.id;
-  const courseID = req.params.course_id;
-
+  const user = req.body.userID;
+  const courseID = req.body.courseID;
+  console.log('awdawd - ' + user + ' course ' + courseID);
   try {
-    const profile = await Profile.findOne({ user: req.user.id });
+    const profile = await Profile.findById(user);
+    console.log(profile);
     // const enrollCheck = profile.enrolledCourse.forEach((course) => {
     //   course === courseID ? true : false;
     // });
