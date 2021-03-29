@@ -16,6 +16,9 @@ const DashboardStudent = () => {
       <Link to='/message' className='btn btn-light mr-3'>
         <i className='text-primary' /> View Message
       </Link>
+      <Link to='/student-events' className='btn btn-light mr-3'>
+        <i className=' text-primary' /> View Events
+      </Link>
     </div>
   );
 };

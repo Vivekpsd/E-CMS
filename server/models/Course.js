@@ -25,12 +25,28 @@ const CourseSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  rating: {
-    type: Number,
-  },
-  review: {
-    type: [String],
-  },
+  review: [
+    {
+      student: {
+        type: String,
+      },
+      star: {
+        type: String,
+        default: null,
+      },
+      comment: {
+        type: String,
+      },
+      date: {
+        type: Date,
+        default: Date.now,
+      },
+      studentID: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'user',
+      },
+    },
+  ],
   startDate: {
     type: String,
     required: true,

@@ -18,7 +18,11 @@ import Student from './components/dashboard/Student';
 import Teacher from './components/dashboard/Teacher';
 import Profile from './components/profile/Profile';
 import Courses from './components/courses/Courses';
+import Events from './components/events/events';
+import StudentEvents from './components/events/StudentEvents';
 import Course from './components/course/Course';
+import AdminEvent from './components/Event/AdminEvent';
+import CreateEvent from './components/events/CreateEvent';
 import Messages from './components/message/Messages';
 import SendMessage from './components/message/SendMessage';
 import StudentCourse from './components/course/StudentCourse';
@@ -51,9 +55,18 @@ export default function App() {
             <Route exact path='/login' component={Login} />
             <Route exact path='/profiles' component={Profiles} />
             <Route exact path='/courses' component={Courses} />
-            <Route exact path='/student-courses' component={StudentCourses} />
-            <Route exact path='/studentcourse/:id' component={StudentCourse} />
+            <PrivateRoute
+              exact
+              path='/student-courses'
+              component={StudentCourses}
+            />
+            <PrivateRoute
+              exact
+              path='/studentcourse/:id'
+              component={StudentCourse}
+            />
             <Route exact path='/course/:id' component={Course} />
+            <Route exact path='/event/:id' component={AdminEvent} />
             <RoleRoute exact path='/admin' role='admin' component={Admin} />
             <RoleRoute
               exact
@@ -88,6 +101,9 @@ export default function App() {
               path='/viewstudent/:id'
               component={EnrolledStudent}
             />
+            <Route exact path='/events' component={Events} />
+            <Route exact path='/createEvent' component={CreateEvent} />
+            <Route exact path='/student-events' component={StudentEvents} />
           </Switch>
         </section>
       </Router>

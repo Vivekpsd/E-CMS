@@ -7,6 +7,8 @@ import {
   GET_COURSE,
   CLEAR_COURSE,
   UPDATE_COURSE,
+  ADD_REVIEW,
+  DELETE_REVIEW,
 } from './types';
 
 //Get all Courses
@@ -136,6 +138,54 @@ export const enrollCourse = (courseID, history) => async (dispatch) => {
         payload: res.data,
       });
       history.push('/student-courses');
+    } catch (err) {
+      dispatch({
+        type: COURSES_ERROR,
+        payload: { msg: err.response.statusText, status: err.response.status },
+      });
+    }
+  }
+};
+
+// add comment
+
+export const addComment = (formData) => async (dispatch) => {
+  try {
+    const config = {
+      header: {
+        'Content-Type': 'application/json',
+      },
+    };
+
+    const res = await axios.put(
+      'http://localhost:5000/api/course/course-review',
+      formData,
+      config
+    );
+    dispatch({
+      type: ADD_REVIEW,
+      payload: res.data,
+    });
+    dispatch(setAlert('Review Added', 'success'));
+  } catch (err) {
+    dispatch({
+      type: COURSES_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status },
+    });
+  }
+};
+
+//delete comment
+
+export const deleteComment = (courseID, reviewID) => async (dispatch) => {
+  if (window.confirm('Are You Sure?')) {
+    try {
+      const res = await axios.delete(
+        `http://localhost:5000/api/course/delete/${courseID}/${reviewID}`
+      );
+
+      dispatch({ type: DELETE_REVIEW, payload: res.data });
+      dispatch(setAlert('Comment Removed', 'danger'));
     } catch (err) {
       dispatch({
         type: COURSES_ERROR,

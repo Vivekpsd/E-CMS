@@ -88,7 +88,7 @@ const TeacherCourses = ({
   );
 };
 
-Courses.propTypes = {
+TeacherCourses.propTypes = {
   getCourses: PropTypes.func.isRequired,
   getCurrentProfile: PropTypes.func.isRequired,
   course: PropTypes.object.isRequired,

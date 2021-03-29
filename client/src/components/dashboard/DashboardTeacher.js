@@ -16,6 +16,9 @@ const DashboardTeacher = () => {
       <Link to='/message' className='btn btn-light mr-3'>
         <i className='text-primary' /> View Message
       </Link>
+      <Link to='/events' className='btn btn-light mr-3'>
+        <i className=' text-primary' /> View Events
+      </Link>
     </div>
   );
 };

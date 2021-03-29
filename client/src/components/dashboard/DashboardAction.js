@@ -19,6 +19,9 @@ const DashboardActions = () => {
       <Link to='/profiles' className='btn btn-light mr-3'>
         <i className=' text-primary' /> View All Users
       </Link>
+      <Link to='/events' className='btn btn-light mr-3'>
+        <i className=' text-primary' /> View Events
+      </Link>
     </div>
   );
 };

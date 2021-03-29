@@ -3,6 +3,7 @@ const router = express.Router();
 const auth = require('../../middleware/auth');
 const { check, validationResult } = require('express-validator');
 const Course = require('../../models/Course');
+const Profile = require('../../models/Profile');
 
 router.use(function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
@@ -155,6 +156,55 @@ router.put('/enroll/:course_id', auth, async (req, res) => {
       await course.save();
       //}
     }
+
+    res.json(course);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
+// @route    PUT api/course/review
+// @desc     Add  message
+// @access   Private
+router.put('/course-review', auth, async (req, res) => {
+  const { star, comment, date, courseID, studentID, student } = req.body;
+  const userID = req.user.id;
+  const newReview = {
+    star,
+    comment,
+    date,
+    studentID,
+    student,
+  };
+
+  try {
+    let course = await Course.findById(courseID);
+
+    if (course) {
+      course.review.unshift(newReview);
+      await course.save();
+    }
+
+    res.json(course);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
+router.delete('/delete/:course_id/:review_id', async (req, res) => {
+  try {
+    const courseID = req.params.course_id;
+    const reviewID = req.params.review_id;
+
+    let course = await Course.findById(courseID);
+    course.review.map(async (review) => {
+      if (review._id == reviewID) {
+        await course.review.remove({ _id: reviewID });
+        await course.save();
+      }
+    });
 
     res.json(course);
   } catch (err) {

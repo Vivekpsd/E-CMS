@@ -1,16 +1,13 @@
 import {
-  GET_COURSES,
-  COURSES_ERROR,
-  GET_COURSE,
-  CLEAR_COURSE,
-  UPDATE_COURSE,
-  ADD_REVIEW,
-  DELETE_REVIEW,
+  GET_EVENTS,
+  CLEAR_EVENT,
+  EVENT_ERROR,
+  GET_EVENT,
 } from '../actions/types';
 
 const initialState = {
-  course: null,
-  courses: [],
+  event: null,
+  events: [],
   loading: true,
   error: {},
 };
@@ -19,36 +16,28 @@ export default function (state = initialState, action) {
   const { type, payload } = action;
 
   switch (type) {
-    case GET_COURSES:
+    case GET_EVENTS:
       return {
         ...state,
-        courses: payload,
+        events: payload,
         loading: false,
       };
-    case COURSES_ERROR:
+    case GET_EVENT:
+      return {
+        ...state,
+        event: payload,
+        loading: false,
+      };
+    case EVENT_ERROR:
       return {
         ...state,
         error: payload,
         loading: false,
       };
-    case GET_COURSE:
-    case UPDATE_COURSE:
-    case ADD_REVIEW:
+    case CLEAR_EVENT:
       return {
         ...state,
-        course: payload,
-        loading: false,
-      };
-    case DELETE_REVIEW:
-      return {
-        ...state,
-        course: payload,
-        loading: false,
-      };
-    case CLEAR_COURSE:
-      return {
-        ...state,
-        course: null,
+        event: null,
         loading: false,
       };
     default:
