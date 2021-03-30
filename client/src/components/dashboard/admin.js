@@ -22,10 +22,11 @@ const Admin = ({
       <h1 className='display-4'>Dashboard</h1>
       <hr></hr>
       <br></br>
+
       <div className='card text-dark bg-light mb-3 shadow p-3 mb-5 bg-white rounded'>
         <div className='card-body'>
           <span className='card-text'>
-            <div className='container'>
+            <div className='container-fluid'>
               <div className='row'>
                 <div className='col-3'>
                   <ProfilePic />

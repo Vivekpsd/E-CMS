@@ -11,7 +11,7 @@ const Landing = ({ isAuthenticated }) => {
   return (
     <div className='landing mt-5'>
       <div className='dark-overlay landing-inner text-dark'>
-        <div className='container'>
+        <div className='container-fluid'>
           <div className='row'>
             <div className='col-md-12 text-center'>
               <h1 className='display-3 mb-4'>Course Management System</h1>

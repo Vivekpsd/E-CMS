@@ -2,6 +2,7 @@ import React, { Fragment, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Spinner from '../layouts/Spinner';
+import StarRating from './StarRating';
 import { Link, withRouter } from 'react-router-dom';
 import ProfilePic from '../layouts/ProfilePic';
 import { enrollStudent } from '../../actions/profile';
@@ -230,7 +231,8 @@ const StudentCourse = ({
                                   <div className='card-body'>
                                     <span className='card-text'>
                                       <h6>{review.student}</h6>
-                                      <span>{review.star}</span>
+                                      <StarRating ratings={review.star} />
+
                                       <p>{review.comment}</p>
                                       <span>{review.date}</span>
                                     </span>
