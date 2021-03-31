@@ -2,7 +2,6 @@ import React, { Fragment, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Spinner from '../layouts/Spinner';
-import StarRating from './StarRating';
 import ReactStars from 'react-rating-stars-component';
 import { Link, withRouter } from 'react-router-dom';
 import ProfilePic from '../layouts/ProfilePic';
@@ -58,6 +57,16 @@ const StudentCourse = ({
       star: parseInt(rating),
     });
   };
+
+  const getStars = (stars) => {
+    let i = 1;
+    let x = 0;
+    while (i <= stars) {
+      x += 1;
+      i++;
+    }
+    return x;
+  };
   const onChange = (e) => {
     setFormData({
       ...formData,
@@ -68,17 +77,21 @@ const StudentCourse = ({
     });
   };
 
+  function roundToTwo(num) {
+    return +(Math.round(num + 'e+2') + 'e-2');
+  }
+
   const getStarAverage = () => {
     let sum = 0,
       len = 0;
     course.review.map((review) => {
-      sum += parseInt(review.star);
+      sum += review.star;
       len += 1;
     });
 
     let avg = sum / len;
-
-    return avg.toFixed(2);
+    let ans = roundToTwo(avg);
+    return ans;
   };
 
   const onSubmit = (e) => {
@@ -86,7 +99,6 @@ const StudentCourse = ({
     addComment(formData);
     setFormData({
       ...formData,
-      star: '',
       comment: '',
     });
 
@@ -167,9 +179,25 @@ const StudentCourse = ({
                     <p>{course.content}</p>
                   </div>
                   <div className='row'>
-                    <div className='col-2'>
-                      <p className='badge badge-warning badge-lg'>Bestseller</p>
-                    </div>
+                    {getStarAverage() >= 4 && course.review.length >= 5 ? (
+                      <div className='col-2'>
+                        <p
+                          className='badge badge-warning badge-lg'
+                          style={{ fontSize: '15px' }}
+                        >
+                          Bestseller
+                        </p>
+                      </div>
+                    ) : (
+                      <div className='col-2'>
+                        <p
+                          className='badge badge-pill badge-success'
+                          style={{ fontSize: '15px' }}
+                        >
+                          New!
+                        </p>
+                      </div>
+                    )}
                     <div className='col-2 mr-auto'>
                       <b>
                         {course.review.length === 0 ? (
@@ -200,7 +228,7 @@ const StudentCourse = ({
                   <hr></hr>
                   <div className='row'>
                     <div className='col'>
-                      <h4>All Reviews</h4>
+                      <h4>All Reviews ({course.review.length})</h4>
                       <form onSubmit={onSubmit} id='review-form'>
                         <div className='form-group'>
                           <label htmlFor='review'>Your Review Here</label>
@@ -254,8 +282,7 @@ const StudentCourse = ({
                                       <h5 className='text-muted'>
                                         {review.comment}
                                       </h5>
-
-                                      <StarRating ratings={review.star} />
+                                      <h6>{getStars(review.star)}</h6>
                                       <hr></hr>
                                       <span>
                                         <FcCalendar />

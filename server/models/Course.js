@@ -31,7 +31,7 @@ const CourseSchema = new mongoose.Schema({
         type: String,
       },
       star: {
-        type: String,
+        type: Number,
         default: null,
       },
       comment: {
