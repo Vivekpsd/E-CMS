@@ -8,7 +8,7 @@ const StarRating = (props) => {
         starRatedColor='gold'
         numberOfStars={5}
         name='rating'
-        starDimension='30px'
+        starDimension='25px'
         rating={parseInt(props.ratings)}
       />
     </div>

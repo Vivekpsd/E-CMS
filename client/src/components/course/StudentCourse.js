@@ -3,9 +3,11 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Spinner from '../layouts/Spinner';
 import StarRating from './StarRating';
+import ReactStars from 'react-rating-stars-component';
 import { Link, withRouter } from 'react-router-dom';
 import ProfilePic from '../layouts/ProfilePic';
 import { enrollStudent } from '../../actions/profile';
+import { FcCalendar, FcCustomerSupport } from 'react-icons/fc';
 import {
   enrollCourse,
   addComment,
@@ -50,6 +52,12 @@ const StudentCourse = ({
     enrollCourse(match.params.id, history);
   };
 
+  const ratingChanged = (rating) => {
+    setFormData({
+      ...formData,
+      star: parseInt(rating),
+    });
+  };
   const onChange = (e) => {
     setFormData({
       ...formData,
@@ -75,8 +83,13 @@ const StudentCourse = ({
 
   const onSubmit = (e) => {
     e.preventDefault();
-
     addComment(formData);
+    setFormData({
+      ...formData,
+      star: '',
+      comment: '',
+    });
+
     //createCourse(formData, history, userID);
   };
   const deleteReview = (reviewID) => {
@@ -188,7 +201,7 @@ const StudentCourse = ({
                   <div className='row'>
                     <div className='col'>
                       <h4>All Reviews</h4>
-                      <form onSubmit={onSubmit}>
+                      <form onSubmit={onSubmit} id='review-form'>
                         <div className='form-group'>
                           <label htmlFor='review'>Your Review Here</label>
                           <textarea
@@ -199,6 +212,8 @@ const StudentCourse = ({
                             value={comment}
                             onChange={(e) => onChange(e)}
                           ></textarea>
+                          <label htmlFor='star'>Stars</label>
+                          <br></br>
                           <input
                             type='number'
                             value={star}
@@ -206,9 +221,10 @@ const StudentCourse = ({
                             max='5'
                             id='star'
                             name='star'
-                            value={star}
+                            disabled
                             onChange={(e) => onChange(e)}
                           />
+                          <ReactStars size={30} onChange={ratingChanged} />
                         </div>
                         <input
                           type='submit'
@@ -230,13 +246,24 @@ const StudentCourse = ({
                                 <div className='card text-dark mb-3 shadow-md p-1 mb-5 bg-light rounded'>
                                   <div className='card-body'>
                                     <span className='card-text'>
-                                      <h6>{review.student}</h6>
-                                      <StarRating ratings={review.star} />
+                                      <h5>
+                                        <FcCustomerSupport />
+                                        &nbsp;&nbsp;
+                                        {review.student}
+                                      </h5>
+                                      <h5 className='text-muted'>
+                                        {review.comment}
+                                      </h5>
 
-                                      <p>{review.comment}</p>
-                                      <span>{review.date}</span>
+                                      <StarRating ratings={review.star} />
+                                      <hr></hr>
+                                      <span>
+                                        <FcCalendar />
+                                        &nbsp;&nbsp;
+                                        {review.date}
+                                      </span>
                                     </span>
-                                    <div>
+                                    <div className='float-right'>
                                       {profile.user._id ===
                                         review.studentID && (
                                         <button
