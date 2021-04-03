@@ -27,6 +27,7 @@ import Messages from './components/message/Messages';
 import SendMessage from './components/message/SendMessage';
 import StudentCourse from './components/course/StudentCourse';
 import EnrolledStudent from './components/enrolled/EnrolledStudent';
+import UploadForm from './components/assignment/UploadForm';
 //Redux
 import { Provider } from 'react-redux';
 import store from './store';
@@ -104,6 +105,7 @@ export default function App() {
             <Route exact path='/events' component={Events} />
             <Route exact path='/createEvent' component={CreateEvent} />
             <Route exact path='/student-events' component={StudentEvents} />
+            <Route exact path='/assigment' component={UploadForm} />
           </Switch>
         </section>
       </Router>
