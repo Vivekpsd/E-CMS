@@ -198,14 +198,25 @@ const StudentCourse = ({
                         </p>
                       </div>
                     )}
-                    <div className='col-2 mr-auto'>
-                      <b>
+                    <div className='col-3'>
+                      <span className='text text-warning font-weight-bold bg-dark pl-3 pr-3 pt-2 pb-2 rounded'>
                         {course.review.length === 0 ? (
                           <p>No Review Available</p>
                         ) : (
                           getStarAverage()
                         )}
-                      </b>
+                        &nbsp;Ratings
+                      </span>
+                    </div>
+                    <div className='col-4'>
+                      <span className='text text-warning font-weight-bold bg-dark pl-3 pr-3 pt-2 pb-2 rounded'>
+                        {course.enrolledStudent.length} - Students Enrolled
+                      </span>
+                    </div>
+                    <div className='col-3'>
+                      <span className='text text-dark font-weight-bold bg-warning pl-3 pr-3 pt-2 pb-2 rounded'>
+                        {course.review.length} - Reviews
+                      </span>
                     </div>
                   </div>
                   <div className='row'>
@@ -243,13 +254,14 @@ const StudentCourse = ({
                           <label htmlFor='star'>Stars</label>
                           <br></br>
                           <input
-                            type='number'
+                            type='hidden'
                             value={star}
                             min='1'
                             max='5'
                             id='star'
                             name='star'
                             disabled
+                            required
                             onChange={(e) => onChange(e)}
                           />
                           <ReactStars size={30} onChange={ratingChanged} />
@@ -282,7 +294,12 @@ const StudentCourse = ({
                                       <h5 className='text-muted'>
                                         {review.comment}
                                       </h5>
-                                      <h6>{getStars(review.star)}</h6>
+                                      <h6 className='badge badge-warning '>
+                                        {getStars(review.star)}
+                                      </h6>
+                                      <h6 className='badge badge-light'>
+                                        Stars
+                                      </h6>
                                       <hr></hr>
                                       <span>
                                         <FcCalendar />

@@ -62,7 +62,10 @@ const Student = ({
             </div>
           </span>
         </div>
+        <br></br>
+        <hr></hr>
       </div>
+
       {/* <div className='card text-dark bg-light mb-3 shadow p-3 mb-5 bg-white rounded'>
         <div className='card-body'>
           <span className='card-text'>

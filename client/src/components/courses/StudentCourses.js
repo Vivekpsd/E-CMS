@@ -16,6 +16,24 @@ const Courses = ({
     getCourses();
     getCurrentProfile();
   }, [getCourses, getCurrentProfile]);
+
+  function roundToTwo(num) {
+    return +(Math.round(num + 'e+2') + 'e-2');
+  }
+
+  const getStarAverage = (course) => {
+    let sum = 0,
+      len = 0;
+    course.review.map((review) => {
+      sum += review.star;
+      len += 1;
+    });
+
+    let avg = sum / len;
+    let ans = roundToTwo(avg);
+    return ans;
+  };
+
   return (
     <Fragment>
       {loading ? (
@@ -62,9 +80,21 @@ const Courses = ({
                             {course.teacher}
                           </p>
                           <p className='card-text'>
-                            4.7 *****{'  '} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <span className='badge badge-warning badge-lg'>
-                              Bestseller
+                            <span
+                              className='badge badge-light'
+                              style={{ fontSize: '13px' }}
+                            >
+                              {course.review.length} Reviews
+                            </span>
+                            <span
+                              className='text text-warning strong float-right font-weight-bold bg-dark pl-2 pr-2 rounded'
+                              style={{ fontSize: '15px' }}
+                            >
+                              {course.review.length === 0 ? (
+                                <p>No Review Available</p>
+                              ) : (
+                                getStarAverage(course)
+                              )}
                             </span>
                           </p>
 
