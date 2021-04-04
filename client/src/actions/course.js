@@ -198,10 +198,10 @@ export const deleteComment = (courseID, reviewID) => async (dispatch) => {
 };
 
 //Assignment
-export const uploadAssignment = (formData) => async (dispatch) => {
+export const uploadAssignment = (formData, courseID) => async (dispatch) => {
   try {
     const res = await axios.post(
-      'http://localhost:5000/api/assignment',
+      `http://localhost:5000/api/assignment/${courseID}`,
       formData,
       {
         headers: {

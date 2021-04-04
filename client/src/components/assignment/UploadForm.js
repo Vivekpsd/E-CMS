@@ -3,7 +3,7 @@ import { getCourses } from '../../actions/course';
 import { getCurrentProfile } from '../../actions/profile';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import axios from 'axios';
+
 import { Link } from 'react-router-dom';
 import { uploadAssignment } from '../../actions/course';
 const UploadForm = ({
@@ -24,25 +24,51 @@ const UploadForm = ({
   const [uploadedFile, setUploadedFile] = useState({});
   const [message, setMessage] = useState('');
   const [uploadPercentage, setUploadPercentage] = useState(0);
-
+  const [courseID, setCourse] = useState('');
   // const { title, description, endDate } = formData;
 
   const onChange = (e) => {
     setFile(e.target.files[0]);
     setFilename(e.target.files[0].name);
   };
+  const onChange2 = (e) => {
+    setCourse(e.target.value);
+    console.log(courseID);
+  };
 
   const onSubmit = async (e) => {
     e.preventDefault();
+
     const formData = new FormData();
     formData.append('file', file);
     console.log(formData);
-    uploadAssignment(formData);
+    uploadAssignment(formData, courseID);
   };
 
   return (
     <Fragment>
       <form onSubmit={onSubmit}>
+        <select
+          id='typeMsg'
+          className='form-control'
+          name='typeMsg'
+          onChange={(e) => onChange2(e)}
+        >
+          {!profile.loading &&
+            profile.enrolledCourse.map((courseID) =>
+              courses.map((course) => {
+                if (course._id === courseID) {
+                  return (
+                    <option value={course._id} key={course._id}>
+                      {course.title}
+                    </option>
+                  );
+                } else {
+                  return <p>No Course</p>;
+                }
+              })
+            )}
+        </select>
         <div className='custom-file mb-4'>
           <input
             type='file'
