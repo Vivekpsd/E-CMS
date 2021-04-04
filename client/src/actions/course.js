@@ -9,6 +9,8 @@ import {
   UPDATE_COURSE,
   ADD_REVIEW,
   DELETE_REVIEW,
+  ADD_ASSIGNEMNT,
+  ASSIGNMENT_ERROR,
 } from './types';
 
 //Get all Courses
@@ -193,4 +195,56 @@ export const deleteComment = (courseID, reviewID) => async (dispatch) => {
       });
     }
   }
+};
+
+//Assignment
+export const uploadAssignment = (formData) => async (dispatch) => {
+  try {
+    const res = await axios.post(
+      'http://localhost:5000/api/assignment',
+      formData,
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      }
+    );
+
+    dispatch({
+      type: ADD_ASSIGNEMNT,
+      payload: res.data,
+    });
+    dispatch(setAlert('Assignment Uploaded', 'success'));
+  } catch (err) {
+    dispatch({
+      type: ASSIGNMENT_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status },
+    });
+  }
+  // try {
+  //   const config = {
+  //     header: {
+  //       'Content-Type': 'multipart/form-data',
+  //     },
+  //   };
+
+  //   console.log(formData);
+
+  //   const res = await axios.post(
+  //     'http://localhost:5000/api/assignment',
+  //     config,
+  //     formData
+  //   );
+  //   console.log('back');
+  //   dispatch(setAlert('Assignment Uploaded', 'success'));
+  //   dispatch({
+  //     type: ADD_ASSIGNEMNT,
+  //     payload: res.data,
+  //   });
+  // } catch (err) {
+  //   dispatch({
+  //     type: ASSIGNMENT_ERROR,
+  //     payload: { msg: err.response.statusText, status: err.response.status },
+  //   });
+  // }
 };

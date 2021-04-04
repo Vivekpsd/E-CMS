@@ -25,3 +25,5 @@ export const GET_EVENTS = 'GET_EVENTS';
 export const DELETE_EVENT = 'DELETE_EVENT';
 export const EVENT_ERROR = 'EVENT_ERROR';
 export const CLEAR_EVENT = 'CLEAR_EVENT';
+export const ASSIGNMENT_ERROR = 'ASSIGNMENT_ERROR';
+export const ADD_ASSIGNEMNT = 'ADD_ASSIGNEMNT';

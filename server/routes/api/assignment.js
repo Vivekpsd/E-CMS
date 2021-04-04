@@ -19,12 +19,13 @@ router.use(function (req, res, next) {
 router.get('/', (req, res) => {});
 
 router.post('/', (req, res) => {
+  console.log(req);
   if (req.files) {
     var file = req.files.file;
     var filename = file.name;
     var courseID = '6064a153e0cd122cc8d2df88';
     var paths = path.join(__dirname + '\\..' + '\\..', '/uploads');
-
+    console.log('back');
     fs.mkdir(
       path.join(paths, `${courseID}`),
       { recursive: true },
@@ -48,6 +49,8 @@ router.post('/', (req, res) => {
         res.send('file uploaded');
       }
     });
+  } else {
+    console.log('No file');
   }
 });
 

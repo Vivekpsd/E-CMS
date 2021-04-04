@@ -10,9 +10,7 @@ const DashboardActions = () => {
       <Link to='/courses' className='btn btn-light mr-3'>
         <i className=' text-primary' /> View Courses
       </Link>
-      <Link to='/assigment' className='btn btn-light mr-3'>
-        <i className='text-primary' /> View Assigment
-      </Link>
+
       <Link to='/message' className='btn btn-light mr-3'>
         <i className='text-primary' /> View Message
       </Link>

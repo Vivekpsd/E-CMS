@@ -6,6 +6,8 @@ import {
   UPDATE_COURSE,
   ADD_REVIEW,
   DELETE_REVIEW,
+  ADD_ASSIGNEMNT,
+  ASSIGNMENT_ERROR,
 } from '../actions/types';
 
 const initialState = {
@@ -26,6 +28,7 @@ export default function (state = initialState, action) {
         loading: false,
       };
     case COURSES_ERROR:
+    case ASSIGNMENT_ERROR:
       return {
         ...state,
         error: payload,
@@ -34,6 +37,7 @@ export default function (state = initialState, action) {
     case GET_COURSE:
     case UPDATE_COURSE:
     case ADD_REVIEW:
+    case ADD_ASSIGNEMNT:
       return {
         ...state,
         course: payload,
