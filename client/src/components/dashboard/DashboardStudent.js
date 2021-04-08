@@ -3,20 +3,44 @@ import { Link } from 'react-router-dom';
 
 const DashboardStudent = () => {
   return (
-    <div className='dash-buttons'>
-      <Link to='/edit-profile' className='btn btn-light mr-3'>
-        <i className='text-primary' /> Edit Profile
+    <div className='text-center bg-dark side-bar'>
+      <Link
+        to='/'
+        className=' mr-3'
+        style={{ color: 'azure', textDecoration: 'none' }}
+      >
+        <i className='text-primary' /> Dashboard
       </Link>
-      <Link to='/student-courses' className='btn btn-light mr-3'>
+      <br></br>
+      <Link
+        to='/student-courses'
+        className=' mr-3'
+        style={{ color: 'azure', textDecoration: 'none' }}
+      >
         <i className=' text-primary' /> Courses
       </Link>
-      <Link to='/assigment' className='btn btn-light mr-3'>
-        <i className='text-primary' /> View Assigment
+      <br></br>
+      <Link
+        to='/assigment'
+        className=' mr-3'
+        style={{ color: 'azure', textDecoration: 'none' }}
+      >
+        <i className='text-primary' /> Assigment
       </Link>
-      <Link to='/message' className='btn btn-light mr-3'>
-        <i className='text-primary' /> View Message
+      <br></br>
+      <Link
+        to='/message'
+        className='mr-3'
+        style={{ color: 'azure', textDecoration: 'none' }}
+      >
+        <i className='text-primary' /> Message
       </Link>
-      <Link to='/student-events' className='btn btn-light mr-3'>
+      <br></br>
+      <Link
+        to='/student-events'
+        className=' mr-3'
+        style={{ color: 'azure', textDecoration: 'none' }}
+      >
         <i className=' text-primary' /> View Events
       </Link>
     </div>

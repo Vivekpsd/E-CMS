@@ -198,10 +198,26 @@ export const deleteComment = (courseID, reviewID) => async (dispatch) => {
 };
 
 //Assignment
-export const uploadAssignment = (formData, courseID) => async (dispatch) => {
+export const uploadAssignment = (formData, formdetails, courseID) => async (
+  dispatch
+) => {
   try {
+    const config = {
+      header: {
+        'Content-Type': 'application/json',
+      },
+    };
+
     const res = await axios.post(
-      `http://localhost:5000/api/assignment/${courseID}`,
+      `http://localhost:5000/api/course/upload-assignment-info/${courseID}`,
+      formdetails,
+      config
+    );
+    const id = res.data._id;
+    console.log(courseID);
+    console.log(res);
+    const res2 = await axios.post(
+      `http://localhost:5000/api/assignment/teacher/${courseID}/${formdetails.title}`,
       formData,
       {
         headers: {
@@ -209,17 +225,17 @@ export const uploadAssignment = (formData, courseID) => async (dispatch) => {
         },
       }
     );
-
     dispatch({
       type: ADD_ASSIGNEMNT,
-      payload: res.data,
+      payload: res2.data,
     });
     dispatch(setAlert('Assignment Uploaded', 'success'));
   } catch (err) {
-    dispatch({
-      type: ASSIGNMENT_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status },
-    });
+    // dispatch({
+    //   type: ASSIGNMENT_ERROR,
+    //   formdetailsoad: { msg: err.response.statusText, status: err.response.status },
+    // });
+    console.log(err.message);
   }
   // try {
   //   const config = {

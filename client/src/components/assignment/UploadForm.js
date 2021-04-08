@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 
 import { Link } from 'react-router-dom';
 import { uploadAssignment } from '../../actions/course';
+import ViewAssignmentsTeacher from './ViewAssignmentsTeacher';
 const UploadForm = ({
   getCourses,
   getCurrentProfile,
@@ -21,9 +22,18 @@ const UploadForm = ({
   //const [formData, setFormData] = useState('');
   const [file, setFile] = useState('');
   const [filename, setFilename] = useState('Choose File');
-  const [uploadedFile, setUploadedFile] = useState({});
-  const [message, setMessage] = useState('');
-  const [uploadPercentage, setUploadPercentage] = useState(0);
+  const [formdetails, setformdetails] = useState({
+    title: '',
+    endDate: '',
+    description: '',
+  });
+
+  const { title, description, endDate } = formdetails;
+  const onChange3 = (e) =>
+    setformdetails({ ...formdetails, [e.target.name]: e.target.value });
+  //const [uploadedFile, setUploadedFile] = useState({});
+  //const [message, setMessage] = useState('');
+  //const [uploadPercentage, setUploadPercentage] = useState(0);
   const [courseID, setCourse] = useState('');
   // const { title, description, endDate } = formData;
 
@@ -38,16 +48,53 @@ const UploadForm = ({
 
   const onSubmit = async (e) => {
     e.preventDefault();
-
     const formData = new FormData();
     formData.append('file', file);
     console.log(formData);
-    uploadAssignment(formData, courseID);
+    uploadAssignment(formData, formdetails, courseID);
   };
 
   return (
     <Fragment>
+      <Link to='view-assignments' className='btn btn-success'>
+        View All Assignment
+      </Link>
       <form onSubmit={onSubmit}>
+        <div className='form-group'>
+          <label htmlFor='title'>Assignment Title</label>
+          <input
+            id='title'
+            className='form-control'
+            type='text'
+            placeholder='Title'
+            name='title'
+            value={title}
+            onChange={onChange3}
+          />
+        </div>
+        <div className='form-group'>
+          <label htmlFor='descirption'>Assignment Description</label>
+          <textarea
+            placeholder='A breif intro of the course'
+            id='description'
+            className='form-control'
+            name='description'
+            value={description}
+            onChange={onChange3}
+          />
+        </div>
+        <div className='form-group'>
+          <label htmlFor='endDate'>End Date</label>
+          <input
+            id='endDate'
+            type='date'
+            className='form-control'
+            name='endDate'
+            value={endDate}
+            onChange={onChange3}
+          />
+        </div>
+        <label htmlFor='enrolledCourse'>Select Course</label>
         <select
           id='typeMsg'
           className='form-control'
@@ -69,6 +116,7 @@ const UploadForm = ({
               })
             )}
         </select>
+        <br></br>
         <div className='custom-file mb-4'>
           <input
             type='file'

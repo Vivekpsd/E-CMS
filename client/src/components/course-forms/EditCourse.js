@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createCourse, getCourseById } from '../../actions/course';
 import { getProfiles } from '../../actions/profile';
+import DashboardActions from '../dashboard/DashboardAction';
 
 const EditCourse = ({
   course: { course, loading },
@@ -73,115 +74,126 @@ const EditCourse = ({
 
   return (
     <Fragment>
-      <h1 className='large text-primary'>Edit Course</h1>
-      <p className='lead'>
-        <i className='fas fa-user' /> Edit Course here
-      </p>
-      <form className='form' onSubmit={onSubmit}>
-        <div className='form-group'>
-          <label htmlFor='title'>Course Title</label>
-          <input
-            id='title'
-            className='form-control'
-            type='text'
-            placeholder='Title'
-            name='title'
-            value={title}
-            onChange={onChange}
-          />
-        </div>
+      <div className='container-fluid'>
+        <div className='row'>
+          <div className='col-2'>
+            <DashboardActions />
+          </div>
+          <div className='col-8'>
+            <h1 className='large text-primary'>Edit Course</h1>
+            <p className='lead'>
+              <i className='fas fa-user' /> Edit Course here
+            </p>
+            <form className='form' onSubmit={onSubmit}>
+              <div className='form-group'>
+                <label htmlFor='title'>Course Title</label>
+                <input
+                  id='title'
+                  className='form-control'
+                  type='text'
+                  placeholder='Title'
+                  name='title'
+                  value={title}
+                  onChange={onChange}
+                />
+              </div>
 
-        <div className='form-group'>
-          <label htmlFor='descirption'>Description</label>
-          <textarea
-            placeholder='A breif intro of the course'
-            id='description'
-            className='form-control'
-            name='description'
-            value={description}
-            onChange={onChange}
-          />
-          <small className='form-text text-muted'>Description of Project</small>
-        </div>
-        <div className='form-group'>
-          <label htmlFor='content'>Course Content</label>
-          <input
-            id='content'
-            className='form-control'
-            type='text'
-            placeholder='content'
-            name='content'
-            value={content}
-            onChange={onChange}
-          />
-        </div>
+              <div className='form-group'>
+                <label htmlFor='descirption'>Description</label>
+                <textarea
+                  placeholder='A breif intro of the course'
+                  id='description'
+                  className='form-control'
+                  name='description'
+                  value={description}
+                  onChange={onChange}
+                />
+                <small className='form-text text-muted'>
+                  Description of Project
+                </small>
+              </div>
+              <div className='form-group'>
+                <label htmlFor='content'>Course Content</label>
+                <input
+                  id='content'
+                  className='form-control'
+                  type='text'
+                  placeholder='content'
+                  name='content'
+                  value={content}
+                  onChange={onChange}
+                />
+              </div>
 
-        <div className='form-group col-md-4'>
-          <label htmlFor='typeMsg'>Choose Teacher</label>
-          <select
-            id='teacher'
-            className='form-control'
-            name='teacher'
-            onChange={(e) => onChange2(e)}
-            //value={teacher}
-          >
-            {profiles.length > 0 ? (
-              profiles.map(
-                (profile) =>
-                  profile.user.role === 'teacher' && (
-                    <option value={profile.user._id} key={profile._id}>
-                      {profile.user.name}
-                    </option>
-                  )
-              )
-            ) : (
-              <option></option>
-            )}
-          </select>
-        </div>
-        <div className='form-group'>
-          <label htmlFor='bio'>Start Date</label>
-          <input
-            id='startDate'
-            type='date'
-            className='form-control'
-            name='startDate'
-            value={startDate}
-            onChange={onChange}
-          />
-        </div>
-        <div className='form-group'>
-          <label htmlFor='endDate'>End Date</label>
-          <input
-            id='endDate'
-            type='date'
-            className='form-control'
-            name='endDate'
-            value={endDate}
-            onChange={onChange}
-          />
-        </div>
+              <div className='form-group col-md-4'>
+                <label htmlFor='typeMsg'>Choose Teacher</label>
+                <select
+                  id='teacher'
+                  className='form-control'
+                  name='teacher'
+                  onChange={(e) => onChange2(e)}
+                  //value={teacher}
+                >
+                  {profiles.length > 0 ? (
+                    profiles.map(
+                      (profile) =>
+                        profile.user.role === 'teacher' && (
+                          <option value={profile.user._id} key={profile._id}>
+                            {profile.user.name}
+                          </option>
+                        )
+                    )
+                  ) : (
+                    <option></option>
+                  )}
+                </select>
+              </div>
+              <div className='form-group'>
+                <label htmlFor='bio'>Start Date</label>
+                <input
+                  id='startDate'
+                  type='date'
+                  className='form-control'
+                  name='startDate'
+                  value={startDate}
+                  onChange={onChange}
+                />
+              </div>
+              <div className='form-group'>
+                <label htmlFor='endDate'>End Date</label>
+                <input
+                  id='endDate'
+                  type='date'
+                  className='form-control'
+                  name='endDate'
+                  value={endDate}
+                  onChange={onChange}
+                />
+              </div>
 
-        <div className='form-group'>
-          <label htmlFor='prerequisite'>Prerequisite</label>
-          <input
-            placeholder='A breif intro of the course'
-            id='prerequisite'
-            className='form-control'
-            name='prerequisite'
-            value={prerequisite}
-            onChange={onChange}
-          />
-          <small className='form-text text-muted'>
-            Things student should know before appling for this course
-          </small>
-        </div>
+              <div className='form-group'>
+                <label htmlFor='prerequisite'>Prerequisite</label>
+                <input
+                  placeholder='A breif intro of the course'
+                  id='prerequisite'
+                  className='form-control'
+                  name='prerequisite'
+                  value={prerequisite}
+                  onChange={onChange}
+                />
+                <small className='form-text text-muted'>
+                  Things student should know before appling for this course
+                </small>
+              </div>
 
-        <input type='submit' className='btn btn-primary my-1 mr-2' />
-        <Link className='btn btn-light my-1' to='/courses'>
-          Go Back
-        </Link>
-      </form>
+              <input type='submit' className='btn btn-primary my-1 mr-2' />
+              <Link className='btn btn-light my-1' to='/courses'>
+                Go Back
+              </Link>
+            </form>
+          </div>
+        </div>
+      </div>
     </Fragment>
   );
 };

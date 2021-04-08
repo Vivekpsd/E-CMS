@@ -4,8 +4,18 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getCurrentProfile } from '../../actions/profile';
 import DashboardActions from './DashboardAction';
+import UserPic from '../../img/user.png';
+import './dashboardCSS/dashboard.css';
 import Spinner from '../layouts/Spinner';
 import DashboardTeacher from './DashboardTeacher';
+import {
+  FaFacebook,
+  FaGithub,
+  FaInstagram,
+  FaTwitch,
+  FaTwitter,
+  FaYoutube,
+} from 'react-icons/fa';
 
 const Teacher = ({
   getCurrentProfile,
@@ -19,26 +29,120 @@ const Teacher = ({
     <Spinner />
   ) : (
     <Fragment>
-      <h1 className='large text-primary'>Dashboard</h1>
-      <p className='lead'>
-        <i className='' /> Welcome {user && user.name}
-        <br></br>
-        <span className='badge badge-info'>Role : {user.role}</span>
-        <br></br>
-        <span className='badge badge-info'>Route : teacher</span>
-      </p>
-      {profile !== null ? (
-        <Fragment>
-          <DashboardTeacher />
-        </Fragment>
-      ) : (
-        <Fragment>
-          <p>You have not yet setup a profile, please add some info</p>
-          <Link to='/create-profile' className='btn btn-primary my-1'>
-            Create Profile
-          </Link>
-        </Fragment>
-      )}
+      <div className='container-fluid'>
+        <div className='row'>
+          <div className='col-2'>
+            <DashboardTeacher />
+          </div>
+          <div className='col-8'>
+            <div className='card text-dark bg-light mb-3 p-3 bg-white rounded'>
+              <div className='card-body'>
+                <span className='card-text'>
+                  <div className='container-fluid'>
+                    <div className='row align-items-center'>
+                      <div className='col-4'>
+                        <img
+                          src={UserPic}
+                          alt='User'
+                          className='rounded'
+                          height='200px'
+                        />
+                      </div>
+                      <div className='col-5'>
+                        <h4>{user && user.name.toUpperCase()}</h4>
+                        <p>
+                          Github -{' '}
+                          {profile === null ? 'N/A' : profile.githubusername}
+                        </p>
+                        <p className='text-muted'>
+                          {user.role.charAt(0).toUpperCase() +
+                            user.role.slice(1)}
+                        </p>
+                      </div>
+                      <div className='col-3 mr-auto'>
+                        {profile !== null ? (
+                          <Fragment>
+                            <Link
+                              to='/edit-profile'
+                              className='btn btn-outline-dark'
+                            >
+                              <i className='text-primary' /> Edit Profile
+                            </Link>
+                          </Fragment>
+                        ) : (
+                          <Fragment>
+                            <Link
+                              to='/create-profile'
+                              className='btn btn-outline-dark my-1'
+                            >
+                              Create Profile
+                            </Link>
+                          </Fragment>
+                        )}
+                      </div>
+                    </div>
+                    <hr></hr>
+                    {profile !== null && (
+                      <div className='row mt-5 justify-content-center align-items-center'>
+                        <div className='col-5'>
+                          <div className='card text-light bg-light mb-3  bg-dark rounded'>
+                            <div className='card-body'>
+                              <h4>Bio</h4>
+                              <hr></hr>
+                              <span className='card-text'>{profile.bio}</span>
+                            </div>
+                          </div>
+                        </div>
+                        <div className='col-5'>
+                          <div class='alert alert-info' role='alert'>
+                            <h4>Skills</h4>
+                            <hr></hr>
+                            <strong>{user.name}</strong> have knowledge about{' '}
+                            <strong>
+                              {profile.skills.map((skill) => {
+                                return skill + ', ';
+                              })}
+                            </strong>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                    <br></br>
+                    <br></br>
+                    {profile !== null && (
+                      <div className='row text-center'>
+                        <div className='col'>
+                          <h1>
+                            <FaFacebook />
+                            &nbsp;&nbsp;
+                            <FaTwitter />
+                            &nbsp;&nbsp;
+                            <FaInstagram />
+                            &nbsp;&nbsp;
+                            <FaGithub />
+                            &nbsp;&nbsp;
+                            <FaYoutube />
+                          </h1>
+                        </div>
+                      </div>
+                    )}
+
+                    <div className='row mt-3'>
+                      {profile === null && (
+                        <div class='alert alert-info' role='alert'>
+                          <strong>Heads up! {user.name}, </strong> You have not
+                          yet setup a profile, please create a new profile for
+                          your account.
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </Fragment>
   );
 };

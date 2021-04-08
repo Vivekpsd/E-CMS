@@ -21,7 +21,7 @@ const EnrolledStudent = ({
 
   const test = (studentID) => {
     return (
-      <div>
+      <div className='container'>
         {profiles.length > 0 ? (
           profiles.map((profile) => {
             return (

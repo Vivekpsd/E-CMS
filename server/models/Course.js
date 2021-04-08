@@ -47,6 +47,25 @@ const CourseSchema = new mongoose.Schema({
       },
     },
   ],
+  assignment: [
+    {
+      endDate: {
+        type: String,
+      },
+      startDate: {
+        type: Date,
+        default: Date.now,
+      },
+      title: {
+        type: String,
+        required: true,
+      },
+      description: {
+        type: String,
+        required: true,
+      },
+    },
+  ],
   startDate: {
     type: String,
     required: true,

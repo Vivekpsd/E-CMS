@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createEvent } from '../../actions/event';
 import { getProfiles } from '../../actions/profile';
+import DashboardActions from '../dashboard/DashboardAction';
 
 const CreateEvent = ({
   createEvent,
@@ -35,76 +36,85 @@ const CreateEvent = ({
 
   return (
     <Fragment>
-      <h1 className='large text-primary'>Create New Event</h1>
-      <p className='lead'>
-        <i className='fas fa-user' /> Create your event here
-      </p>
-      <form className='form' onSubmit={onSubmit}>
-        <div className='form-group'>
-          <label htmlFor='title'>Event Name</label>
-          <input
-            id='title'
-            className='form-control'
-            type='text'
-            placeholder='Title'
-            name='title'
-            value={title}
-            onChange={onChange}
-          />
-        </div>
+      <div className='container-fluid'>
+        <div className='row'>
+          <div className='col-2'>
+            <DashboardActions />
+          </div>
+          <div className='col-8'>
+            <h1 className='large text-primary'>Create New Event</h1>
+            <p className='lead'>
+              <i className='fas fa-user' /> Create your event here
+            </p>
+            <form className='form' onSubmit={onSubmit}>
+              <div className='form-group'>
+                <label htmlFor='title'>Event Name</label>
+                <input
+                  id='title'
+                  className='form-control'
+                  type='text'
+                  placeholder='Title'
+                  name='title'
+                  value={title}
+                  onChange={onChange}
+                />
+              </div>
 
-        <div className='form-group'>
-          <label htmlFor='descirption'>Description</label>
-          <textarea
-            placeholder='A breif intro of the event'
-            id='description'
-            className='form-control'
-            name='description'
-            value={description}
-            onChange={onChange}
-          />
-        </div>
+              <div className='form-group'>
+                <label htmlFor='descirption'>Description</label>
+                <textarea
+                  placeholder='A breif intro of the event'
+                  id='description'
+                  className='form-control'
+                  name='description'
+                  value={description}
+                  onChange={onChange}
+                />
+              </div>
 
-        <div className='form-group'>
-          <label htmlFor='bio'>Start Date</label>
-          <input
-            id='startDate'
-            type='date'
-            className='form-control'
-            name='startDate'
-            value={startDate}
-            onChange={onChange}
-          />
-        </div>
-        <div className='form-group'>
-          <label htmlFor='endDate'>End Date</label>
-          <input
-            id='endDate'
-            type='date'
-            className='form-control'
-            name='endDate'
-            value={endDate}
-            onChange={onChange}
-          />
-        </div>
-        <div className='form-group'>
-          <label htmlFor='link'>Link</label>
-          <input
-            id='link'
-            className='form-control'
-            type='text'
-            placeholder='Link'
-            name='link'
-            value={link}
-            onChange={onChange}
-          />
-        </div>
+              <div className='form-group'>
+                <label htmlFor='bio'>Start Date</label>
+                <input
+                  id='startDate'
+                  type='date'
+                  className='form-control'
+                  name='startDate'
+                  value={startDate}
+                  onChange={onChange}
+                />
+              </div>
+              <div className='form-group'>
+                <label htmlFor='endDate'>End Date</label>
+                <input
+                  id='endDate'
+                  type='date'
+                  className='form-control'
+                  name='endDate'
+                  value={endDate}
+                  onChange={onChange}
+                />
+              </div>
+              <div className='form-group'>
+                <label htmlFor='link'>Link</label>
+                <input
+                  id='link'
+                  className='form-control'
+                  type='text'
+                  placeholder='Link'
+                  name='link'
+                  value={link}
+                  onChange={onChange}
+                />
+              </div>
 
-        <input type='submit' className='btn btn-primary my-1 mr-2' />
-        <Link className='btn btn-light my-1' to='/dashboard'>
-          Go Back
-        </Link>
-      </form>
+              <input type='submit' className='btn btn-primary my-1 mr-2' />
+              <Link className='btn btn-light my-1' to='/events'>
+                Go Back
+              </Link>
+            </form>
+          </div>
+        </div>
+      </div>
     </Fragment>
   );
 };

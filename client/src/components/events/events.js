@@ -4,41 +4,68 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Spinner from '../layouts/Spinner';
 import { allEvents } from '../../actions/event';
+import { getCurrentProfile } from '../../actions/profile';
 import EventItem from './EventItem';
 
-const Events = ({ allEvents, event: { events, loading } }) => {
+import DashboardAction from '../dashboard/DashboardAction';
+import DashboardStudent from '../dashboard/DashboardStudent';
+import DashboardTeaher from '../dashboard/DashboardTeacher';
+
+const Events = ({
+  allEvents,
+  event: { events, loading },
+  getCurrentProfile,
+  profile: { profile },
+}) => {
   useEffect(() => {
     allEvents();
-  }, [allEvents]);
+    getCurrentProfile();
+  }, [allEvents, getCurrentProfile]);
   return (
     <Fragment>
       {loading ? (
         <Spinner />
       ) : (
         <Fragment>
-          <h1 className='large text-primary'>Events</h1>
-          <p className='lead'>
-            <i className='fab fa-connectdevelop' /> Browse our Events
-          </p>
+          <div className='container-fluid'>
+            <div className='row'>
+              <div className='col-2'>
+                {profile.user.role === 'student' && <DashboardStudent />}
+                {profile.user.role === 'teacher' && <DashboardTeaher />}
+                {profile.user.role === 'admin' && <DashboardAction />}
+              </div>
 
-          <div>
-            <p className=''></p>
-            <Link to='/createEvent' className='btn btn-info'>
-              Add Event
-            </Link>
-            &nbsp;
-            <Link to='/dashboard' className='btn btn-dark'>
-              Go Back To Dashboard
-            </Link>
-          </div>
+              <div className='col-9'>
+                <h1 className='large text-primary'>Events</h1>
+                <p className='lead'>
+                  <i className='fab fa-connectdevelop' /> Browse our Events
+                </p>
 
-          <br></br>
-          <div className='events'>
-            {events.length > 0 ? (
-              events.map((event) => <EventItem key={event._id} event={event} />)
-            ) : (
-              <h4>No courses found...</h4>
-            )}
+                <div>
+                  <p className=''></p>
+                  {profile.user.role === 'admin' && (
+                    <Link to='/createEvent' className='btn btn-info'>
+                      Add Event
+                    </Link>
+                  )}
+                  &nbsp;
+                  <Link to='/dashboard' className='btn btn-dark'>
+                    Go Back To Dashboard
+                  </Link>
+                </div>
+
+                <br></br>
+                <div className='events'>
+                  {events.length > 0 ? (
+                    events.map((event) => (
+                      <EventItem key={event._id} event={event} />
+                    ))
+                  ) : (
+                    <h4>No courses found...</h4>
+                  )}
+                </div>
+              </div>
+            </div>
           </div>
         </Fragment>
       )}
@@ -54,6 +81,7 @@ const Events = ({ allEvents, event: { events, loading } }) => {
 
 Events.propTypes = {
   event: PropTypes.object.isRequired,
+  profile: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -61,4 +89,6 @@ const mapStateToProps = (state) => ({
   event: state.event,
 });
 
-export default connect(mapStateToProps, { allEvents })(Events);
+export default connect(mapStateToProps, { allEvents, getCurrentProfile })(
+  Events
+);

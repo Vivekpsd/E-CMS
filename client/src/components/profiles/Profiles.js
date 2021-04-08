@@ -1,15 +1,22 @@
 import React, { Fragment, useEffect } from 'react';
 import Spinner from '../layouts/Spinner';
-import { getProfiles } from '../../actions/profile';
+import { getProfiles, getCurrentProfile } from '../../actions/profile';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import ProfileItem from './ProfileItem';
 import { Link } from 'react-router-dom';
+import DashboardAction from '../dashboard/DashboardAction';
 
-const Profiles = ({ getProfiles, profile: { profiles, loading } }) => {
+const Profiles = ({
+  getProfiles,
+  profile: { profiles, loading },
+  getCurrentProfile,
+  profile: { profile },
+}) => {
   useEffect(() => {
     getProfiles();
-  }, [getProfiles]);
+    getCurrentProfile();
+  }, [getProfiles, getCurrentProfile]);
 
   return (
     <Fragment>
@@ -17,24 +24,34 @@ const Profiles = ({ getProfiles, profile: { profiles, loading } }) => {
         <Spinner />
       ) : (
         <Fragment>
-          <h1 className='large text-primary'>Developers</h1>
-          <p className='lead'>
-            <i className='fab fa-connectdevelop' /> Browse and connect with
-            developers
-          </p>
-          <Link to='/dashboard' className='btn btn-dark'>
-            Back To Dashboard
-          </Link>
-          <hr></hr>
-          <br></br>
-          <div className='profiles'>
-            {profiles.length > 0 ? (
-              profiles.map((profile) => (
-                <ProfileItem key={profile._id} profile={profile} />
-              ))
-            ) : (
-              <h4>No profiles found...</h4>
-            )}
+          <div className='container-fluid'>
+            <div className='row'>
+              <div className='col-2'>
+                <DashboardAction />
+              </div>
+              <div className='col-8'>
+                <h1 className='large text-dark'>Developers</h1>
+                <p className='lead'>
+                  <i className='fab fa-connectdevelop' /> Browse and connect
+                  with developers
+                </p>
+                <Link to='/dashboard' className='btn btn-dark'>
+                  Back To Dashboard
+                </Link>
+
+                <br></br>
+                <br></br>
+                <div className='profiles'>
+                  {profiles.length > 0 ? (
+                    profiles.map((profile) => (
+                      <ProfileItem key={profile._id} profile={profile} />
+                    ))
+                  ) : (
+                    <h4>No profiles found...</h4>
+                  )}
+                </div>
+              </div>
+            </div>
           </div>
         </Fragment>
       )}
@@ -51,4 +68,6 @@ const mapStateToProps = (state) => ({
   profile: state.profile,
 });
 
-export default connect(mapStateToProps, { getProfiles })(Profiles);
+export default connect(mapStateToProps, { getProfiles, getCurrentProfile })(
+  Profiles
+);

@@ -15,6 +15,9 @@ import {
 } from '../../actions/course';
 import { getCurrentProfile } from '../../actions/profile';
 import Alert from '../../components/layouts/Alert';
+import DashboardAction from '../dashboard/DashboardAction';
+import DashboardStudent from '../dashboard/DashboardStudent';
+import DashboardTeaher from '../dashboard/DashboardTeacher';
 
 const StudentCourse = ({
   match,
@@ -116,221 +119,248 @@ const StudentCourse = ({
         <Spinner />
       ) : (
         <Fragment>
-          <div className='card text-dark bg-light mb-3 shadow p-3 mb-5 bg-white rounded'>
-            <div className='card-body'>
-              <span className='card-text'>
-                <div className='container'>
-                  <div className='row'>
-                    <div className='col-8'>
-                      <Link to='/student-courses' className='text-info'>
-                        Back To All Courses
-                      </Link>
+          <div className='container-fluid'>
+            <div className='row'>
+              <div className='col-2'>
+                {profile.user.role === 'student' && <DashboardStudent />}
+                {profile.user.role === 'teacher' && <DashboardTeaher />}
+                {profile.user.role === 'admin' && <DashboardAction />}
+              </div>
+              <div className='col-9'>
+                <div className='card text-dark bg-light mb-3 shadow p-3 mb-5 bg-white rounded'>
+                  <div className='card-body'>
+                    <span className='card-text'>
+                      <div className='container'>
+                        <div className='row'>
+                          <div className='col-8'>
+                            {profile.user.role === 'student' && (
+                              <Link to='/student-courses' className='text-info'>
+                                Back To All Courses
+                              </Link>
+                            )}
+                            {profile.user.role === 'teacher' && (
+                              <Link to='/teacher-courses' className='text-info'>
+                                Back To All Courses
+                              </Link>
+                            )}
 
-                      {course.title && (
-                        <p className='display-4'>{course.title} </p>
-                      )}
-                      <hr></hr>
-                      <p style={{ fontSize: '17px' }}>{course.description}</p>
-                    </div>
-                    <div className='col-4 align-self-center'>
-                      <div className='card'>
-                        <ProfilePic />
+                            {course.title && (
+                              <p className='display-4'>{course.title} </p>
+                            )}
+                            <hr></hr>
+                            <p style={{ fontSize: '17px' }}>
+                              {course.description}
+                            </p>
+                          </div>
+                          <div className='col-4 align-self-center'>
+                            <div className='card'>
+                              <ProfilePic />
+                              <hr></hr>
+                              <h3 className='text-center'>
+                                ₹ 500{' '}
+                                <del
+                                  className='text-muted'
+                                  style={{ fontSize: '20px' }}
+                                >
+                                  1000
+                                </del>
+                                <br></br>
+                                <p
+                                  style={{ fontSize: '15px' }}
+                                  className='badge badge-danger'
+                                >
+                                  50% OFF
+                                </p>
+                              </h3>
+
+                              {course.enrolledStudent.find(
+                                (enrolledStudent) => {
+                                  if (enrolledStudent === profile.user._id) {
+                                    return true;
+                                  }
+                                }
+                              ) ? (
+                                <button className='btn btn-secondary disabled'>
+                                  Already Enrolled
+                                </button>
+                              ) : (
+                                <button
+                                  className='btn btn-outline-primary'
+                                  onClick={(e) => onClick(e)}
+                                >
+                                  Buy now
+                                </button>
+                              )}
+                            </div>
+                          </div>
+                        </div>
+
+                        <div className='alert alert-info mt-4 mb-4'>
+                          <h5>What you'll learn</h5>
+                          <hr></hr>
+                          <p>{course.content}</p>
+                        </div>
+                        <div className='row'>
+                          {getStarAverage() >= 4 &&
+                          course.review.length >= 5 ? (
+                            <div className='col-2'>
+                              <p
+                                className='badge badge-warning badge-lg'
+                                style={{ fontSize: '15px' }}
+                              >
+                                Bestseller
+                              </p>
+                            </div>
+                          ) : (
+                            <div className='col-2'>
+                              <p
+                                className='badge badge-pill badge-success'
+                                style={{ fontSize: '15px' }}
+                              >
+                                New!
+                              </p>
+                            </div>
+                          )}
+                          <div className='col-3'>
+                            <span className='text text-warning font-weight-bold bg-dark pl-3 pr-3 pt-2 pb-2 rounded'>
+                              {course.review.length === 0 ? (
+                                <p>No Review Available</p>
+                              ) : (
+                                getStarAverage()
+                              )}
+                              &nbsp;Ratings
+                            </span>
+                          </div>
+                          <div className='col-4'>
+                            <span className='text text-warning font-weight-bold bg-dark pl-3 pr-3 pt-2 pb-2 rounded'>
+                              {course.enrolledStudent.length} - Students
+                              Enrolled
+                            </span>
+                          </div>
+                          <div className='col-3'>
+                            <span className='text text-dark font-weight-bold bg-warning pl-3 pr-3 pt-2 pb-2 rounded'>
+                              {course.review.length} - Reviews
+                            </span>
+                          </div>
+                        </div>
+                        <div className='row'>
+                          <div className='col'>
+                            <p>
+                              Taught By{' '}
+                              <span className='text-info font-weight-bold'>
+                                {course.teacher}
+                              </span>
+                            </p>
+                          </div>
+                        </div>
                         <hr></hr>
-                        <h3 className='text-center'>
-                          ₹ 500{' '}
-                          <del
-                            className='text-muted'
-                            style={{ fontSize: '20px' }}
-                          >
-                            1000
-                          </del>
-                          <br></br>
-                          <p
-                            style={{ fontSize: '15px' }}
-                            className='badge badge-danger'
-                          >
-                            50% OFF
-                          </p>
-                        </h3>
-
-                        {course.enrolledStudent.find((enrolledStudent) => {
-                          if (enrolledStudent === profile.user._id) {
-                            return true;
-                          }
-                        }) ? (
-                          <button className='btn btn-secondary disabled'>
-                            Already Enrolled
-                          </button>
-                        ) : (
-                          <button
-                            className='btn btn-outline-primary'
-                            onClick={(e) => onClick(e)}
-                          >
-                            Buy now
-                          </button>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className='alert alert-info mt-4 mb-4'>
-                    <h5>What you'll learn</h5>
-                    <hr></hr>
-                    <p>{course.content}</p>
-                  </div>
-                  <div className='row'>
-                    {getStarAverage() >= 4 && course.review.length >= 5 ? (
-                      <div className='col-2'>
-                        <p
-                          className='badge badge-warning badge-lg'
-                          style={{ fontSize: '15px' }}
-                        >
-                          Bestseller
-                        </p>
-                      </div>
-                    ) : (
-                      <div className='col-2'>
-                        <p
-                          className='badge badge-pill badge-success'
-                          style={{ fontSize: '15px' }}
-                        >
-                          New!
-                        </p>
-                      </div>
-                    )}
-                    <div className='col-3'>
-                      <span className='text text-warning font-weight-bold bg-dark pl-3 pr-3 pt-2 pb-2 rounded'>
-                        {course.review.length === 0 ? (
-                          <p>No Review Available</p>
-                        ) : (
-                          getStarAverage()
-                        )}
-                        &nbsp;Ratings
-                      </span>
-                    </div>
-                    <div className='col-4'>
-                      <span className='text text-warning font-weight-bold bg-dark pl-3 pr-3 pt-2 pb-2 rounded'>
-                        {course.enrolledStudent.length} - Students Enrolled
-                      </span>
-                    </div>
-                    <div className='col-3'>
-                      <span className='text text-dark font-weight-bold bg-warning pl-3 pr-3 pt-2 pb-2 rounded'>
-                        {course.review.length} - Reviews
-                      </span>
-                    </div>
-                  </div>
-                  <div className='row'>
-                    <div className='col'>
-                      <p>
-                        Taught By{' '}
-                        <span className='text-info font-weight-bold'>
-                          {course.teacher}
-                        </span>
-                      </p>
-                    </div>
-                  </div>
-                  <hr></hr>
-                  <div className='row'>
-                    <div className='col'>
-                      <h4>Requirements</h4>
-                      {course.prerequisite}
-                    </div>
-                  </div>
-                  <hr></hr>
-                  <div className='row'>
-                    <div className='col'>
-                      <h4>All Reviews ({course.review.length})</h4>
-                      <form onSubmit={onSubmit} id='review-form'>
-                        <div className='form-group'>
-                          <label htmlFor='review'>Your Review Here</label>
-                          <textarea
-                            className='form-control'
-                            id='comment'
-                            rows='3'
-                            name='comment'
-                            value={comment}
-                            onChange={(e) => onChange(e)}
-                          ></textarea>
-                          <label htmlFor='star'>Stars</label>
-                          <br></br>
-                          <input
-                            type='hidden'
-                            value={star}
-                            min='1'
-                            max='5'
-                            id='star'
-                            name='star'
-                            disabled
-                            required
-                            onChange={(e) => onChange(e)}
-                          />
-                          <ReactStars size={30} onChange={ratingChanged} />
+                        <div className='row'>
+                          <div className='col'>
+                            <h4>Requirements</h4>
+                            {course.prerequisite}
+                          </div>
                         </div>
-                        <input
-                          type='submit'
-                          className='btn btn-primary my-1 mr-2'
-                        />
-                      </form>
-                    </div>
-                  </div>
-                  <hr></hr>
-                  <Alert />
-                  <div className='row'>
-                    <div className='col'>
-                      <h6>Reviews</h6>
-                      {course.review && (
-                        <div>
-                          {course.review.map((review) => {
-                            return (
-                              <div key={review._id}>
-                                <div className='card text-dark mb-3 shadow-md p-1 mb-5 bg-light rounded'>
-                                  <div className='card-body'>
-                                    <span className='card-text'>
-                                      <h5>
-                                        <FcCustomerSupport />
-                                        &nbsp;&nbsp;
-                                        {review.student}
-                                      </h5>
-                                      <h5 className='text-muted'>
-                                        {review.comment}
-                                      </h5>
-                                      <h6 className='badge badge-warning '>
-                                        {getStars(review.star)}
-                                      </h6>
-                                      <h6 className='badge badge-light'>
-                                        Stars
-                                      </h6>
-                                      <hr></hr>
-                                      <span>
-                                        <FcCalendar />
-                                        &nbsp;&nbsp;
-                                        {review.date}
-                                      </span>
-                                    </span>
-                                    <div className='float-right'>
-                                      {profile.user._id ===
-                                        review.studentID && (
-                                        <button
-                                          className='btn btn-danger'
-                                          onClick={() => {
-                                            deleteReview(review._id);
-                                          }}
-                                        >
-                                          Delete
-                                        </button>
-                                      )}
-                                    </div>
-                                  </div>
-                                </div>
+                        <hr></hr>
+                        <div className='row'>
+                          <div className='col'>
+                            <h4>All Reviews ({course.review.length})</h4>
+                            <form onSubmit={onSubmit} id='review-form'>
+                              <div className='form-group'>
+                                <label htmlFor='review'>Your Review Here</label>
+                                <textarea
+                                  className='form-control'
+                                  id='comment'
+                                  rows='3'
+                                  name='comment'
+                                  value={comment}
+                                  onChange={(e) => onChange(e)}
+                                ></textarea>
+                                <label htmlFor='star'>Stars</label>
+                                <br></br>
+                                <input
+                                  type='hidden'
+                                  value={star}
+                                  min='1'
+                                  max='5'
+                                  id='star'
+                                  name='star'
+                                  disabled
+                                  required
+                                  onChange={(e) => onChange(e)}
+                                />
+                                <ReactStars
+                                  size={30}
+                                  onChange={ratingChanged}
+                                />
                               </div>
-                            );
-                          })}
+                              <input
+                                type='submit'
+                                className='btn btn-primary my-1 mr-2'
+                              />
+                            </form>
+                          </div>
                         </div>
-                      )}
-                    </div>
+                        <hr></hr>
+                        <Alert />
+                        <div className='row'>
+                          <div className='col'>
+                            <h6>Reviews</h6>
+                            {course.review && (
+                              <div>
+                                {course.review.map((review) => {
+                                  return (
+                                    <div key={review._id}>
+                                      <div className='card text-dark mb-3 shadow-md p-1 mb-5 bg-light rounded'>
+                                        <div className='card-body'>
+                                          <span className='card-text'>
+                                            <h5>
+                                              <FcCustomerSupport />
+                                              &nbsp;&nbsp;
+                                              {review.student}
+                                            </h5>
+                                            <h5 className='text-muted'>
+                                              {review.comment}
+                                            </h5>
+                                            <h6 className='badge badge-warning '>
+                                              {getStars(review.star)}
+                                            </h6>
+                                            <h6 className='badge badge-light'>
+                                              Stars
+                                            </h6>
+                                            <hr></hr>
+                                            <span>
+                                              <FcCalendar />
+                                              &nbsp;&nbsp;
+                                              {review.date}
+                                            </span>
+                                          </span>
+                                          <div className='float-right'>
+                                            {profile.user._id ===
+                                              review.studentID && (
+                                              <button
+                                                className='btn btn-danger'
+                                                onClick={() => {
+                                                  deleteReview(review._id);
+                                                }}
+                                              >
+                                                Delete
+                                              </button>
+                                            )}
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  );
+                                })}
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    </span>
                   </div>
                 </div>
-              </span>
+              </div>
             </div>
           </div>
         </Fragment>

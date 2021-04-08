@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import Landing from './components/layouts/landing';
 import Navbar from './components/layouts/navbar';
+import './index.css';
 import Login from './components/auth/login';
 import Register from './components/auth/register';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
@@ -19,6 +20,7 @@ import Teacher from './components/dashboard/Teacher';
 import Profile from './components/profile/Profile';
 import Courses from './components/courses/Courses';
 import Events from './components/events/events';
+import TeacherCourses from './components/courses/TeacherCourses';
 import StudentEvents from './components/events/StudentEvents';
 import Course from './components/course/Course';
 import AdminEvent from './components/Event/AdminEvent';
@@ -28,6 +30,9 @@ import SendMessage from './components/message/SendMessage';
 import StudentCourse from './components/course/StudentCourse';
 import EnrolledStudent from './components/enrolled/EnrolledStudent';
 import UploadForm from './components/assignment/UploadForm';
+import ViewAssignmentsTeacher from './components/assignment/ViewAssignmentsTeacher';
+import ViewUploadedAssignment from './components/assignment/ViewUploadedAssignment';
+import ViewUploadedAssignments from './components/assignment/ViewUploadedAssignments';
 //Redux
 import { Provider } from 'react-redux';
 import store from './store';
@@ -49,7 +54,7 @@ export default function App() {
       <Router>
         <Navbar />
         <Route path='/' exact component={Landing} />
-        <section className='container'>
+        <section className='container-fluid'>
           <Alert />
           <Switch>
             <Route exact path='/register' component={Register} />
@@ -60,6 +65,11 @@ export default function App() {
               exact
               path='/student-courses'
               component={StudentCourses}
+            />
+            <PrivateRoute
+              exact
+              path='/teacher-courses'
+              component={TeacherCourses}
             />
             <PrivateRoute
               exact
@@ -106,6 +116,21 @@ export default function App() {
             <Route exact path='/createEvent' component={CreateEvent} />
             <Route exact path='/student-events' component={StudentEvents} />
             <Route exact path='/assigment' component={UploadForm} />
+            <Route
+              exact
+              path='/view-assignments'
+              component={ViewAssignmentsTeacher}
+            />
+            <Route
+              exact
+              path='/assignment/:id'
+              component={ViewUploadedAssignments}
+            />
+            <Route
+              exact
+              path='/assignment-submitted/:id'
+              component={ViewUploadedAssignment}
+            />
           </Switch>
         </section>
       </Router>

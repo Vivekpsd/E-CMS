@@ -12,8 +12,9 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
           Dashboard
         </Link>
       </li>
+      &nbsp;&nbsp;
       <li className='nav-item'>
-        <Link onClick={logout} className='nav-link' to='/'>
+        <Link onClick={logout} className='nav-btn btn btn-danger' to='/'>
           Logout
         </Link>
       </li>
@@ -40,10 +41,10 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
     </ul>
   );
   return (
-    <nav className='navbar navbar-expand-sm navbar-dark bg-dark mb-4'>
+    <nav className='navbar navbar-expand-sm navbar-light mb-4'>
       <div className='container'>
         <Link className='navbar-brand' to='/'>
-          E-CMS
+          <h5>Engineers Gurukul</h5>
         </Link>
         <button
           className='navbar-toggler'

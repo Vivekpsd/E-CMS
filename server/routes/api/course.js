@@ -4,6 +4,7 @@ const auth = require('../../middleware/auth');
 const { check, validationResult } = require('express-validator');
 const Course = require('../../models/Course');
 const Profile = require('../../models/Profile');
+const { request } = require('express');
 
 router.use(function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
@@ -213,4 +214,36 @@ router.delete('/delete/:course_id/:review_id', async (req, res) => {
   }
 });
 
+// @route    PUT api/course/upload-assignment
+// @desc     Add  assignment
+// @access   Private
+
+router.post('/upload-assignment-info/:courseID', async (req, res) => {
+  const { title, startDate, endDate, description } = req.body;
+  const courseID = req.params.courseID;
+  //console.log(courseID);
+  //console.log(title);
+  const newAssignment = {
+    title,
+    startDate,
+    endDate,
+    description,
+  };
+
+  try {
+    let course = await Course.findById(courseID);
+
+    if (course) {
+      course.assignment.unshift(newAssignment);
+      await course.save();
+    } else {
+      console.log('No Course');
+    }
+
+    res.json(course);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
 module.exports = router;
