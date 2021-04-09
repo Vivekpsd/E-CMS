@@ -1,7 +1,12 @@
 import axios from 'axios';
 import { setAlert } from './alert';
 
-import { ASSIGNMENT_COURSE, ASSIGNMENT_ERROR, GET_ASSIGNMENTS } from './types';
+import {
+  ASSIGNMENT_COURSE,
+  ASSIGNMENT_ERROR,
+  GET_ASSIGNMENTS,
+  STUDENT_ASSIGNMENT_UPLOADS,
+} from './types';
 
 //Get all Courses
 export const getAssignmentCourse = () => async (dispatch) => {
@@ -41,22 +46,53 @@ export const getUploadedAssignment = (courseID) => async (dispatch) => {
   }
 };
 
-//Get uploaded assignments by student in specific courses
-// export const getUploadedAssignments = (assignID) => async (dispatch) => {
-//   console.log(assignID);
-//   try {
-//     const res = await axios.get(
-//       `http://localhost:5000/api/assignment/course-list/${courseID}`
-//     );
+//Get uploaded assignments by student in specific courses - Teacher
+export const getUploadedAssignments = (courseID, name) => async (dispatch) => {
+  try {
+    const res = await axios.get(
+      `http://localhost:5000/api/assignment/assignmentuploded/${courseID}/${name}`
+    );
 
-//     dispatch({
-//       type: GET_ASSIGNMENTS,
-//       payload: res.data,
-//     });
-//   } catch (err) {
-//     dispatch({
-//       type: ASSIGNMENT_ERROR,
-//       payload: { msg: err.response },
-//     });
-//   }
-// };
+    dispatch({
+      type: STUDENT_ASSIGNMENT_UPLOADS,
+      payload: res.data,
+    });
+  } catch (err) {
+    dispatch({
+      type: ASSIGNMENT_ERROR,
+      payload: { msg: err.response },
+    });
+  }
+};
+
+//File Uploaded By Student - By student
+
+//Assignment
+export const uploadAssignmentStudent = (
+  formData,
+  username,
+  email,
+  courseID,
+  assignID
+) => async (dispatch) => {
+  console.log('In Action');
+  try {
+    const res = await axios.post(
+      `http://localhost:5000/api/assignment/student/${courseID}/${assignID}/${username}/${email}`,
+      formData,
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      }
+    );
+
+    // dispatch({
+    //   type: ADD_ASSIGNEMNT,
+    //   payload: res2.data,
+    // });
+    dispatch(setAlert('Assignment Uploaded', 'success'));
+  } catch (err) {
+    console.log(err.message);
+  }
+};

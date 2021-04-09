@@ -2,10 +2,11 @@ import {
   GET_ASSIGNMENTS,
   ASSIGNMENT_COURSE,
   ASSIGNMENT_ERROR,
+  STUDENT_ASSIGNMENT_UPLOADS,
 } from '../actions/types';
 
 const initialState = {
-  assignment: null,
+  assignment: [],
   assignments: [],
   courses: [],
   loading: true,
@@ -32,6 +33,12 @@ export default function (state = initialState, action) {
       return {
         ...state,
         error: payload,
+        loading: false,
+      };
+    case STUDENT_ASSIGNMENT_UPLOADS:
+      return {
+        ...state,
+        assignment: payload,
         loading: false,
       };
     default:

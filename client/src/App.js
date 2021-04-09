@@ -33,6 +33,9 @@ import UploadForm from './components/assignment/UploadForm';
 import ViewAssignmentsTeacher from './components/assignment/ViewAssignmentsTeacher';
 import ViewUploadedAssignment from './components/assignment/ViewUploadedAssignment';
 import ViewUploadedAssignments from './components/assignment/ViewUploadedAssignments';
+import AssignmentUploadStudent from './components/assignment-student/AssignmentUploadStudent';
+import AssignmentFileStudent from './components/assignment-student/AssignmentFilesStudent';
+import UploadAssignmentForm from './components/assignment-student/UploadAssignmentForm';
 //Redux
 import { Provider } from 'react-redux';
 import store from './store';
@@ -128,8 +131,23 @@ export default function App() {
             />
             <Route
               exact
-              path='/assignment-submitted/:id'
+              path='/assignment-submitted/:id/:name'
               component={ViewUploadedAssignment}
+            />
+            <Route
+              exact
+              path='/assignments-tosubmit'
+              component={AssignmentUploadStudent}
+            />
+            <Route
+              exact
+              path='/assignment-tosubmit/:id'
+              component={AssignmentFileStudent}
+            />
+            <Route
+              exact
+              path='/upload-assignment-student/:id/:name'
+              component={UploadAssignmentForm}
             />
           </Switch>
         </section>

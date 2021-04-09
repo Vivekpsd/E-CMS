@@ -4,33 +4,22 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getCurrentProfile } from '../../actions/profile';
 import { getCourses } from '../../actions/course';
-import {
-  getAssignmentCourse,
-  getUploadedAssignment,
-} from '../../actions/assignment';
+import { getAssignmentCourse } from '../../actions/assignment';
 import Spinner from '../layouts/Spinner';
 
-const ViewUploadedAssignments = ({
-  match,
+const AssignmentUploadStudent = ({
   getCourses,
   course: { courses, loading },
   getCurrentProfile,
   profile: { profile },
   getAssignmentCourse,
-  getUploadedAssignment,
   assignment,
 }) => {
   useEffect(() => {
     getCurrentProfile();
     getCourses();
     getAssignmentCourse();
-    getUploadedAssignment(match.params.id);
-  }, [
-    getCurrentProfile,
-    getCourses,
-    getAssignmentCourse,
-    getUploadedAssignment,
-  ]);
+  }, [getCurrentProfile, getCourses, getAssignmentCourse]);
 
   return (
     <Fragment>
@@ -41,21 +30,28 @@ const ViewUploadedAssignments = ({
           <div className='container'>
             <div className='row'>
               <div className='col'>
-                <h3>List of Assignments </h3>
+                <h3>View Courses of Assignments </h3>
                 <hr></hr>
-                {assignment.assignments.map((course) => {
-                  return (
-                    <div>
-                      {course}
-                      <Link
-                        to={`/assignment-submitted/${match.params.id}/${course}`}
-                        style={{ textDecoration: 'none', color: 'red' }}
-                      >
-                        - View Submitted Assignment
-                      </Link>
-                    </div>
-                  );
-                })}
+                {assignment.courses.map((courseID) =>
+                  courses.map((course) => {
+                    return (
+                      <p>
+                        {course._id === courseID &&
+                          course.enrolledStudent.map((profileID) => {
+                            return (
+                              <p>
+                                {profileID === profile.user._id && (
+                                  <Link to={`assignment-tosubmit/${courseID}`}>
+                                    {course.title}
+                                  </Link>
+                                )}
+                              </p>
+                            );
+                          })}
+                      </p>
+                    );
+                  })
+                )}
               </div>
             </div>
           </div>
@@ -65,13 +61,12 @@ const ViewUploadedAssignments = ({
   );
 };
 
-ViewUploadedAssignments.propTypes = {
+AssignmentUploadStudent.propTypes = {
   getCourses: PropTypes.func.isRequired,
   getCurrentProfile: PropTypes.func.isRequired,
   course: PropTypes.object.isRequired,
   profile: PropTypes.object.isRequired,
   getAssignmentCourse: PropTypes.object.isRequired,
-  getUploadedAssignment: PropTypes.object.isRequired,
 };
 const mapSatateToProps = (state) => ({
   course: state.course,
@@ -83,5 +78,4 @@ export default connect(mapSatateToProps, {
   getCourses,
   getCurrentProfile,
   getAssignmentCourse,
-  getUploadedAssignment,
-})(ViewUploadedAssignments);
+})(AssignmentUploadStudent);

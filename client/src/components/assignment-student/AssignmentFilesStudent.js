@@ -7,11 +7,10 @@ import { getCourses } from '../../actions/course';
 import {
   getAssignmentCourse,
   getUploadedAssignment,
-  getUploadedAssignments,
 } from '../../actions/assignment';
 import Spinner from '../layouts/Spinner';
 
-const ViewUploadedAssignment = ({
+const AssignmentFileStudent = ({
   match,
   getCourses,
   course: { courses, loading },
@@ -19,7 +18,6 @@ const ViewUploadedAssignment = ({
   profile: { profile },
   getAssignmentCourse,
   getUploadedAssignment,
-  getUploadedAssignments,
   assignment,
 }) => {
   useEffect(() => {
@@ -27,13 +25,11 @@ const ViewUploadedAssignment = ({
     getCourses();
     getAssignmentCourse();
     getUploadedAssignment(match.params.id);
-    getUploadedAssignments(match.params.id, match.params.name);
   }, [
     getCurrentProfile,
     getCourses,
     getAssignmentCourse,
     getUploadedAssignment,
-    getUploadedAssignments,
   ]);
 
   return (
@@ -42,23 +38,40 @@ const ViewUploadedAssignment = ({
         <Spinner />
       ) : (
         <Fragment>
-          {assignment.assignment.map((uploaded) => {
-            return <div>{uploaded}</div>;
-          })}
+          <div className='container'>
+            <div className='row'>
+              <div className='col'>
+                <h3>List of Assignments </h3>
+                <hr></hr>
+                {assignment.assignments.map((course) => {
+                  return (
+                    <div>
+                      {course}
+                      <Link
+                        to={`/upload-assignment-student/${match.params.id}/${course}`}
+                        style={{ textDecoration: 'none', color: 'red' }}
+                      >
+                        - Upload Assignment
+                      </Link>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
         </Fragment>
       )}
     </Fragment>
   );
 };
 
-ViewUploadedAssignment.propTypes = {
+AssignmentFileStudent.propTypes = {
   getCourses: PropTypes.func.isRequired,
   getCurrentProfile: PropTypes.func.isRequired,
   course: PropTypes.object.isRequired,
   profile: PropTypes.object.isRequired,
   getAssignmentCourse: PropTypes.object.isRequired,
   getUploadedAssignment: PropTypes.object.isRequired,
-  getUploadedAssignments: PropTypes.object.isRequired,
 };
 const mapSatateToProps = (state) => ({
   course: state.course,
@@ -71,5 +84,4 @@ export default connect(mapSatateToProps, {
   getCurrentProfile,
   getAssignmentCourse,
   getUploadedAssignment,
-  getUploadedAssignments,
-})(ViewUploadedAssignment);
+})(AssignmentFileStudent);

@@ -56,85 +56,87 @@ const UploadForm = ({
 
   return (
     <Fragment>
-      <Link to='view-assignments' className='btn btn-success'>
-        View All Assignment
-      </Link>
-      <form onSubmit={onSubmit}>
-        <div className='form-group'>
-          <label htmlFor='title'>Assignment Title</label>
-          <input
-            id='title'
+      <div className='container'>
+        <Link to='view-assignments' className='btn btn-success'>
+          View All Assignment
+        </Link>
+        <form onSubmit={onSubmit}>
+          <div className='form-group'>
+            <label htmlFor='title'>Assignment Title</label>
+            <input
+              id='title'
+              className='form-control'
+              type='text'
+              placeholder='Title'
+              name='title'
+              value={title}
+              onChange={onChange3}
+            />
+          </div>
+          <div className='form-group'>
+            <label htmlFor='descirption'>Assignment Description</label>
+            <textarea
+              placeholder='A breif intro of the course'
+              id='description'
+              className='form-control'
+              name='description'
+              value={description}
+              onChange={onChange3}
+            />
+          </div>
+          <div className='form-group'>
+            <label htmlFor='endDate'>End Date</label>
+            <input
+              id='endDate'
+              type='date'
+              className='form-control'
+              name='endDate'
+              value={endDate}
+              onChange={onChange3}
+            />
+          </div>
+          <label htmlFor='enrolledCourse'>Select Course</label>
+          <select
+            id='typeMsg'
             className='form-control'
-            type='text'
-            placeholder='Title'
-            name='title'
-            value={title}
-            onChange={onChange3}
-          />
-        </div>
-        <div className='form-group'>
-          <label htmlFor='descirption'>Assignment Description</label>
-          <textarea
-            placeholder='A breif intro of the course'
-            id='description'
-            className='form-control'
-            name='description'
-            value={description}
-            onChange={onChange3}
-          />
-        </div>
-        <div className='form-group'>
-          <label htmlFor='endDate'>End Date</label>
-          <input
-            id='endDate'
-            type='date'
-            className='form-control'
-            name='endDate'
-            value={endDate}
-            onChange={onChange3}
-          />
-        </div>
-        <label htmlFor='enrolledCourse'>Select Course</label>
-        <select
-          id='typeMsg'
-          className='form-control'
-          name='typeMsg'
-          onChange={(e) => onChange2(e)}
-        >
-          {!profile.loading &&
-            profile.enrolledCourse.map((courseID) =>
-              courses.map((course) => {
-                if (course._id === courseID) {
-                  return (
-                    <option value={course._id} key={course._id}>
-                      {course.title}
-                    </option>
-                  );
-                } else {
-                  return <p>No Course</p>;
-                }
-              })
-            )}
-        </select>
-        <br></br>
-        <div className='custom-file mb-4'>
-          <input
-            type='file'
-            className='custom-file-input'
-            id='customFile'
-            onChange={onChange}
-          />
-          <label className='custom-file-label' htmlFor='customFile'>
-            {filename}
-          </label>
-        </div>
+            name='typeMsg'
+            onChange={(e) => onChange2(e)}
+          >
+            {!profile.loading &&
+              profile.enrolledCourse.map((courseID) =>
+                courses.map((course) => {
+                  if (course._id === courseID) {
+                    return (
+                      <option value={course._id} key={course._id}>
+                        {course.title}
+                      </option>
+                    );
+                  } else {
+                    return <p>No Course</p>;
+                  }
+                })
+              )}
+          </select>
+          <br></br>
+          <div className='custom-file mb-4'>
+            <input
+              type='file'
+              className='custom-file-input'
+              id='customFile'
+              onChange={onChange}
+            />
+            <label className='custom-file-label' htmlFor='customFile'>
+              {filename}
+            </label>
+          </div>
 
-        <input
-          type='submit'
-          value='Upload'
-          className='btn btn-primary btn-block mt-4'
-        />
-      </form>
+          <input
+            type='submit'
+            value='Upload'
+            className='btn btn-primary btn-block mt-4'
+          />
+        </form>
+      </div>
     </Fragment>
     // <Fragment>
     //   <form

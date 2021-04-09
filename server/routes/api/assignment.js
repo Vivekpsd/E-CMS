@@ -20,9 +20,6 @@ router.use(function (req, res, next) {
 //Upload file by teacher
 
 router.post('/teacher/:courseID/:id', (req, res) => {
-  console.log(req.params.courseID);
-
-  console.log(req.params.id);
   if (req.files) {
     var file = req.files.file;
     var id = req.params.id;
@@ -86,7 +83,7 @@ router.get('/courselist', async (req, res) => {
       '/uploads',
       '/teacher'
     );
-    console.log(directoryPath);
+
     fs.readdir(directoryPath, function (err, files) {
       //handling error
       if (err) {
@@ -115,7 +112,7 @@ router.get('/course-list/:courseID', async (req, res) => {
       '/teacher',
       `/${courseID}`
     );
-    console.log(directoryPath);
+
     fs.readdir(directoryPath, function (err, files) {
       //handling error
       if (err) {
@@ -135,14 +132,14 @@ router.get('/course-list/:courseID', async (req, res) => {
 //////////////////////////////////////////Student  Uploads////////////////////////////////////////////////
 
 //Student Uploads in uploads file
-router.post('/student/:courseID', (req, res) => {
-  console.log(req.params.courseID);
-  console.log('running correct');
+router.post('/student/:courseID/:assignID/:username/:email', (req, res) => {
   if (req.files) {
+    var name = req.params.username + '_' + req.params.email;
     var file = req.files.file;
+    file.name = name;
     var filename = file.name;
     var courseID = req.params.courseID;
-    var assignID = 'Mern Stack Assignment 1';
+    var assignID = req.params.assignID;
     var paths = path.join(__dirname + '\\..' + '\\..', '/uploads', '/student');
 
     fs.mkdir(
@@ -163,7 +160,6 @@ router.post('/student/:courseID', (req, res) => {
       `/${courseID}`,
       `/${assignID}`
     );
-    console.log(path1);
 
     file.mv(`${path1}/` + filename, function (err) {
       if (err) {
@@ -177,12 +173,11 @@ router.post('/student/:courseID', (req, res) => {
   }
 });
 
-//See list of assignment uploded
-router.get('/assignmentuploded', async (req, res) => {
-  console.log('ddddd');
+//See list of assignment uploded by students
+router.get('/assignmentuploded/:id/:name', async (req, res) => {
   try {
-    var courseID = req.body.courseID;
-    var assignID = req.body.assignID;
+    var courseID = req.params.id;
+    var assignID = req.params.name;
 
     var directoryPath = path.join(
       __dirname + '\\..' + '\\..',
@@ -191,7 +186,7 @@ router.get('/assignmentuploded', async (req, res) => {
       `/${courseID}`,
       `/${assignID}`
     );
-    console.log('ddddd', directoryPath);
+
     fs.readdir(directoryPath, function (err, files) {
       //handling error
       if (err) {

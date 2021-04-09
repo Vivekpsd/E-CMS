@@ -21,7 +21,7 @@ const DashboardStudent = () => {
       </Link>
       <br></br>
       <Link
-        to='/assigment'
+        to='/assignments-tosubmit'
         className=' mr-3'
         style={{ color: 'azure', textDecoration: 'none' }}
       >
