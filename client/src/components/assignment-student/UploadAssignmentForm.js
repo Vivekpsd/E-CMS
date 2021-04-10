@@ -95,7 +95,11 @@ const UploadAssignmentForm = ({
                           className='custom-file-input'
                           id='customFile'
                           onChange={onChange}
+                          accept='application/pdf'
                         />
+                        <small className='text-muted'>
+                          Upload Only PDF Files
+                        </small>
                         <label
                           className='custom-file-label'
                           htmlFor='customFile'

@@ -23,7 +23,7 @@ router.post('/teacher/:courseID/:id', (req, res) => {
   if (req.files) {
     var file = req.files.file;
     var id = req.params.id;
-    file.name = id;
+    file.name = id + '.pdf';
     var filename = file.name;
     var courseID = req.params.courseID;
 
@@ -136,7 +136,7 @@ router.post('/student/:courseID/:assignID/:username/:email', (req, res) => {
   if (req.files) {
     var name = req.params.username + '_' + req.params.email;
     var file = req.files.file;
-    file.name = name;
+    file.name = name + '.pdf';
     var filename = file.name;
     var courseID = req.params.courseID;
     var assignID = req.params.assignID;
@@ -203,4 +203,45 @@ router.get('/assignmentuploded/:id/:name', async (req, res) => {
     console.error(err.message);
   }
 });
+
+//Download assignment - Teacher
+router.get(
+  '/download-assignment/:courseID/:assignID/:file',
+  function (req, res) {
+    const courseID = req.params.courseID;
+    const assignID = req.params.assignID;
+    const file = req.params.file;
+
+    var directoryPath = path.join(
+      __dirname + '\\..' + '\\..',
+      '/uploads',
+      '/student',
+      `/${courseID}`,
+      `/${assignID}`,
+      `/${file}`
+    );
+    console.log('Download Running');
+    res.download(directoryPath);
+  }
+);
+
+//teacher's assignment downlaod by student
+router.get(
+  '/student/download-assignment/:courseID/:assignID',
+  function (req, res) {
+    const courseID = req.params.courseID;
+    const assignID = req.params.assignID;
+
+    var directoryPath = path.join(
+      __dirname + '\\..' + '\\..',
+      '/uploads',
+      '/teacher',
+      `/${courseID}`,
+      `/${assignID}`
+    );
+    console.log('Download Running');
+    res.download(directoryPath);
+  }
+);
+
 module.exports = router;

@@ -32,11 +32,7 @@ const Student = ({
     <Fragment>
       <div className='container-fluid'>
         <div className='row'>
-          <div className='col-3'>
-            <DashboardStudent />
-          </div>
-
-          <div className='col-8'>
+          <div className='col-12'>
             <div className='card text-dark bg-light mb-3 p-3 bg-white rounded'>
               <div className='card-body'>
                 <span className='card-text'>

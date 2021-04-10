@@ -4,12 +4,14 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getCurrentProfile } from '../../actions/profile';
 import { getCourses } from '../../actions/course';
+
 import {
   getAssignmentCourse,
   getUploadedAssignment,
   getUploadedAssignments,
 } from '../../actions/assignment';
 import Spinner from '../layouts/Spinner';
+import axios from 'axios';
 
 const ViewUploadedAssignment = ({
   match,
@@ -36,6 +38,23 @@ const ViewUploadedAssignment = ({
     getUploadedAssignments,
   ]);
 
+  const download = async (file) => {
+    axios({
+      url: `http://localhost:5000/api/assignment/download-assignment/${match.params.id}/${match.params.name}/${file}`,
+      method: 'GET',
+      responseType: 'blob',
+    }).then((response) => {
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement('a');
+      link.href = link;
+
+      link.setAttribute('download', file);
+      document.body.appendChild(link);
+
+      link.click();
+    });
+  };
+
   return (
     <Fragment>
       {loading && assignment.loading ? (
@@ -43,7 +62,18 @@ const ViewUploadedAssignment = ({
       ) : (
         <Fragment>
           {assignment.assignment.map((uploaded) => {
-            return <div>{uploaded}</div>;
+            return (
+              <div>
+                {uploaded}
+                <Link
+                  onClick={() => {
+                    download(uploaded);
+                  }}
+                >
+                  Download
+                </Link>
+              </div>
+            );
           })}
         </Fragment>
       )}

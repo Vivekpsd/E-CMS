@@ -9,6 +9,7 @@ import {
   getUploadedAssignment,
 } from '../../actions/assignment';
 import Spinner from '../layouts/Spinner';
+import axios from 'axios';
 
 const AssignmentFileStudent = ({
   match,
@@ -32,6 +33,23 @@ const AssignmentFileStudent = ({
     getUploadedAssignment,
   ]);
 
+  const download = async (course) => {
+    axios({
+      url: `http://localhost:5000/api/assignment/student/download-assignment/${match.params.id}/${course}`,
+      method: 'GET',
+      responseType: 'blob',
+    }).then((response) => {
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement('a');
+      link.href = link;
+
+      link.setAttribute('download', course);
+      document.body.appendChild(link);
+
+      link.click();
+    });
+  };
+
   return (
     <Fragment>
       {loading && assignment.loading ? (
@@ -52,6 +70,13 @@ const AssignmentFileStudent = ({
                         style={{ textDecoration: 'none', color: 'red' }}
                       >
                         - Upload Assignment
+                      </Link>
+                      <Link
+                        onClick={() => {
+                          download(course);
+                        }}
+                      >
+                        Download
                       </Link>
                     </div>
                   );

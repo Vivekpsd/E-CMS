@@ -3,14 +3,28 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { logout } from '../../actions/auth';
+import DashboardStudent from '../dashboard/DashboardStudent';
+import DashboardTeacher from '../dashboard/DashboardTeacher';
+import DashboardActions from '../dashboard/DashboardAction';
 
-const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
+const Navbar = ({ auth: { isAuthenticated, loading, user }, logout }) => {
   const authLinks = (
     <ul className='navbar-nav ml-auto'>
       <li className='nav-item'>
-        <Link className='nav-link' to='/dashboard'>
-          Dashboard
-        </Link>
+        {user && user.role === 'student' && (
+          <Link className='nav-link' component={DashboardStudent}></Link>
+        )}
+        {user && user.role === 'teacher' && (
+          <Link className='nav-link' component={DashboardTeacher}></Link>
+        )}
+        {user && user.role === 'admin' && (
+          <Link className='nav-link' component={DashboardActions}></Link>
+        )}
+        {isAuthenticated === false && (
+          <Link className='nav-link' to='/dashboard'>
+            Dashboard
+          </Link>
+        )}
       </li>
       &nbsp;&nbsp;
       <li className='nav-item'>
@@ -41,27 +55,32 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
     </ul>
   );
   return (
-    <nav className='navbar navbar-expand-sm navbar-light mb-4'>
-      <div className='container'>
-        <Link className='navbar-brand' to='/'>
-          <h5>Engineers Gurukul</h5>
-        </Link>
-        <button
-          className='navbar-toggler'
-          type='button'
-          data-toggle='collapse'
-          data-target='#mobile-nav'
-        >
-          <span className='navbar-toggler-icon' />
-        </button>
+    <div className='container' style={{ marginBottom: '70px' }}>
+      <nav
+        className='navbar navbar-expand-md  fixed-top navbar-light'
+        style={{ backgroundColor: 'white' }}
+      >
+        <div className='container'>
+          <Link className='navbar-brand' to='/'>
+            <h5>Engineers Gurukul</h5>
+          </Link>
+          <button
+            className='navbar-toggler'
+            type='button'
+            data-toggle='collapse'
+            data-target='#mobile-nav'
+          >
+            <span className='navbar-toggler-icon' />
+          </button>
 
-        <div className='collapse navbar-collapse' id='mobile-nav'>
-          {!loading && (
-            <Fragment>{isAuthenticated ? authLinks : guestLinks}</Fragment>
-          )}
+          <div className='collapse navbar-collapse' id='mobile-nav'>
+            {!loading && (
+              <Fragment>{isAuthenticated ? authLinks : guestLinks}</Fragment>
+            )}
+          </div>
         </div>
-      </div>
-    </nav>
+      </nav>
+    </div>
   );
 };
 Navbar.propTypes = {

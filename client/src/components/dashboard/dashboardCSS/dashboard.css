@@ -8,13 +8,23 @@ body {
   height: 720px;
   margin-left: -30px;
   margin-top: -25px;
-  padding-top: 50px;
+  padding-top: 100px;
   background-color: #3e4444;
   text-align: justify;
   color: azure;
   font-size: 20px;
   position: fixed;
   line-height: 40px;
+}
+
+.dashboard {
+  text-decoration: none;
+  background-color: black;
+  float: inline;
+}
+
+.card {
+  width: 100%;
 }
 
 ul {
