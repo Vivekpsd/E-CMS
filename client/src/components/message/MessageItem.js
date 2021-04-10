@@ -10,7 +10,7 @@ const MessageItem = ({
     <Fragment>
       {profile.user._id === senderID ? (
         <Fragment>
-          <div className='card text-dark mb-3 shadow-lg p-3 mb-5 bg-white rounded'>
+          <div className='card text-dark mb-3 p-3 mb-5 '>
             <div className='card-body'>
               <span className='card-text'>
                 <blockquote className='blockquote'>

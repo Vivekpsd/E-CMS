@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import ProfileItem from './ProfileItem';
 import { Link } from 'react-router-dom';
-import DashboardAction from '../dashboard/DashboardAction';
 
 const Profiles = ({
   getProfiles,
@@ -24,12 +23,9 @@ const Profiles = ({
         <Spinner />
       ) : (
         <Fragment>
-          <div className='container-fluid'>
+          <div className='container'>
             <div className='row'>
-              <div className='col-2'>
-                <DashboardAction />
-              </div>
-              <div className='col-8'>
+              <div className='col-12'>
                 <h1 className='large text-dark'>Developers</h1>
                 <p className='lead'>
                   <i className='fab fa-connectdevelop' /> Browse and connect

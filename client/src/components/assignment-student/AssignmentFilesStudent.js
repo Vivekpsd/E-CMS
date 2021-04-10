@@ -10,6 +10,7 @@ import {
 } from '../../actions/assignment';
 import Spinner from '../layouts/Spinner';
 import axios from 'axios';
+import { FaArrowRight } from 'react-icons/fa';
 
 const AssignmentFileStudent = ({
   match,
@@ -56,31 +57,59 @@ const AssignmentFileStudent = ({
         <Spinner />
       ) : (
         <Fragment>
-          <div className='container'>
+          <div className='container' style={{ marginTop: '110px' }}>
             <div className='row'>
               <div className='col'>
                 <h3>List of Assignments </h3>
                 <hr></hr>
-                {assignment.assignments.map((course) => {
-                  return (
-                    <div>
-                      {course}
-                      <Link
-                        to={`/upload-assignment-student/${match.params.id}/${course}`}
-                        style={{ textDecoration: 'none', color: 'red' }}
-                      >
-                        - Upload Assignment
-                      </Link>
-                      <Link
-                        onClick={() => {
-                          download(course);
-                        }}
-                      >
-                        Download
-                      </Link>
-                    </div>
-                  );
-                })}
+                <table class='table '>
+                  <thead class='thead-dark'>
+                    <tr>
+                      <th scope='col'>#</th>
+                      <th scope='col'>Assignment Title</th>
+                      <th scope='col'>Download</th>
+                      <th scope='col'>Upload</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {assignment.assignments.map((course) => {
+                      return (
+                        <Fragment>
+                          <tr>
+                            <th>
+                              <FaArrowRight />
+                            </th>
+                            <td>{course}</td>
+                            <td>
+                              <Link
+                                to={`/upload-assignment-student/${match.params.id}/${course}`}
+                                className='btn btn-outline-success'
+                              >
+                                Upload Assignment
+                              </Link>
+                            </td>
+                            <td>
+                              <Link
+                                style={{
+                                  textDecoration: 'none',
+                                  color: 'black',
+                                  backgroundColor: 'yellow',
+                                  border: '1px solid black',
+                                  padding: '4px',
+                                }}
+                                onClick={() => {
+                                  download(course);
+                                }}
+                              >
+                                Download
+                              </Link>
+                            </td>
+                          </tr>
+                        </Fragment>
+                      );
+                    })}
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>
@@ -96,7 +125,7 @@ AssignmentFileStudent.propTypes = {
   course: PropTypes.object.isRequired,
   profile: PropTypes.object.isRequired,
   getAssignmentCourse: PropTypes.object.isRequired,
-  getUploadedAssignment: PropTypes.object.isRequired,
+  getUploadedAssignment: PropTypes.func.isRequired,
 };
 const mapSatateToProps = (state) => ({
   course: state.course,

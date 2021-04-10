@@ -8,17 +8,19 @@ import Spinner from '../layouts/Spinner';
 
 import DashboardImg1 from '../../img/dashboardImg1.jpg';
 import DashboardImg2 from '../../img/bgDashboard3.png';
+import Feature1 from '../../img/feature1.png';
+import Feature2 from '../../img/feature2.png';
+import Feature3 from '../../img/feature3.png';
+import User from '../../img/user.png';
 import '../dashboard/dashboardCSS/dashboard.css';
 import {
   FaFacebook,
   FaGithub,
   FaInstagram,
-  FaTwitch,
   FaTwitter,
   FaYoutube,
   FaArrowRight,
 } from 'react-icons/fa';
-const { v4: uuidv4 } = require('uuid');
 
 const Student = ({
   getCurrentProfile,
@@ -69,12 +71,21 @@ const Student = ({
                   <div className='container-fluid'>
                     <div className='row align-items-center'>
                       <div className='col-4'>
-                        <img
-                          src={user.avatar}
-                          alt='User'
-                          className='rounded'
-                          height='200px'
-                        />
+                        {user.avatar ? (
+                          <img
+                            src={user.avatar}
+                            alt='User'
+                            className='rounded'
+                            height='200px'
+                          />
+                        ) : (
+                          <img
+                            src={User}
+                            alt='User'
+                            className='rounded'
+                            height='200px'
+                          />
+                        )}
                       </div>
                       <div className='col-5'>
                         <h4>{user && user.name.toUpperCase()}</h4>
@@ -168,6 +179,40 @@ const Student = ({
                 </span>
               </div>
             </div>
+          </div>
+        </div>
+      </div>
+      <br></br>
+      <div className='container'>
+        <p className='display-4'>Why choose Us?</p>
+        <hr></hr>
+        <div className='row text-center'>
+          <div className='col-12 col-md-4'>
+            <br></br>
+            <img src={Feature1} height='100px' width='100px' alt='feature1' />
+            <br></br>
+            <p>
+              Our Service is open 24 x 7. You can book your tickets anytime you
+              want. We will be there for you. Always
+            </p>
+          </div>
+          <div className='col-12 col-md-4'>
+            <br></br>
+            <img src={Feature2} height='100px' width='100px' alt='feature2' />
+            <br></br>
+            <p>
+              Our Website is fully responsive for all the devices out there such
+              as mobile, tablet, or desktop
+            </p>
+          </div>
+          <div className='col-12 col-md-4'>
+            <br></br>
+            <img src={Feature3} height='100px' width='100px' alt='feature3' />
+            <br></br>
+            <p>
+              All your credit and debit card information is secure with us. All
+              your transaction details are secured with 3 layer encryption
+            </p>
           </div>
         </div>
       </div>

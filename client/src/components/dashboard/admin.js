@@ -90,7 +90,7 @@ const Admin = ({
                           </div>
                         </div>
                         <div className='col-5'>
-                          <div class='alert alert-info' role='alert'>
+                          <div className='alert alert-info' role='alert'>
                             <h4>Skills</h4>
                             <hr></hr>
                             <strong>{user.name}</strong> have knowledge about{' '}
@@ -125,7 +125,7 @@ const Admin = ({
 
                     <div className='row mt-3'>
                       {profile === null && (
-                        <div class='alert alert-info' role='alert'>
+                        <div className='alert alert-info' role='alert'>
                           <strong>Heads up! {user.name}, </strong> You have not
                           yet setup a profile, please create a new profile for
                           your account.

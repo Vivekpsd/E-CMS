@@ -26,10 +26,10 @@ const StudentEvents = ({
         <Spinner />
       ) : (
         <Fragment>
-          <div className='container-fluid'>
+          <div className='container' style={{ marginTop: '110px' }}>
             <div className='row'>
               <div className='col-12'>
-                <h1 className='large text-dark'>Events</h1>
+                <h2 className='large text-dark'>Events</h2>
                 <p className='lead'>
                   <i className='fab fa-connectdevelop' /> Browse and Register
                   for upcoming Events
