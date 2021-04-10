@@ -43,11 +43,7 @@ const Courses = ({
         <Fragment>
           <div className='container-fluid'>
             <div className='row'>
-              <div className='col-2'>
-                <DashboardStudent />
-              </div>
-              <div className='col-1'></div>
-              <div className='col-9'>
+              <div className='col-12'>
                 <h1 className='large text-dark'>Courses</h1>
                 <p className='lead'>
                   <i className='fab fa-connectdevelop' /> Browse Courses

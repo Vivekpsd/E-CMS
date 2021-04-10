@@ -36,12 +36,9 @@ const CreateEvent = ({
 
   return (
     <Fragment>
-      <div className='container-fluid'>
+      <div className='container'>
         <div className='row'>
-          <div className='col-2'>
-            <DashboardActions />
-          </div>
-          <div className='col-8'>
+          <div className='col-12'>
             <h1 className='large text-primary'>Create New Event</h1>
             <p className='lead'>
               <i className='fas fa-user' /> Create your event here

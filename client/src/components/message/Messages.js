@@ -16,14 +16,9 @@ const Messages = ({ getCurrentProfile, profile: { profile, loading } }) => {
 
   return (
     <Fragment>
-      <div className='container-fluid'>
+      <div className='container'>
         <div className='row'>
-          <div className='col-2'>
-            {profile.user.role === 'student' && <DashboardStudent />}
-            {profile.user.role === 'teacher' && <DashboardTeaher />}
-            {profile.user.role === 'admin' && <DashboardAction />}
-          </div>
-          <div className='col-9'>
+          <div className='col-12'>
             <h1 className='large text-dark'>All Messages</h1>
             <p className='lead'>
               <i className='fab fa-connectdevelop' /> See all messages here

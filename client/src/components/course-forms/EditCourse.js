@@ -74,12 +74,9 @@ const EditCourse = ({
 
   return (
     <Fragment>
-      <div className='container-fluid'>
+      <div className='container'>
         <div className='row'>
-          <div className='col-2'>
-            <DashboardActions />
-          </div>
-          <div className='col-8'>
+          <div className='col-12'>
             <h1 className='large text-primary'>Edit Course</h1>
             <p className='lead'>
               <i className='fas fa-user' /> Edit Course here

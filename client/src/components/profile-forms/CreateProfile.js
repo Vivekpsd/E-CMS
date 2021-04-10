@@ -41,69 +41,7 @@ const CreateProfile = ({ createProfile, history }) => {
     <Fragment>
       <div className='container-fluid'>
         <div className='row'>
-          <div className='col-3'>
-            <div className='side-bar'>
-              <ul
-                style={{
-                  backgroundColor: '#b9936c',
-                  paddingTop: '10px',
-                  paddingBottom: '10px',
-                }}
-              >
-                <Link
-                  style={{ textDecoration: 'none', color: 'azure' }}
-                  to='/dashboard'
-                >
-                  Dashboard
-                </Link>
-              </ul>
-              <ul>
-                <Link style={{ pointerEvents: 'none', color: 'grey' }}>
-                  My Courses
-                </Link>
-              </ul>
-              <ul>
-                <Link style={{ pointerEvents: 'none', color: 'grey' }}>
-                  Assignment
-                </Link>
-              </ul>
-              <ul>
-                <Link
-                  style={{ pointerEvents: 'none', color: 'grey' }}
-                  to='/student-courses'
-                >
-                  Browse Courses
-                </Link>
-              </ul>
-              <ul>
-                <Link
-                  style={{ pointerEvents: 'none', color: 'grey' }}
-                  to='/student-events'
-                >
-                  Browse Events
-                </Link>
-              </ul>
-              <ul className='pb-3'>
-                <Link
-                  style={{ pointerEvents: 'none', color: 'grey' }}
-                  to='/message'
-                >
-                  Messages
-                </Link>
-              </ul>
-              <hr></hr>
-              <ul>
-                <Link>About Us</Link>
-              </ul>
-              <ul>
-                <Link>Contact Us</Link>
-              </ul>
-              <ul>
-                <Link>Help</Link>
-              </ul>
-            </div>
-          </div>
-          <div className='col-8'>
+          <div className='col-12'>
             <h1 className='large text-primary'>Create Your Profile</h1>
             <p className='lead'>
               <i className='fas fa-user' /> Create your profile here

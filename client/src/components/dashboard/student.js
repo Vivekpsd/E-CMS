@@ -3,11 +3,12 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getCurrentProfile } from '../../actions/profile';
-import DashboardStudent from './DashboardStudent';
+
 import Spinner from '../layouts/Spinner';
-import ProfilePic from '../layouts/ProfilePic';
-import UserPic from '../../img/user.png';
-import './dashboardCSS/dashboard.css';
+
+import DashboardImg1 from '../../img/dashboardImg1.jpg';
+import DashboardImg2 from '../../img/bgDashboard3.png';
+import '../dashboard/dashboardCSS/dashboard.css';
 import {
   FaFacebook,
   FaGithub,
@@ -15,6 +16,7 @@ import {
   FaTwitch,
   FaTwitter,
   FaYoutube,
+  FaArrowRight,
 } from 'react-icons/fa';
 const { v4: uuidv4 } = require('uuid');
 
@@ -26,10 +28,38 @@ const Student = ({
   useEffect(() => {
     getCurrentProfile();
   }, [getCurrentProfile]);
+
   return loading && profile === null ? (
     <Spinner />
   ) : (
     <Fragment>
+      <div
+        className='container-fluid'
+        style={{
+          backgroundImage: `url(${DashboardImg2})`,
+          backgroundSize: 'cover',
+          overflow: 'hidden',
+        }}
+      >
+        <div className='row align-items-center'>
+          <div className='col-6'>
+            <br></br>
+            <br></br>
+            <h1 className='pl-5'>
+              Welcome to Engineers Gurukul Training Center!
+              <Link
+                to='student-courses'
+                className='btn btn-lg btn-primary mt-5'
+              >
+                Browse Courses &nbsp;&nbsp; <FaArrowRight />
+              </Link>
+            </h1>
+          </div>
+          <div className='col-6'>
+            <img src={DashboardImg1} alt='Img1' height='500px' />
+          </div>
+        </div>
+      </div>
       <div className='container-fluid'>
         <div className='row'>
           <div className='col-12'>
@@ -40,7 +70,7 @@ const Student = ({
                     <div className='row align-items-center'>
                       <div className='col-4'>
                         <img
-                          src={UserPic}
+                          src={user.avatar}
                           alt='User'
                           className='rounded'
                           height='200px'
@@ -92,7 +122,7 @@ const Student = ({
                           </div>
                         </div>
                         <div className='col-5'>
-                          <div class='alert alert-info' role='alert'>
+                          <div className='alert alert-info' role='alert'>
                             <h4>Skills</h4>
                             <hr></hr>
                             <strong>{user.name}</strong> have knowledge about{' '}
@@ -127,7 +157,7 @@ const Student = ({
 
                     <div className='row mt-3'>
                       {profile === null && (
-                        <div class='alert alert-info' role='alert'>
+                        <div className='alert alert-info' role='alert'>
                           <strong>Heads up! {user.name}, </strong> You have not
                           yet setup a profile, please create a new profile for
                           your account.

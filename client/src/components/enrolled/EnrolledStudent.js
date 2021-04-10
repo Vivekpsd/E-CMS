@@ -25,7 +25,7 @@ const EnrolledStudent = ({
         {profiles.length > 0 ? (
           profiles.map((profile) => {
             return (
-              <div>
+              <div className='container'>
                 {profile.user._id === studentID && (
                   <ProfileItem key={profile.user._id} profile={profile} />
                 )}
@@ -45,17 +45,16 @@ const EnrolledStudent = ({
         <Spinner />
       ) : (
         <Fragment>
-          <Link to='/courses' className='btn btn-light'>
-            Back To All Courses
-          </Link>
-          <div className='profiles'>
-            {course.enrolledStudent.length > 0 ? (
-              course.enrolledStudent.map((student) => {
-                return <div>{test(student)} </div>;
-              })
-            ) : (
-              <h4>No student found...</h4>
-            )}
+          <div className='container'>
+            <div className='profiles'>
+              {course.enrolledStudent.length > 0 ? (
+                course.enrolledStudent.map((student) => {
+                  return <div>{test(student)} </div>;
+                })
+              ) : (
+                <h4>No student found...</h4>
+              )}
+            </div>
           </div>
         </Fragment>
       )}

@@ -39,7 +39,7 @@ const Teacher = ({
                     <div className='row align-items-center'>
                       <div className='col-4'>
                         <img
-                          src={UserPic}
+                          src={user.avatar}
                           alt='User'
                           className='rounded'
                           height='200px'

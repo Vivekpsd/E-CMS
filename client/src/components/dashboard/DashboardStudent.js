@@ -1,6 +1,7 @@
 import React from 'react';
 import { Fragment } from 'react';
 import { Link } from 'react-router-dom';
+import '../dashboard/dashboardCSS/dashboard.css';
 
 const DashboardStudent = () => {
   return (
@@ -11,6 +12,7 @@ const DashboardStudent = () => {
             <i className='text-primary' /> Dashboard
           </Link>
         </li>
+        &nbsp;&nbsp;&nbsp;
         <li className='nav-item'>
           <Link
             to='/student-courses'
@@ -20,6 +22,7 @@ const DashboardStudent = () => {
             <i className=' text-primary' /> Courses
           </Link>
         </li>
+        &nbsp;&nbsp;&nbsp;
         <li className='nav-item'>
           <Link
             to='/assignments-tosubmit'
@@ -29,6 +32,7 @@ const DashboardStudent = () => {
             <i className='text-primary' /> Assigment
           </Link>
         </li>
+        &nbsp;&nbsp;&nbsp;
         <li className='nav-item'>
           <Link
             to='/message'
@@ -38,6 +42,7 @@ const DashboardStudent = () => {
             <i className='text-primary' /> Message
           </Link>
         </li>
+        &nbsp;&nbsp;&nbsp;
         <li className='nav-item'>
           <Link
             to='/student-events'

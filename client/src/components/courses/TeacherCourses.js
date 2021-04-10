@@ -6,9 +6,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import CourseItem from './CourseItem';
-import DashboardAction from '../dashboard/DashboardAction';
-import DashboardStudent from '../dashboard/DashboardStudent';
-import DashboardTeaher from '../dashboard/DashboardTeacher';
+
 import ProfilePic from '../layouts/ProfilePic';
 
 const TeacherCourses = ({
@@ -43,15 +41,9 @@ const TeacherCourses = ({
         <Spinner />
       ) : (
         <Fragment>
-          <div className='container-fluid'>
+          <div className='container'>
             <div className='row'>
-              <div className='col-2'>
-                {profile.user.role === 'student' && <DashboardStudent />}
-                {profile.user.role === 'teacher' && <DashboardTeaher />}
-                {profile.user.role === 'admin' && <DashboardAction />}
-              </div>
-              <div className='col-1'></div>
-              <div className='col-9'>
+              <div className='col-12'>
                 <h1 className='large text-dark'>Courses</h1>
                 <p className='lead'>
                   <i className='fab fa-connectdevelop' /> Browse Courses

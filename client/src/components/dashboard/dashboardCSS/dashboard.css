@@ -1,36 +1,25 @@
-body {
-  margin: 0;
-  padding: 0;
-}
-
-.side-bar {
-  width: 250px;
-  height: 720px;
-  margin-left: -30px;
-  margin-top: -25px;
-  padding-top: 100px;
-  background-color: #3e4444;
-  text-align: justify;
-  color: azure;
-  font-size: 20px;
-  position: fixed;
-  line-height: 40px;
-}
-
-.dashboard {
-  text-decoration: none;
-  background-color: black;
-  float: inline;
-}
-
-.card {
+.container-fluid {
   width: 100%;
+  padding-right: 0;
+  padding-left: 0;
+  margin-right: auto;
+  margin-left: auto;
 }
 
-ul {
-  list-style-type: none;
+h1 {
+  color: #111;
+  font-family: 'Lato', sans-serif;
+  font-size: 54px;
+  font-weight: 300;
+  line-height: 70px;
+  margin-left: 80px;
 }
-
-hr {
-  border-top: 1px solid grey;
+.navbar-nav > .active > a {
+  color: aqua;
+  background-color: chartreuse;
+}
+.nav-item > a:hover {
+  font-size: large;
+  transition: 0.3s;
+  border-bottom: 1px solid black;
 }

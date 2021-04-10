@@ -26,10 +26,7 @@ const Course = ({
         <Fragment>
           <div className='container-fluid'>
             <div className='row'>
-              <div className='col-2'>
-                <DashboardActions />
-              </div>
-              <div className='col-9'>
+              <div className='col-12'>
                 <div className='card text-dark bg-light mb-3 shadow p-3 mb-5 bg-white rounded'>
                   <div className='card-body'>
                     <span className='card-text'>

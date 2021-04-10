@@ -3,9 +3,11 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { logout } from '../../actions/auth';
+import EgLogo from '../../../src/img/EgLogo.png';
 import DashboardStudent from '../dashboard/DashboardStudent';
 import DashboardTeacher from '../dashboard/DashboardTeacher';
 import DashboardActions from '../dashboard/DashboardAction';
+import '../dashboard/dashboardCSS/dashboard.css';
 
 const Navbar = ({ auth: { isAuthenticated, loading, user }, logout }) => {
   const authLinks = (
@@ -26,9 +28,13 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, logout }) => {
           </Link>
         )}
       </li>
-      &nbsp;&nbsp;
-      <li className='nav-item'>
-        <Link onClick={logout} className='nav-btn btn btn-danger' to='/'>
+      &nbsp;&nbsp;&nbsp;
+      <li className='nav-item pt-1'>
+        <Link
+          onClick={logout}
+          className='nav-btn btn btn-sm btn-outline-danger'
+          to='/'
+        >
           Logout
         </Link>
       </li>
@@ -42,13 +48,15 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, logout }) => {
           Home
         </Link>
       </li>
+      &nbsp;&nbsp;&nbsp;
       <li className='nav-item'>
         <Link className='nav-link' to='/register'>
           Sign Up
         </Link>
       </li>
+      &nbsp;&nbsp;&nbsp;
       <li className='nav-item'>
-        <Link className='nav-link' to='/login'>
+        <Link className='nav-link btn btn-sm btn-outline-success' to='/login'>
           Login
         </Link>
       </li>
@@ -57,12 +65,12 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, logout }) => {
   return (
     <div className='container' style={{ marginBottom: '70px' }}>
       <nav
-        className='navbar navbar-expand-md  fixed-top navbar-light'
-        style={{ backgroundColor: 'white' }}
+        className='navbar navbar-expand-md  fixed-top navbar-light pt-3 pb-2 shadow-lg'
+        style={{ backgroundColor: '#f0ccb0' }}
       >
         <div className='container'>
           <Link className='navbar-brand' to='/'>
-            <h5>Engineers Gurukul</h5>
+            <img src={EgLogo} height='50px' alt='EG Logo' />
           </Link>
           <button
             className='navbar-toggler'
