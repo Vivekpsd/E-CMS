@@ -50,7 +50,7 @@ const StudentCourse = ({
   const onClick = (e) => {
     e.preventDefault();
 
-    enrollStudent(match.params.id, history);
+    enrollStudent(match.params.id, profile._id, history);
     enrollCourse(match.params.id, history);
   };
 

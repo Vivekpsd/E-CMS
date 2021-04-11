@@ -88,34 +88,40 @@ const UploadAssignmentForm = ({
             {course.assignment.map((assignment) => {
               return (
                 <div>
-                  {assignment.title === match.params.name &&
+                  {assignment.title + '.pdf' === match.params.name &&
                     getTodayDate(assignment.endDate) && (
-                      <form onSubmit={onSubmit}>
-                        <div className='custom-file mb-4'>
-                          <input
-                            type='file'
-                            className='custom-file-input'
-                            id='customFile'
-                            onChange={onChange}
-                            accept='application/pdf'
-                          />
-                          <small className='text-muted'>
-                            Upload Only PDF Files
-                          </small>
-                          <label
-                            className='custom-file-label'
-                            htmlFor='customFile'
-                          >
-                            {filename}
-                          </label>
+                      <Fragment>
+                        <div className='alert alert-info'>
+                          <strong>{assignment.endDate}</strong> is the last day
+                          to submit this assignment.
                         </div>
+                        <form onSubmit={onSubmit}>
+                          <div className='custom-file mb-4'>
+                            <input
+                              type='file'
+                              className='custom-file-input'
+                              id='customFile'
+                              onChange={onChange}
+                              accept='application/pdf'
+                            />
+                            <small className='text-muted'>
+                              Upload Only PDF Files
+                            </small>
+                            <label
+                              className='custom-file-label'
+                              htmlFor='customFile'
+                            >
+                              {filename}
+                            </label>
+                          </div>
 
-                        <input
-                          type='submit'
-                          value='Upload'
-                          className='btn btn-primary btn-block mt-4'
-                        />
-                      </form>
+                          <input
+                            type='submit'
+                            value='Upload'
+                            className='btn btn-primary btn-block mt-4'
+                          />
+                        </form>
+                      </Fragment>
                     )}
                 </div>
               );

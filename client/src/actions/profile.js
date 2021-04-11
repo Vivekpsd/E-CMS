@@ -145,17 +145,20 @@ export const sendMessage = (formDate, history) => async (dispatch) => {
 
 // Add Course in profile
 
-export const enrollStudent = (courseID, history) => async (dispatch) => {
+export const enrollStudent = (courseID, userID, history) => async (
+  dispatch
+) => {
   try {
     const config = {
       header: {
         'Content-Type': 'application/json',
       },
     };
-
+    const body = { courseID, userID };
     const res = await axios.put(
-      `http://localhost:5000/api/profile/enroll/${courseID}`,
-      courseID,
+      `http://localhost:5000/api/profile/enroll`,
+      body,
+
       config
     );
     console.log(courseID);
