@@ -41,7 +41,7 @@ const Course = ({
                             )}
                             <hr></hr>
                             <p style={{ fontSize: '17px' }}>
-                              {course.description}
+                              {course.description.substring(0, 250)}...
                             </p>
                           </div>
                           <div className='col-4 align-self-center'>

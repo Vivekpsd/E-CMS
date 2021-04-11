@@ -49,7 +49,7 @@ const AssignmentUploadStudent = ({
                           <th scope='col'>#</th>
                           <th scope='col'>Subject Assignment </th>
                           <th scope='col'>Taught By</th>
-                          <th scope='col'>Due Date </th>
+                          <th scope='col'>Assignments</th>
                         </tr>
                       </thead>
                       {assignment.courses.map((courseID) =>
@@ -74,7 +74,7 @@ const AssignmentUploadStudent = ({
                                             </Link>
                                           </td>
                                           <td>{course.teacher}</td>
-                                          <td>{course.endDate}</td>
+                                          <td>{course.assignment.length}</td>
                                         </tr>
                                       )}
                                     </tbody>

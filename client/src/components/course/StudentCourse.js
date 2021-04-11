@@ -144,8 +144,35 @@ const StudentCourse = ({
                             )}
                             <hr></hr>
                             <p style={{ fontSize: '17px' }}>
-                              {course.description}
+                              {course.description.substring(0, 300)}...
                             </p>
+
+                            <p>
+                              Taught By{' '}
+                              <span className='text-dark font-weight-bold'>
+                                {course.teacher}
+                              </span>
+                            </p>
+                            {getStarAverage() >= 4 &&
+                            course.review.length >= 5 ? (
+                              <div className=''>
+                                <p
+                                  className='badge badge-warning badge-lg'
+                                  style={{ fontSize: '15px' }}
+                                >
+                                  Bestseller
+                                </p>
+                              </div>
+                            ) : (
+                              <div className=''>
+                                <p
+                                  className='badge badge-pill badge-success'
+                                  style={{ fontSize: '15px' }}
+                                >
+                                  New!
+                                </p>
+                              </div>
+                            )}
                           </div>
                           <div className='col-4 align-self-center'>
                             <div className='card'>
@@ -191,63 +218,73 @@ const StudentCourse = ({
                         </div>
 
                         <div className='alert alert-info mt-4 mb-4'>
-                          <h5>What you'll learn</h5>
+                          <strong>What you'll learn</strong>
                           <hr></hr>
                           <p>{course.content}</p>
                         </div>
-                        <div className='row'>
-                          {getStarAverage() >= 4 &&
-                          course.review.length >= 5 ? (
-                            <div className='col-2'>
-                              <p
-                                className='badge badge-warning badge-lg'
-                                style={{ fontSize: '15px' }}
-                              >
-                                Bestseller
-                              </p>
-                            </div>
-                          ) : (
-                            <div className='col-2'>
-                              <p
-                                className='badge badge-pill badge-success'
-                                style={{ fontSize: '15px' }}
-                              >
-                                New!
-                              </p>
-                            </div>
-                          )}
+                        <div className='row justify-content-center'>
                           <div className='col-3'>
-                            <span className='text text-warning font-weight-bold bg-dark pl-3 pr-3 pt-2 pb-2 rounded'>
+                            <div
+                              style={{
+                                border: '1px solid black',
+                                paddingTop: '10px',
+                                paddingBottom: '10px',
+                                textAlign: 'center',
+                                background: '#3e4444',
+                                borderRadius: '4px',
+                                color: 'white',
+                                boxShadow: '0 5px 15px rgba(145, 92, 182, .4)',
+                                transition:
+                                  '  transition: all 0.2s ease-in-out',
+                              }}
+                            >
                               {course.review.length === 0 ? (
                                 <p>No Review Available</p>
                               ) : (
                                 getStarAverage()
                               )}
                               &nbsp;Ratings
-                            </span>
+                            </div>
                           </div>
                           <div className='col-4'>
-                            <span className='text text-warning font-weight-bold bg-dark pl-3 pr-3 pt-2 pb-2 rounded'>
+                            <div
+                              style={{
+                                border: '1px solid black',
+                                paddingTop: '10px',
+                                paddingBottom: '10px',
+                                textAlign: 'center',
+                                background: '#3e4444',
+                                borderRadius: '4px',
+                                color: 'white',
+                                boxShadow: '0 5px 15px rgba(145, 92, 182, .4)',
+                                transition:
+                                  '  transition: all 0.2s ease-in-out',
+                              }}
+                            >
                               {course.enrolledStudent.length} - Students
                               Enrolled
-                            </span>
+                            </div>
                           </div>
                           <div className='col-3'>
-                            <span className='text text-dark font-weight-bold bg-warning pl-3 pr-3 pt-2 pb-2 rounded'>
+                            <div
+                              style={{
+                                border: '1px solid black',
+                                paddingTop: '10px',
+                                paddingBottom: '10px',
+                                textAlign: 'center',
+                                background: '#3e4444',
+                                borderRadius: '4px',
+                                color: 'white',
+                                boxShadow: '0 5px 15px rgba(145, 92, 182, .4)',
+                                transition:
+                                  '  transition: all 0.2s ease-in-out',
+                              }}
+                            >
                               {course.review.length} - Reviews
-                            </span>
+                            </div>
                           </div>
                         </div>
-                        <div className='row'>
-                          <div className='col'>
-                            <p>
-                              Taught By{' '}
-                              <span className='text-info font-weight-bold'>
-                                {course.teacher}
-                              </span>
-                            </p>
-                          </div>
-                        </div>
+
                         <hr></hr>
                         <div className='row'>
                           <div className='col'>
@@ -261,7 +298,9 @@ const StudentCourse = ({
                             <h4>All Reviews ({course.review.length})</h4>
                             <form onSubmit={onSubmit} id='review-form'>
                               <div className='form-group'>
-                                <label htmlFor='review'>Your Review Here</label>
+                                <label htmlFor='review'>
+                                  Write your Review Here
+                                </label>
                                 <textarea
                                   className='form-control'
                                   id='comment'

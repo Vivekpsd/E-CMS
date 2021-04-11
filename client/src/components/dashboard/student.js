@@ -70,24 +70,24 @@ const Student = ({
                 <span className='card-text'>
                   <div className='container-fluid'>
                     <div className='row align-items-center'>
-                      <div className='col-4'>
+                      <div className='col-1 pl-4'>
                         {user.avatar ? (
                           <img
                             src={user.avatar}
                             alt='User'
                             className='rounded'
-                            height='200px'
+                            height='90px'
                           />
                         ) : (
                           <img
                             src={User}
                             alt='User'
-                            className='rounded'
-                            height='200px'
+                            classNam='rounded'
+                            height='90px'
                           />
                         )}
                       </div>
-                      <div className='col-5'>
+                      <div className='col-3 pl-5'>
                         <h4>{user && user.name.toUpperCase()}</h4>
                         <p>
                           Github -{' '}
@@ -98,7 +98,7 @@ const Student = ({
                             user.role.slice(1)}
                         </p>
                       </div>
-                      <div className='col-3 mr-auto'>
+                      <div className='col-2 mr-auto'>
                         {profile !== null ? (
                           <Fragment>
                             <Link
@@ -119,6 +119,27 @@ const Student = ({
                           </Fragment>
                         )}
                       </div>
+                      <div className='col-5 mr-auto'>
+                        {profile !== null ? (
+                          <h1>
+                            <FaFacebook />
+                            &nbsp;&nbsp;
+                            <FaTwitter />
+                            &nbsp;&nbsp;
+                            <FaInstagram />
+                            &nbsp;&nbsp;
+                            <FaGithub />
+                            &nbsp;&nbsp;
+                            <FaYoutube />
+                          </h1>
+                        ) : (
+                          <div className='alert alert-info' role='alert'>
+                            <strong>Heads up! {user.name}, </strong> You have
+                            not yet setup a profile, please create a new profile
+                            for your account.
+                          </div>
+                        )}
+                      </div>
                     </div>
                     <hr></hr>
                     {profile !== null && (
@@ -136,7 +157,7 @@ const Student = ({
                           <div className='alert alert-info' role='alert'>
                             <h4>Skills</h4>
                             <hr></hr>
-                            <strong>{user.name}</strong> have knowledge about{' '}
+                            <strong>{user.name}</strong> has knowledge about{' '}
                             <strong>
                               {profile.skills.map((skill) => {
                                 return skill + ', ';
@@ -147,34 +168,6 @@ const Student = ({
                       </div>
                     )}
                     <br></br>
-                    <br></br>
-                    {profile !== null && (
-                      <div className='row text-center'>
-                        <div className='col'>
-                          <h1>
-                            <FaFacebook />
-                            &nbsp;&nbsp;
-                            <FaTwitter />
-                            &nbsp;&nbsp;
-                            <FaInstagram />
-                            &nbsp;&nbsp;
-                            <FaGithub />
-                            &nbsp;&nbsp;
-                            <FaYoutube />
-                          </h1>
-                        </div>
-                      </div>
-                    )}
-
-                    <div className='row mt-3'>
-                      {profile === null && (
-                        <div className='alert alert-info' role='alert'>
-                          <strong>Heads up! {user.name}, </strong> You have not
-                          yet setup a profile, please create a new profile for
-                          your account.
-                        </div>
-                      )}
-                    </div>
                   </div>
                 </span>
               </div>
@@ -182,6 +175,30 @@ const Student = ({
           </div>
         </div>
       </div>
+      <div className='container-fluid mt-4'>
+        <div className='row'>
+          <div className='col-4' style={{ marginLeft: '125px' }}>
+            <h2>Your Enrollement</h2>
+            <hr></hr>
+            <div className='card'>
+              <img src={DashboardImg1} alt='Card cap' />
+              <div className='card-body'>
+                <h5 className='card-title'>Course title</h5>
+                <p className='card-text'>
+                  This is a wider card with supporting text below as a natural
+                  lead-in to additional content. This content is a little bit
+                  longer.
+                </p>
+                <p className='card-text'>
+                  <small className='text-muted'>Last updated 3 mins ago</small>
+                </p>
+              </div>
+            </div>
+            <hr></hr>
+          </div>
+        </div>
+      </div>
+
       <br></br>
       <div className='container'>
         <p className='display-4'>Why choose Us?</p>

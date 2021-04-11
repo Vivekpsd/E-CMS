@@ -69,6 +69,7 @@ const AssignmentFileStudent = ({
                       <th scope='col'>Assignment Title</th>
                       <th scope='col'>Download</th>
                       <th scope='col'>Upload</th>
+                      <th scope='col'>Due Date</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -104,6 +105,7 @@ const AssignmentFileStudent = ({
                                 Download
                               </Link>
                             </td>
+                            <td></td>
                           </tr>
                         </Fragment>
                       );
