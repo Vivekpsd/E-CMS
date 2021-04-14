@@ -10,9 +10,10 @@ const CourseSchema = new mongoose.Schema({
     required: true,
   },
   img: {
-    data: Buffer,
-    contentType: String,
+    type: String,
+    default: '',
   },
+
   teacher: {
     type: String,
     required: true,

@@ -49,6 +49,7 @@ const Student = ({
             <br></br>
             <h1 className='pl-5'>
               Welcome to Engineers Gurukul Training Center!
+              <br></br>
               <Link
                 to='student-courses'
                 className='btn btn-lg btn-primary mt-5'

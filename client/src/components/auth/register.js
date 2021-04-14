@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { setAlert } from '../../actions/alert';
 import { register } from '../../actions/auth';
 import { FaAddressBook, FaUser, FaCode } from 'react-icons/fa';
+import LoginBackground from '../../img/login-background.jpg';
 
 import PropTypes from 'prop-types';
 
@@ -33,11 +34,16 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
   }
   return (
     <Fragment>
-      <div className='container'>
+      <div
+        className='container-fluid'
+        style={{
+          paddingTop: '60px',
+        }}
+      >
         <div className='row'>
           <div className='col-sm-6 mx-auto mt-4'>
             <div className='card text-dark bg-light mb-3 shadow p-3 mb-5 bg-white rounded'>
-              <h1 className='display-4 text-center'>Sign Up</h1>
+              <h2 className='display-4 text-center'>Sign Up</h2>
               <div className='card-body'>
                 <span className='card-text'>
                   <form className='form' onSubmit={(e) => onSubmit(e)}>

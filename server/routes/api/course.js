@@ -5,6 +5,10 @@ const { check, validationResult } = require('express-validator');
 const Course = require('../../models/Course');
 const Profile = require('../../models/Profile');
 const { request } = require('express');
+const upload = require('express-fileupload');
+const path = require('path');
+const fs = require('fs');
+router.use(upload());
 
 router.use(function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
@@ -246,4 +250,42 @@ router.post('/upload-assignment-info/:courseID', async (req, res) => {
     res.status(500).send('Server Error');
   }
 });
+
+//Uploading Image while creating course
+router.post('/courseimg/:courseID', async (req, res) => {
+  if (req.files) {
+    var file = req.files.file;
+    var filename = file.name;
+    var courseID = req.params.courseID;
+    var paths = path.join(
+      __dirname + '\\..' + '\\..' + '\\..',
+      '/client',
+      '/src',
+      '/img',
+      '/courseImgs'
+    );
+    console.log(paths);
+
+    file.mv(`${paths}/` + filename, async function (err) {
+      if (err) {
+        res.send(err);
+      } else {
+        let course = await Course.findById(courseID);
+        if (course) {
+          //update
+          course = await Course.findOneAndUpdate(
+            { _id: courseID },
+            { img: filename },
+            { new: true }
+          );
+          course.save();
+          res.send(course);
+        }
+      }
+    });
+  } else {
+    console.log('No Image');
+  }
+});
+
 module.exports = router;

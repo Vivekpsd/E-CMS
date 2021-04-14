@@ -25,10 +25,10 @@ const Courses = ({
         <Spinner />
       ) : (
         <Fragment>
-          <div className='container'>
+          <div className='container' style={{ paddingTop: '70px' }}>
             <div className='row'>
               <div className='col-12'>
-                <h1 className='large text-dark'>Courses</h1>
+                <h2 className='large text-dark'>Courses</h2>
                 <p className='lead'>
                   <i className='fab fa-connectdevelop' /> Browse our Courses
                 </p>

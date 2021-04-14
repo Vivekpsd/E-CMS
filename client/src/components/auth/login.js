@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { login } from '../../actions/auth';
 import { FaUser, FaCode } from 'react-icons/fa';
+import LoginBackground from '../../img/login-background.jpg';
 
 const Login = ({ login, isAuthenticated }) => {
   const [formData, setFormData] = useState({
@@ -27,11 +28,16 @@ const Login = ({ login, isAuthenticated }) => {
 
   return (
     <Fragment>
-      <div className='container'>
+      <div
+        className='container-fluid'
+        style={{
+          paddingTop: '70px',
+        }}
+      >
         <div className='row'>
           <div className='col-sm-6 mx-auto mt-4'>
             <div className='card text-dark bg-light mb-3 shadow p-3 mb-5 bg-white rounded'>
-              <h1 className='display-4 text-center'>Login</h1>
+              <h2 className='display-4 text-center'>Login</h2>
               <div className='card-body'>
                 <span className='card-text'>
                   <hr></hr>

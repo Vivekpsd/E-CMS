@@ -2,10 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import ProfilePic from '../layouts/ProfilePic';
+import CourseImage from '../../img/courseImgs/aboutus.png';
 
 const CourseItem = ({
   course: {
     _id,
+    img,
     title,
     content,
     description,
@@ -22,8 +24,15 @@ const CourseItem = ({
         <span className='card-text'>
           <div className='container'>
             <div className='row'>
-              <div className='col-2 mr-5'>
-                <ProfilePic />
+              <div
+                className='col-2'
+                style={{
+                  backgroundImage: `url(${process.env.PUBLIC_URL + img})`,
+                  height: '300px',
+                  backgroundSize: 'cover',
+                }}
+              >
+                {/* <img src={<CourseImage />} alt='course' height='200px' /> */}
               </div>
               <div className='col-4'>
                 <h3>{title}</h3>

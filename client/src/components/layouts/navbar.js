@@ -57,7 +57,7 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, logout }) => {
       &nbsp;&nbsp;&nbsp;
       <li className='nav-item'>
         <Link className='nav-link btn btn-sm btn-outline-success' to='/login'>
-          Login
+          <strong>Login</strong>
         </Link>
       </li>
     </ul>
@@ -65,8 +65,8 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, logout }) => {
   return (
     <div className='container' style={{ marginBottom: '70px' }}>
       <nav
-        className='navbar navbar-expand-md  fixed-top navbar-light pt-3 pb-2 shadow-lg'
-        style={{ backgroundColor: '#f0ccb0' }}
+        className='navbar navbar-expand-md  fixed-top navbar-light pt-3 pb-2 shadow-md'
+        style={{ backgroundColor: '#FFDEAD' }}
       >
         <div className='container'>
           <Link className='navbar-brand' to='/'>
