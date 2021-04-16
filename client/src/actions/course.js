@@ -50,9 +50,14 @@ export const getCourseById = (courseId) => async (dispatch) => {
 };
 
 //Create or Update course
-export const createCourse = (formData, history, userID, edit = false) => async (
-  dispatch
-) => {
+export const createCourse = (
+  formData,
+  imgname,
+  img,
+  history,
+  userID,
+  edit = false
+) => async (dispatch) => {
   try {
     const config = {
       header: {
@@ -60,21 +65,32 @@ export const createCourse = (formData, history, userID, edit = false) => async (
       },
     };
 
+    formData.img = imgname;
+    console.log(img);
+
     const res = await axios.post(
       'http://localhost:5000/api/course/',
       formData,
       config
     );
+
+    const res3 = await axios.post(
+      `http://localhost:5000/api/course/courseimg/${res.data._id}`,
+      img,
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      }
+    );
     const body = { courseID: res.data._id, userID: userID };
-    console.log(userID);
+
     //Get Current Profile
     const res2 = await axios.put(
       `http://localhost:5000/api/profile/enroll/${res.data._id}`,
       body,
       config
     );
-
-    console.log(res2);
 
     dispatch({
       type: GET_COURSE,

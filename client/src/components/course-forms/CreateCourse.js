@@ -25,8 +25,11 @@ const CreateCourse = ({
     startDate: '',
     endDate: '',
     prerequisite: '',
+    price: '',
     courseID: null,
   });
+  const [file, setFile] = useState('');
+  const [filename, setFilename] = useState('Choose File');
 
   const {
     title,
@@ -36,8 +39,12 @@ const CreateCourse = ({
     startDate,
     endDate,
     prerequisite,
+    price,
   } = formData;
-
+  const onChange3 = (e) => {
+    setFile(e.target.files[0]);
+    setFilename(e.target.files[0].name);
+  };
   const [userID, setUserID] = useState(0);
 
   const onChange = (e) =>
@@ -54,8 +61,11 @@ const CreateCourse = ({
 
   const onSubmit = (e) => {
     e.preventDefault();
+
     console.log('Up - ' + userID);
-    createCourse(formData, history, userID);
+    const formData2 = new FormData();
+    formData2.append('file', file);
+    createCourse(formData, filename, formData2, history, userID);
   };
 
   return (
@@ -155,6 +165,18 @@ const CreateCourse = ({
               </div>
 
               <div className='form-group'>
+                <label htmlFor='price'>Price</label>
+                <input
+                  id='price'
+                  type='number'
+                  className='form-control'
+                  name='price'
+                  value={price}
+                  onChange={onChange}
+                />
+              </div>
+
+              <div className='form-group'>
                 <label htmlFor='prerequisite'>Prerequisite</label>
                 <input
                   placeholder='A breif intro of the course'
@@ -167,6 +189,19 @@ const CreateCourse = ({
                 <small className='form-text text-muted'>
                   Things student should know before appling for this course
                 </small>
+              </div>
+              <div className='custom-file mb-4'>
+                <input
+                  type='file'
+                  className='img'
+                  id='img'
+                  onChange={onChange3}
+                  //accept='application/pdf'
+                />
+                <small className='text-muted'>Upload Course Image</small>
+                <label className='custom-file-label' htmlFor='img'>
+                  {filename}
+                </label>
               </div>
 
               <input type='submit' className='btn btn-primary my-1 mr-2' />

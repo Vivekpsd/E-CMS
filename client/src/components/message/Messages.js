@@ -17,8 +17,8 @@ const Messages = ({ getCurrentProfile, profile: { profile, loading } }) => {
 
   return (
     <Fragment>
-      <div className='container' style={{ marginTop: '110px' }}>
-        <div className='row'>
+      <div className='container-fluid messageBackground'>
+        <div className='row' style={{ marginTop: '80px', paddingTop: '20px' }}>
           <div className='col'>
             {profile === null ? (
               <div>
@@ -56,8 +56,6 @@ const Messages = ({ getCurrentProfile, profile: { profile, loading } }) => {
                     ) : (
                       <p></p>
                     )}
-                    <br></br>
-                    <br></br>
                     <div className='messages'>
                       {profile.messages.length > 0 ? (
                         profile.messages.map((message) => (

@@ -9,6 +9,10 @@ const CourseSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  price: {
+    type: String,
+  },
+
   img: {
     type: String,
     default: '',

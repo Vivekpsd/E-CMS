@@ -43,6 +43,7 @@ import Alert from './components/layouts/Alert';
 import Dashboard from './components/dashboard/Dashboard';
 import { loadUser } from './actions/auth';
 import setAuthToken from './utils/setAuthToken';
+import Footer from './components/layouts/Footer';
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -150,7 +151,9 @@ export default function App() {
               component={UploadAssignmentForm}
             />
           </Switch>
+          <div class='push'></div>
         </section>
+        <Footer />
       </Router>
     </Provider>
   );

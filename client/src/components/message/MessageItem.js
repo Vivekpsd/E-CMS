@@ -8,78 +8,92 @@ const MessageItem = ({
 }) => {
   return (
     <Fragment>
-      {profile.user._id === senderID ? (
-        <Fragment>
-          <div className='card text-dark mb-3 p-3 mb-5 '>
-            <div className='card-body'>
-              <span className='card-text'>
-                <blockquote className='blockquote'>
-                  <p className='mb-0'>{message}</p>
+      <div>
+        {profile.user._id === senderID ? (
+          <Fragment>
+            <div className='container '>
+              <div className='row'>
+                <div className='col-10 ml-auto mt-3'>
+                  <div
+                    className='pl-5 pt-4 pb-3 pr-5'
+                    style={{
+                      border: '2px solid black',
+                      borderRadius: '10px',
+                      backgroundColor: 'white',
+                      opacity: '0.9',
+                    }}
+                  >
+                    <blockquote className='blockquote'>
+                      <p className='mb-0'>{message}</p>
 
-                  <footer className='blockquote-footer'>
-                    <cite title='Source Title'>
-                      {profile.user._id === senderID ? (
-                        <span>Send by you</span>
-                      ) : (
-                        <span>{sentBy}</span>
-                      )}
-                    </cite>
-                  </footer>
-                </blockquote>
+                      <footer className='blockquote-footer'>
+                        <cite title='Source Title'>
+                          {profile.user._id === senderID ? (
+                            <span>Send by you</span>
+                          ) : (
+                            <span>{sentBy}</span>
+                          )}
+                        </cite>
+                      </footer>
+                    </blockquote>
 
-                {/* <p>{senderID}</p> */}
-                <div className='container'>
-                  <div className='row'>
-                    <div className='col-3'>
-                      <p>
-                        <FcCalendar /> <span>{date}</span>
-                      </p>
-                    </div>
-                    <div className='col-3 ml-auto'>
-                      <p>
-                        <FcInfo /> <span>Sent By You</span>
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </span>
-            </div>
-          </div>
-        </Fragment>
-      ) : (
-        <Fragment>
-          <div className='card text-dark mb-3 shadow-lg p-3 mb-5 bg-white rounded'>
-            <div className='card-body'>
-              <span className='card-text'>
-                <blockquote className='blockquote'>
-                  <p className='mb-0'>{message}</p>
-
-                  <footer className='blockquote-footer'>
-                    <cite title='Source Title'>
-                      {profile.user._id === senderID ? (
-                        <span>Send By You</span>
-                      ) : (
-                        <span>{sentBy}</span>
-                      )}
-                    </cite>
-                  </footer>
-                </blockquote>
-
-                {/* <p>{senderID}</p> */}
-                <div className='container'>
-                  <div className='row'>
-                    <div className='col-3'>
-                      <p>
-                        <FcCalendar /> <span>{date}</span>
-                      </p>
+                    {/* <p>{senderID}</p> */}
+                    <div className='container'>
+                      <div className='row'>
+                        <div className='col-7'>
+                          <p>
+                            <FcCalendar /> <span>{date}</span>
+                          </p>
+                        </div>
+                        <div className='col-3 ml-auto'>
+                          <p>
+                            <FcInfo /> <span>Sent By You</span>
+                          </p>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </span>
+              </div>
             </div>
-          </div>
-        </Fragment>
-      )}
+          </Fragment>
+        ) : (
+          <Fragment>
+            <div className='container'>
+              <div className='row'>
+                <div className='col-10 mt-4'>
+                  <div
+                    className='pl-5 pt-4 pb-3 pr-5'
+                    style={{
+                      border: '2px solid black',
+                      borderRadius: '10px',
+                      backgroundColor: 'white',
+                      opacity: '0.9',
+                    }}
+                  >
+                    <blockquote className='blockquote'>
+                      <p className='mb-0'>{message}</p>
+
+                      <footer className='blockquote-footer'>
+                        <cite title='Source Title'>
+                          {profile.user._id === senderID ? (
+                            <span>Send By You</span>
+                          ) : (
+                            <span>{sentBy}</span>
+                          )}
+                        </cite>
+                      </footer>
+                    </blockquote>
+                    <p>
+                      <FcCalendar /> <span>{date}</span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </Fragment>
+        )}
+      </div>
     </Fragment>
   );
 };

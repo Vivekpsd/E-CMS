@@ -55,6 +55,8 @@ router.post(
       endDate,
       prerequisite,
       courseID,
+      img,
+      price,
     } = req.body;
 
     //Build Course Object
@@ -66,6 +68,8 @@ router.post(
     if (startDate) courseFields.startDate = startDate;
     if (endDate) courseFields.endDate = endDate;
     if (prerequisite) courseFields.prerequisite = prerequisite;
+    if (img) courseFields.img = img;
+    if (price) courseFields.price = price.toString();
 
     try {
       let course = await Course.findById(courseID);
@@ -253,6 +257,7 @@ router.post('/upload-assignment-info/:courseID', async (req, res) => {
 
 //Uploading Image while creating course
 router.post('/courseimg/:courseID', async (req, res) => {
+  console.log('img uploading');
   if (req.files) {
     var file = req.files.file;
     var filename = file.name;
@@ -260,9 +265,7 @@ router.post('/courseimg/:courseID', async (req, res) => {
     var paths = path.join(
       __dirname + '\\..' + '\\..' + '\\..',
       '/client',
-      '/src',
-      '/img',
-      '/courseImgs'
+      '/public'
     );
     console.log(paths);
 

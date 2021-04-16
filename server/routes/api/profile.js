@@ -228,7 +228,7 @@ router.put(
 // @route    PUT api/profile/Enroll
 // @desc     Add Enrolled Course to Profile
 // @access   Private
-router.put('/enroll', auth, async (req, res) => {
+router.put('/enroll/:id', auth, async (req, res) => {
   const user = req.body.userID;
   const courseID = req.body.courseID;
   console.log('user- ' + user + ' course ' + courseID);

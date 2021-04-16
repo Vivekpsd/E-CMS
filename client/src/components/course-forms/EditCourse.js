@@ -27,6 +27,7 @@ const EditCourse = ({
     endDate: '',
     prerequisite: '',
     courseID: null,
+    price: '',
   });
 
   useEffect(() => {
@@ -39,6 +40,7 @@ const EditCourse = ({
       startDate: loading || !course.startDate ? '' : course.startDate,
       endDate: loading || !course.endDate ? '' : course.endDate,
       prerequisite: loading || !course.prerequisite ? '' : course.prerequisite,
+      price: loading || !course.price ? '' : course.price,
       courseID: course._id,
     });
   }, [loading]);
@@ -51,6 +53,7 @@ const EditCourse = ({
     startDate,
     endDate,
     prerequisite,
+    price,
   } = formData;
 
   const [userID, setUserID] = useState(0);
@@ -118,6 +121,18 @@ const EditCourse = ({
                   placeholder='content'
                   name='content'
                   value={content}
+                  onChange={onChange}
+                />
+              </div>
+              <div className='form-group'>
+                <label htmlFor='price'>Course Price</label>
+                <input
+                  id='price'
+                  className='form-control'
+                  type='number'
+                  placeholder='Price'
+                  name='price'
+                  value={price}
                   onChange={onChange}
                 />
               </div>
