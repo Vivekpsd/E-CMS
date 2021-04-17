@@ -65,7 +65,7 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, logout }) => {
   return (
     <div className='container' style={{ marginBottom: '70px' }}>
       <nav
-        className='navbar navbar-expand-md  fixed-top navbar-light pt-3 pb-2 shadow-md'
+        className='navbar navbar-expand-md  fixed-top navbar-light pt-3 pb-2 '
         style={{ backgroundColor: '#FFDEAD' }}
       >
         <div className='container'>

@@ -172,7 +172,7 @@ export const enrollStudent = (courseID, userID, history) => async (
     console.log('error');
     dispatch({
       type: PROFILE_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status },
+      payload: { msg: 'Failed' },
     });
   }
 };

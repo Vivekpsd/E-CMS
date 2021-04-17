@@ -1,12 +1,14 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import axios from 'axios';
 import Spinner from '../layouts/Spinner';
 import ReactStars from 'react-rating-stars-component';
 import { Link, withRouter } from 'react-router-dom';
 import ProfilePic from '../layouts/ProfilePic';
 import { enrollStudent } from '../../actions/profile';
 import { FcCalendar, FcCustomerSupport } from 'react-icons/fc';
+import EgLogo from '../../img/EgLogo.png';
 import {
   enrollCourse,
   addComment,
@@ -15,9 +17,21 @@ import {
 } from '../../actions/course';
 import { getCurrentProfile } from '../../actions/profile';
 import Alert from '../../components/layouts/Alert';
-import DashboardAction from '../dashboard/DashboardAction';
-import DashboardStudent from '../dashboard/DashboardStudent';
-import DashboardTeaher from '../dashboard/DashboardTeacher';
+
+function loadScript(src) {
+  return new Promise((resolve) => {
+    const script = document.createElement('script');
+    script.src = src;
+    script.onload = () => {
+      resolve(true);
+    };
+    script.onerror = () => {
+      resolve(false);
+    };
+    document.body.appendChild(script);
+  });
+}
+const __DEV__ = document.domain === 'localhost';
 
 const StudentCourse = ({
   match,
@@ -47,11 +61,54 @@ const StudentCourse = ({
 
   const { student, studentID, comment, star, courseID } = formData;
 
+  //Payment
+  async function displayRazorpay() {
+    const res = await loadScript(
+      'https://checkout.razorpay.com/v1/checkout.js'
+    );
+
+    if (!res) {
+      alert('Razorpay SDK failed to load. Are you online?');
+      return;
+    }
+    const dummyData = { price: course.price };
+    const res1 = await axios.post(
+      'http://localhost:5000/api/payment/razorpay',
+      dummyData
+    );
+
+    console.log(res1.data.amount);
+
+    const options = {
+      key: __DEV__ ? 'rzp_test_lRDu07bVMpEFH6' : 'PRODUCTION_KEY',
+      currency: res1.data.currency,
+      amount: res1.data.amount.toString(),
+      order_id: res1.data.id,
+      name: 'Engineers Gurukul',
+      description: 'Thank you Buying',
+      image: 'http://localhost:5000/api/payment/logo.png',
+      handler: function (response) {
+        // alert(response.razorpay_payment_id);
+        // alert(response.razorpay_order_id);
+        // alert(response.razorpay_signature);
+        enrollStudent(match.params.id, profile._id, history);
+        enrollCourse(match.params.id, history);
+      },
+      prefill: {
+        name: profile.name,
+        email: profile.user.email,
+      },
+    };
+    const paymentObject = new window.Razorpay(options);
+    paymentObject.open();
+  }
+  //Payment End
+
   const onClick = (e) => {
     e.preventDefault();
-
-    enrollStudent(match.params.id, profile._id, history);
-    enrollCourse(match.params.id, history);
+    displayRazorpay();
+    // enrollStudent(match.params.id, profile._id, history);
+    // enrollCourse(match.params.id, history);
   };
 
   const ratingChanged = (rating) => {

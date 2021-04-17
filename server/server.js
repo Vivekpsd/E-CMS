@@ -19,5 +19,6 @@ app.use('/api/profile', require('./routes/api/profile'));
 app.use('/api/course', require('./routes/api/course'));
 app.use('/api/event', require('./routes/api/event'));
 app.use('/api/assignment', require('./routes/api/assignment'));
+app.use('/api/payment', require('./routes/api/payment'));
 
 app.listen(PORT, () => console.log(`Server Running on port ${PORT}!`));

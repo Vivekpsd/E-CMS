@@ -46,7 +46,7 @@ h3 {
 }
 .mainFooter {
   overflow: hidden;
-  margin-top: 250px;
+
   background: #262626;
   color: #627482 !important;
   margin-bottom: 0;
@@ -56,4 +56,8 @@ h3 {
   background-image: url('./img/bgDashboard.png');
   background-repeat: no-repeat;
   background-attachment: fixed;
+}
+
+.container-fluid {
+  margin-top: 0px;
 }

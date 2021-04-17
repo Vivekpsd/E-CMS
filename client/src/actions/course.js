@@ -137,31 +137,29 @@ export const deleteCourse = (courseId, history) => async (dispatch) => {
 // Add Profile into course
 
 export const enrollCourse = (courseID, history) => async (dispatch) => {
-  if (window.confirm('Are You Sure?')) {
-    try {
-      const config = {
-        header: {
-          'Content-Type': 'application/json',
-        },
-      };
+  try {
+    const config = {
+      header: {
+        'Content-Type': 'application/json',
+      },
+    };
 
-      const res = await axios.put(
-        `http://localhost:5000/api/course/enroll/${courseID}`,
-        courseID,
-        config
-      );
+    const res = await axios.put(
+      `http://localhost:5000/api/course/enroll/${courseID}`,
+      courseID,
+      config
+    );
 
-      dispatch({
-        type: UPDATE_COURSE,
-        payload: res.data,
-      });
-      history.push('/student-courses');
-    } catch (err) {
-      dispatch({
-        type: COURSES_ERROR,
-        payload: { msg: err.response.statusText, status: err.response.status },
-      });
-    }
+    dispatch({
+      type: UPDATE_COURSE,
+      payload: res.data,
+    });
+    history.push('/student-courses');
+  } catch (err) {
+    dispatch({
+      type: COURSES_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status },
+    });
   }
 };
 
