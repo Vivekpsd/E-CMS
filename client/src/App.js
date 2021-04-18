@@ -58,7 +58,7 @@ export default function App() {
       <Router>
         <Navbar />
         <Route path='/' exact component={Landing} />
-        <section className='container-fluid'>
+        <section className='container-fluid' style={{ marginTop: '70px' }}>
           <Alert />
           <Switch>
             <Route exact path='/register' component={Register} />

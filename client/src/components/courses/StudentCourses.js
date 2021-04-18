@@ -6,7 +6,10 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import ProfilePic from '../layouts/ProfilePic';
-import DashboardStudent from '../dashboard/DashboardStudent';
+import DashboardImg1 from '../../img/dashboardImg1.jpg';
+import { FaArrowRight } from 'react-icons/fa';
+
+import './courses.css';
 
 const Courses = ({
   getCourses,
@@ -32,6 +35,9 @@ const Courses = ({
 
     let avg = sum / len;
     let ans = roundToTwo(avg);
+    if (ans === null) {
+      return 0;
+    }
     return ans;
   };
 
@@ -41,80 +47,59 @@ const Courses = ({
         <Spinner />
       ) : (
         <Fragment>
-          <div className='container-fluid'>
+          <div className='container mt-5'>
+            <div className='' style={{ paddingTop: '50px' }}>
+              <h2>All Courses</h2>
+              <hr></hr>
+            </div>
             <div className='row'>
-              <div className='col-12'>
-                <h1 className='large text-dark'>Courses</h1>
-                <p className='lead'>
-                  <i className='fab fa-connectdevelop' /> Browse Courses
-                </p>
-
-                <div>
-                  <p className=''></p>
-                  <Link to='/dashboard' className='btn btn-dark'>
-                    Go Back To Dashboard
-                  </Link>
-                </div>
-
-                <br></br>
-                <div className='row'>
-                  {courses.length > 0 ? (
-                    courses.map((course) => (
+              {courses.length > 0 ? (
+                courses.map((course) => (
+                  <div className='col-4'>
+                    <div className='card'>
                       <div
-                        className='card mb-3 mr-4'
-                        style={{ maxWidth: '250px' }}
-                        key={course._id}
-                      >
-                        <div className='col-md-12'>
+                        style={{
+                          backgroundImage: `url(${
+                            process.env.PUBLIC_URL + course.img
+                          })`,
+                          height: '300px',
+                          backgroundSize: 'cover',
+                        }}
+                      ></div>
+                      <div className='card-body'>
+                        <h5 className='card-title'>
+                          {course.title} &nbsp; &nbsp; &nbsp;{' '}
+                        </h5>
+                        <p className='card-text'>
+                          By {course.teacher}
+                          <span className='text-muted'>
+                            <span className='float-right'>
+                              {course.review.length === 0
+                                ? 'No Review'
+                                : getStarAverage(course)}{' '}
+                              ({course.review.length})
+                            </span>
+                          </span>
+                        </p>
+                        <pre>₹ {course.price}</pre>
+                        <p className='card-text'>
                           <Link
                             to={`/studentcourse/${course._id}`}
-                            className='text-dark'
+                            className='course-btn'
                             style={{ textDecoration: 'none' }}
                           >
-                            <div className='card-body'>
-                              <span>
-                                <ProfilePic />
-                              </span>
-                              <hr></hr>
-
-                              <h6 className='card-title'>{course.title}</h6>
-
-                              <p className='card-text text-muted'>
-                                {course.teacher}
-                              </p>
-                              <p className='card-text'>
-                                <span
-                                  className='badge badge-light'
-                                  style={{ fontSize: '13px' }}
-                                >
-                                  {course.review.length} Reviews
-                                </span>
-                                <span
-                                  className='text text-warning strong float-right font-weight-bold bg-dark pl-2 pr-2 rounded'
-                                  style={{ fontSize: '15px' }}
-                                >
-                                  {course.review.length === 0 ? (
-                                    <span>N/A</span>
-                                  ) : (
-                                    getStarAverage(course)
-                                  )}
-                                </span>
-                              </p>
-
-                              <hr></hr>
-                              <h4 className='text-center'>
-                                <span className='badge badge-light'>₹ 500</span>
-                              </h4>
-                            </div>
+                            View Course &nbsp;
+                            <FaArrowRight />
                           </Link>
-                        </div>
+                        </p>
                       </div>
-                    ))
-                  ) : (
-                    <h4>No courses found...</h4>
-                  )}
-                </div>
-              </div>
+                    </div>
+                    <hr></hr>
+                  </div>
+                ))
+              ) : (
+                <h4>No courses found...</h4>
+              )}
             </div>
           </div>
         </Fragment>

@@ -5,10 +5,10 @@ import axios from 'axios';
 import Spinner from '../layouts/Spinner';
 import ReactStars from 'react-rating-stars-component';
 import { Link, withRouter } from 'react-router-dom';
-import ProfilePic from '../layouts/ProfilePic';
+
 import { enrollStudent } from '../../actions/profile';
 import { FcCalendar, FcCustomerSupport } from 'react-icons/fc';
-import EgLogo from '../../img/EgLogo.png';
+
 import {
   enrollCourse,
   addComment,
@@ -233,10 +233,19 @@ const StudentCourse = ({
                           </div>
                           <div className='col-4 align-self-center'>
                             <div className='card'>
-                              <ProfilePic />
+                              <div
+                                style={{
+                                  backgroundImage: `url(${
+                                    process.env.PUBLIC_URL + course.img
+                                  })`,
+                                  height: '300px',
+
+                                  backgroundSize: 'cover',
+                                }}
+                              ></div>
                               <hr></hr>
                               <h3 className='text-center'>
-                                ₹ 500{' '}
+                                {course.price}
                                 <del
                                   className='text-muted'
                                   style={{ fontSize: '20px' }}
@@ -296,11 +305,10 @@ const StudentCourse = ({
                               }}
                             >
                               {course.review.length === 0 ? (
-                                <p>No Review Available</p>
+                                <span>No Review Available</span>
                               ) : (
                                 getStarAverage()
                               )}
-                              &nbsp;Ratings
                             </div>
                           </div>
                           <div className='col-4'>

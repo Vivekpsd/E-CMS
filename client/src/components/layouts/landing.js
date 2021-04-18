@@ -3,16 +3,17 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import Home from './Home';
 
 const Landing = ({ isAuthenticated }) => {
   if (isAuthenticated) {
     return <Redirect to='/dashboard' />;
   }
   return (
-    <div className='container' style={{ paddingTop: '70px' }}>
+    <div className='container'>
       <div className='row'>
         <div className='col'>
-          <h2>Hello</h2>
+          <Home />
         </div>
       </div>
     </div>

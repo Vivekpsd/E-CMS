@@ -18,6 +18,8 @@ const Course = ({
   useEffect(() => {
     getCourseById(match.params.id);
   }, [getCourseById]);
+
+  console.log(process.env);
   return (
     <Fragment>
       {course === null ? (
@@ -45,7 +47,16 @@ const Course = ({
                             </p>
                           </div>
                           <div className='col-4 align-self-center'>
-                            <ProfilePic />
+                            <div
+                              style={{
+                                backgroundImage: `url(${
+                                  process.env.PUBLIC_URL + course.img
+                                })`,
+                                height: '300px',
+
+                                backgroundSize: 'cover',
+                              }}
+                            ></div>
                           </div>
                         </div>
 

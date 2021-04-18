@@ -27,7 +27,6 @@ router.get('/logo.png', (req, res) => {
 });
 
 router.post('/razorpay', async (req, res) => {
-  console.log('sss-', req.body.price);
   const payment_capture = 1;
   const amount = req.body.price;
   const currency = 'INR';
