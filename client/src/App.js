@@ -4,6 +4,9 @@ import Navbar from './components/layouts/navbar';
 import './index.css';
 import Login from './components/auth/login';
 import Register from './components/auth/register';
+import Gallery from './components/layouts/pages/gallery';
+import AboutUs from './components/layouts/pages/about';
+import ContactUs from './components/layouts/pages/contact';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import PrivateRoute from './components/routing/PrivateRoute';
@@ -63,6 +66,9 @@ export default function App() {
           <Switch>
             <Route exact path='/register' component={Register} />
             <Route exact path='/login' component={Login} />
+            <Route exact path='/gallery' component={Gallery} />
+            <Route exact path='/about' component={AboutUs} />
+            <Route exact path='/contact' component={ContactUs} />
             <Route exact path='/profiles' component={Profiles} />
             <Route exact path='/courses' component={Courses} />
             <PrivateRoute

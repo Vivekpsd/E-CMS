@@ -30,11 +30,7 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, logout }) => {
       </li>
       &nbsp;&nbsp;&nbsp;
       <li className='nav-item pt-1'>
-        <Link
-          onClick={logout}
-          className='nav-btn btn btn-sm btn-outline-danger'
-          to='/'
-        >
+        <Link onClick={logout} className='nav-btn btn btn-sm btn-dark' to='/'>
           Logout
         </Link>
       </li>
@@ -50,13 +46,31 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, logout }) => {
       </li>
       &nbsp;&nbsp;&nbsp;
       <li className='nav-item'>
+        <Link className='nav-link' to='/gallery'>
+          Gallery
+        </Link>
+      </li>
+      &nbsp;&nbsp;&nbsp;
+      <li className='nav-item'>
+        <Link className='nav-link' to='/about'>
+          About
+        </Link>
+      </li>
+      &nbsp;&nbsp;&nbsp;
+      <li className='nav-item'>
+        <Link className='nav-link' to='/contact'>
+          Contact
+        </Link>
+      </li>
+      &nbsp;&nbsp;&nbsp;
+      <li className='nav-item'>
         <Link className='nav-link' to='/register'>
           Sign Up
         </Link>
       </li>
       &nbsp;&nbsp;&nbsp;
       <li className='nav-item'>
-        <Link className='nav-link btn btn-sm btn-outline-success' to='/login'>
+        <Link className='nav-link btn btn-sm btn-warning text-dark' to='/login'>
           <strong>Login</strong>
         </Link>
       </li>
@@ -65,8 +79,11 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, logout }) => {
   return (
     <div className='container' style={{ marginBottom: '70px' }}>
       <nav
-        className='navbar navbar-expand-md  fixed-top navbar-light pt-3 pb-2 '
-        style={{ backgroundColor: '#FFDEAD' }}
+        className='navbar navbar-expand-md  fixed-top navbar-dark pt-3 pb-2 '
+        style={{
+          backgroundColor: 'rgb(122, 122, 250)',
+          fontFamily: 'inherit',
+        }}
       >
         <div className='container'>
           <Link className='navbar-brand' to='/'>

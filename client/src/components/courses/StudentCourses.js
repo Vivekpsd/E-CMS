@@ -60,7 +60,7 @@ const Courses = ({
                       <div
                         style={{
                           backgroundImage: `url(${
-                            process.env.PUBLIC_URL + course.img
+                            process.env.PUBLIC_URL + '/courses/' + course.img
                           })`,
                           height: '300px',
                           backgroundSize: 'cover',

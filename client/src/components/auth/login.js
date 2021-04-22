@@ -1,10 +1,11 @@
 import React, { Fragment, useState } from 'react';
-import { Redirect } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { login } from '../../actions/auth';
 import { FaUser, FaCode } from 'react-icons/fa';
-import LoginBackground from '../../img/login-background.jpg';
+import LoginImg from '../../img/LoginImg.jpg';
+import './auth.css';
 
 const Login = ({ login, isAuthenticated }) => {
   const [formData, setFormData] = useState({
@@ -29,15 +30,83 @@ const Login = ({ login, isAuthenticated }) => {
   return (
     <Fragment>
       <div
+        className='container'
+        style={{
+          paddingTop: '100px',
+          paddingBottom: '100px',
+        }}
+      >
+        <div className='card p-5 shadow-lg'>
+          <div className='row align-items-center'>
+            <div className='col-5'>
+              <img
+                src={LoginImg}
+                alt='login'
+                height='400'
+                style={{ borderRadius: '30px' }}
+              />
+            </div>
+            <div className='col-1'></div>
+            <div className='col-5'>
+              <h2 className='login-head'>Login</h2>
+              <br></br>
+              <span className='card-text'>
+                <form className='form login-form' onSubmit={(e) => onSubmit(e)}>
+                  <div className='form-group'>
+                    <label htmlFor='email'>
+                      {' '}
+                      <FaUser />
+                      &nbsp; Email
+                    </label>
+                    <input
+                      id='email'
+                      type='email'
+                      className='form-control rounded-input'
+                      placeholder='Your Email'
+                      name='email'
+                      value={email}
+                      onChange={(e) => onChange(e)}
+                      required
+                    />
+                  </div>
+                  <div className='form-group'>
+                    <label htmlFor='password'>
+                      <FaCode />
+                      &nbsp;Password
+                    </label>
+                    <input
+                      id='password'
+                      type='password'
+                      placeholder='Password'
+                      className='form-control rounded-input'
+                      name='password'
+                      value={password}
+                      minLength='6'
+                      onChange={(e) => onChange(e)}
+                      required
+                    />
+                  </div>
+                  <br></br>
+
+                  <br></br>
+                  <input type='submit' className='login-button' value='login' />
+                </form>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* <div
         className='container-fluid'
         style={{
           paddingTop: '70px',
         }}
       >
         <div className='row'>
-          <div className='col-sm-6 mx-auto mt-4'>
-            <div className='card text-dark bg-light mb-3 shadow p-3 mb-5 bg-white rounded'>
-              <h2 className='display-4 text-center'>Login</h2>
+          <div className='col-3'></div>
+          <div className='col-4 mx-auto mt-4'>
+            <div className='card text-dark bg-light mb-3 p-3 mb-5 bg-white rounded'>
+              <h2 className='text-center'>Login</h2>
               <div className='card-body'>
                 <span className='card-text'>
                   <hr></hr>
@@ -88,7 +157,7 @@ const Login = ({ login, isAuthenticated }) => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
     </Fragment>
   );
 };

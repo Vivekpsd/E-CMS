@@ -27,7 +27,9 @@ const CourseItem = ({
               <div
                 className='col-2'
                 style={{
-                  backgroundImage: `url(${process.env.PUBLIC_URL + img})`,
+                  backgroundImage: `url(${
+                    process.env.PUBLIC_URL + '/courses/' + img
+                  })`,
                   height: '300px',
                   backgroundSize: 'cover',
                 }}

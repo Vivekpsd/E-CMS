@@ -265,7 +265,8 @@ router.post('/courseimg/:courseID', async (req, res) => {
     var paths = path.join(
       __dirname + '\\..' + '\\..' + '\\..',
       '/client',
-      '/public'
+      '/public',
+      '/courses'
     );
     console.log(paths);
 
