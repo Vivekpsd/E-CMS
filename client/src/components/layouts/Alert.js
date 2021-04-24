@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import Fade from 'react-reveal/Fade';
+import Bounce from 'react-reveal/Bounce';
+import { FaTimes } from 'react-icons/fa';
 
 const Alert = ({ alerts }) => (
   <div
@@ -15,7 +16,7 @@ const Alert = ({ alerts }) => (
     {alerts !== 0 &&
       alerts.length > 0 &&
       alerts.map((alert) => (
-        <Fade left duration={300}>
+        <Bounce left duration={500}>
           <div
             key={alert.id}
             className={`alert alert-${alert.alertType}`}
@@ -23,7 +24,10 @@ const Alert = ({ alerts }) => (
           >
             {alert.alertType === 'danger' ? (
               <span>
-                <strong>Error : </strong>
+                <strong>
+                  <FaTimes />
+                </strong>
+                &nbsp;
                 {alert.msg}
               </span>
             ) : (
@@ -33,7 +37,7 @@ const Alert = ({ alerts }) => (
               </span>
             )}
           </div>
-        </Fade>
+        </Bounce>
       ))}
   </div>
 );

@@ -5,6 +5,7 @@ import axios from 'axios';
 import Spinner from '../layouts/Spinner';
 import ReactStars from 'react-rating-stars-component';
 import { Link, withRouter } from 'react-router-dom';
+
 import './course.css';
 
 import { enrollStudent } from '../../actions/profile';
@@ -93,7 +94,7 @@ const StudentCourse = ({
         // alert(response.razorpay_payment_id);
         // alert(response.razorpay_order_id);
         // alert(response.razorpay_signature);
-        enrollStudent(match.params.id, profile._id, history);
+        enrollStudent(match.params.id, profile._id);
         enrollCourse(match.params.id, history);
       },
       prefill: {
@@ -208,7 +209,10 @@ const StudentCourse = ({
                       return true;
                     }
                   }) ? (
-                    <button className='btn btn-secondary disabled'>
+                    <button
+                      className='login-button disabled'
+                      style={{ backgroundColor: 'wheat' }}
+                    >
                       Already Enrolled
                     </button>
                   ) : (
@@ -341,38 +345,83 @@ const StudentCourse = ({
             <div className='row'>
               <div className='col'>
                 <h4>All Reviews ({course.review.length})</h4>
-                <form onSubmit={onSubmit} id='review-form'>
-                  <div className='form-group'>
-                    <label htmlFor='review'>Write your Review Here</label>
-                    <textarea
-                      className='form-control'
-                      id='comment'
-                      rows='3'
-                      name='comment'
-                      value={comment}
-                      onChange={(e) => onChange(e)}
-                    ></textarea>
-                    <label htmlFor='star'>Stars</label>
-                    <br></br>
+                {course.enrolledStudent.find((enrolledStudent) => {
+                  if (enrolledStudent === profile.user._id) {
+                    return true;
+                  }
+                }) ? (
+                  <form onSubmit={onSubmit} id='review-form'>
+                    <div className='form-group'>
+                      <label htmlFor='review'>Write your Review Here</label>
+                      <textarea
+                        className='form-control'
+                        id='comment'
+                        rows='3'
+                        name='comment'
+                        value={comment}
+                        onChange={(e) => onChange(e)}
+                      ></textarea>
+                      <label htmlFor='star'>Stars</label>
+                      <br></br>
+                      <input
+                        type='hidden'
+                        value={star}
+                        min='1'
+                        max='5'
+                        id='star'
+                        name='star'
+                        disabled
+                        required
+                        onChange={(e) => onChange(e)}
+                      />
+                      <ReactStars size={30} onChange={ratingChanged} />
+                    </div>
                     <input
-                      type='hidden'
-                      value={star}
-                      min='1'
-                      max='5'
-                      id='star'
-                      name='star'
-                      disabled
-                      required
-                      onChange={(e) => onChange(e)}
+                      type='submit'
+                      value='Add Review'
+                      className='course-btn'
                     />
-                    <ReactStars size={30} onChange={ratingChanged} />
-                  </div>
-                  <input type='submit' className='course-btn' />
-                </form>
+                  </form>
+                ) : (
+                  <form onSubmit={onSubmit} id='review-form'>
+                    <div className='form-group'>
+                      <label htmlFor='review'>Write your Review Here</label>
+                      <textarea
+                        className='form-control'
+                        id='comment'
+                        rows='3'
+                        name='comment'
+                        value={comment}
+                        onChange={(e) => onChange(e)}
+                      ></textarea>
+                      <label htmlFor='star'>Stars</label>
+                      <br></br>
+                      <input
+                        type='hidden'
+                        value={star}
+                        min='1'
+                        max='5'
+                        id='star'
+                        name='star'
+                        disabled
+                        required
+                        onChange={(e) => onChange(e)}
+                      />
+                      <ReactStars size={30} onChange={ratingChanged} />
+                    </div>
+                    <input
+                      type='submit'
+                      value='Register to Review'
+                      className='course-btn disabled'
+                      disabled
+                    />
+                  </form>
+                )}
               </div>
             </div>
             <hr></hr>
             <Alert />
+
             <div className='row'>
               <div className='col'>
                 <h6>Reviews</h6>
@@ -403,7 +452,7 @@ const StudentCourse = ({
                                   &nbsp;&nbsp;&nbsp;&nbsp;
                                   <FcClock />
                                   &nbsp;&nbsp;
-                                  {review.date.substring(11, 20)}
+                                  {review.date.substring(11, 16)}
                                 </span>
                               </span>
                               <div className='float-right'>

@@ -9,6 +9,7 @@ import NotAvailable from '../../img/notAvailable.webp';
 import NoMessage from '../../img/noMessage.jpg';
 import { FiMail } from 'react-icons/fi';
 import { FaArrowLeft } from 'react-icons/fa';
+import MsgBg from '../../img/msgBg.png';
 
 const Messages = ({ getCurrentProfile, profile: { profile, loading } }) => {
   useEffect(() => {
@@ -17,11 +18,14 @@ const Messages = ({ getCurrentProfile, profile: { profile, loading } }) => {
 
   return (
     <Fragment>
-      <div className='container-fluid messageBackground'>
+      <div
+        className='container-fluid messageBackground'
+        style={{ backgroundImage: `url(${MsgBg})` }}
+      >
         <div className='row' style={{ marginTop: '80px', paddingTop: '20px' }}>
           <div className='col'>
             {profile === null ? (
-              <div>
+              <div style={{ backgroundColor: 'white', height: '360px' }}>
                 <h1 className='text-center'>
                   No Messages Available
                   <img src={NotAvailable} alt='not available' />
@@ -50,7 +54,16 @@ const Messages = ({ getCurrentProfile, profile: { profile, loading } }) => {
                     &nbsp;
                     {profile.user.role === 'admin' ||
                     profile.user.role === 'teacher' ? (
-                      <Link to='/sendmessage' className='btn btn-danger'>
+                      <Link
+                        to='/sendmessage'
+                        className='course-btn'
+                        style={{
+                          position: 'fixed',
+                          zIndex: '99',
+                          marginLeft: '1110px',
+                          marginTop: '-65px',
+                        }}
+                      >
                         Send Message
                       </Link>
                     ) : (
@@ -66,14 +79,21 @@ const Messages = ({ getCurrentProfile, profile: { profile, loading } }) => {
                           />
                         ))
                       ) : (
-                        <h1 className='text-center'>
-                          No messages found...
-                          <img
-                            src={NoMessage}
-                            alt='no message'
-                            height='400px'
-                          />
-                        </h1>
+                        <div
+                          style={{
+                            paddingLeft: '150px',
+                            paddingRight: '250px',
+                          }}
+                        >
+                          <h1 className='text-center'>
+                            No messages found...
+                            <img
+                              src={NoMessage}
+                              alt='no message'
+                              height='400px'
+                            />
+                          </h1>
+                        </div>
                       )}
                     </div>
                   </div>

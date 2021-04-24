@@ -23,10 +23,10 @@ const Profiles = ({
         <Spinner />
       ) : (
         <Fragment>
-          <div className='container'>
+          <div className='container pt-5'>
             <div className='row'>
               <div className='col-12'>
-                <h1 className='large text-dark'>Developers</h1>
+                <h2 className='large text-dark'>Developers</h2>
                 <p className='lead'>
                   <i className='fab fa-connectdevelop' /> Browse and connect
                   with developers
@@ -37,13 +37,13 @@ const Profiles = ({
 
                 <br></br>
                 <br></br>
-                <div className='profiles'>
+                <div className='profiles row'>
                   {profiles.length > 0 ? (
                     profiles.map((profile) => (
                       <ProfileItem key={profile._id} profile={profile} />
                     ))
                   ) : (
-                    <h4>No profiles found...</h4>
+                    <h4 className='pt-5'>No profiles found...</h4>
                   )}
                 </div>
               </div>

@@ -30,12 +30,9 @@ const Profile = ({
         <Spinner />
       ) : (
         <Fragment>
-          <div className='container-fluid'>
+          <div className='container pt-4'>
             <div className='row'>
-              <div className='col-2'>
-                <DashboardActions />
-              </div>
-              <div className='col-9'>
+              <div className='col-12'>
                 <Link to='/profiles' className='btn btn-dark'>
                   Back To Profiles
                 </Link>

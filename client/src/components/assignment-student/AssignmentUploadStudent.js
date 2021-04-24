@@ -90,6 +90,7 @@ const AssignmentUploadStudent = ({
               </div>
             </div>
           </div>
+          <div style={{ height: '200px' }}></div>
         </Fragment>
       )}
     </Fragment>

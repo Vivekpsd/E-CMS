@@ -3,8 +3,9 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getCurrentProfile } from '../../actions/profile';
-
+import { getCourses } from '../../actions/course';
 import Spinner from '../layouts/Spinner';
+import CourseItem from '../courses/StudentCourses';
 
 import DashboardImg1 from '../../img/dash1.png';
 import DashboardImg2 from '../../img/bgDashboardl.png';
@@ -25,15 +26,19 @@ import {
   FaDatabase,
 } from 'react-icons/fa';
 import { FiInfo, FiTarget } from 'react-icons/fi';
+import StudentCourseItem from '../courses/StudentCourseItem';
 
 const Student = ({
   getCurrentProfile,
   auth: { user },
+  getCourses,
   profile: { profile, loading },
+  course: { courses },
 }) => {
   useEffect(() => {
     getCurrentProfile();
-  }, [getCurrentProfile]);
+    getCourses();
+  }, [getCurrentProfile, getCourses]);
 
   return loading && profile === null ? (
     <Spinner />
@@ -188,27 +193,36 @@ const Student = ({
         </div>
       </div>
       <hr></hr>
-      <div className='container-fluid mt-4'>
-        <div className='row'>
-          <div className='col-4' style={{ marginLeft: '125px' }}>
-            <h2>Your Enrollement</h2>
-            <hr></hr>
-            <div className='card'>
-              <img src={DashboardImg1} alt='Card cap' />
-              <div className='card-body'>
-                <h5 className='card-title'>Course title</h5>
-                <p className='card-text'>
-                  This is a wider card with supporting text below as a natural
-                  lead-in to additional content. This content is a little bit
-                  longer.
-                </p>
-                <p className='card-text'>
-                  <small className='text-muted'>Last updated 3 mins ago</small>
-                </p>
-              </div>
+      <div className='container mt-4'>
+        <h2>Your Enrollement</h2>
+        <hr></hr>
+        <div>
+          {profile === null ? (
+            <div className='alert alert-info'>
+              Dear <strong>{user.name},</strong> you have not yet set up your
+              profile. Create your profile to get enrolled in our courses
             </div>
-            <hr></hr>
-          </div>
+          ) : (
+            <Fragment>
+              {profile.enrolledCourse.length === 0 && (
+                <div className='alert alert-info'>
+                  You are not yet enrolled in any courses
+                </div>
+              )}
+              <div className='row'>
+                {profile.enrolledCourse.length > 0 &&
+                  profile.enrolledCourse.map((course_id) => {
+                    return courses.map((course) => {
+                      return (
+                        course_id === course._id && (
+                          <StudentCourseItem course={course} key={course._id} />
+                        )
+                      );
+                    });
+                  })}
+              </div>
+            </Fragment>
+          )}
         </div>
       </div>
       <hr></hr>
@@ -246,7 +260,9 @@ const Student = ({
           </div>
         </div>
       </div>
-
+      <br></br>
+      <br></br>
+      <br></br>
       {/* <h1 className='display-4'>Dashboard</h1> --------------------- Previous Code----------------
       <hr></hr>
       <br></br>
@@ -299,13 +315,18 @@ const Student = ({
 
 Student.propTypes = {
   getCurrentProfile: PropTypes.func.isRequired,
+  getCourses: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   profile: PropTypes.object.isRequired,
+  course: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   auth: state.auth,
   profile: state.profile,
+  course: state.course,
 });
 
-export default connect(mapStateToProps, { getCurrentProfile })(Student);
+export default connect(mapStateToProps, { getCurrentProfile, getCourses })(
+  Student
+);

@@ -27,31 +27,46 @@ const ViewAssignmentsTeacher = ({
         <Spinner />
       ) : (
         <Fragment>
-          <div className='container'>
+          <div className='container pt-5'>
             <div className='row'>
               <div className='col'>
                 <h3>Subjects of Asignment Uploaded By You</h3>
                 <hr></hr>
-                {assignment.courses.map((courseID) =>
-                  courses.map((allCourseID) => {
-                    return (
-                      courseID === allCourseID._id && (
-                        <div>
-                          {allCourseID.title}{' '}
-                          <Link
-                            to={`/assignment/${allCourseID._id}`}
-                            style={{ textDecoration: 'none', color: 'red' }}
-                          >
-                            - View Uploaded Assignments
-                          </Link>
-                        </div>
-                      )
-                    );
-                  })
-                )}
+                <table class='table '>
+                  <thead class='thead-dark'>
+                    <tr>
+                      <th scope='col'>Subjects</th>
+                      <th scope='col'>View Assignments</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {assignment.courses.map((courseID) =>
+                      courses.map((allCourseID) => {
+                        return (
+                          <Fragment>
+                            {courseID === allCourseID._id && (
+                              <tr>
+                                <td>{allCourseID.title} </td>
+                                <td>
+                                  <Link
+                                    to={`/assignment/${allCourseID._id}`}
+                                    className='btn btn-outline-dark'
+                                  >
+                                    View Uploaded Assignments
+                                  </Link>
+                                </td>
+                              </tr>
+                            )}
+                          </Fragment>
+                        );
+                      })
+                    )}
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>
+          <div style={{ height: '250px' }}></div>
         </Fragment>
       )}
     </Fragment>

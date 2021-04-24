@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 
-import { FcCalendar, FcInfo } from 'react-icons/fc';
+import { FcCalendar, FcClock, FcInfo } from 'react-icons/fc';
 
 const MessageItem = ({
   profile,
@@ -13,7 +13,7 @@ const MessageItem = ({
           <Fragment>
             <div className='container '>
               <div className='row'>
-                <div className='col-10 ml-auto mt-3'>
+                <div className='col-10  mt-3'>
                   <div
                     className='pl-5 pt-4 pb-3 pr-5'
                     style={{
@@ -40,15 +40,14 @@ const MessageItem = ({
                     {/* <p>{senderID}</p> */}
                     <div className='container'>
                       <div className='row'>
-                        <div className='col-7'>
-                          <p>
-                            <FcCalendar /> <span>{date}</span>
-                          </p>
-                        </div>
-                        <div className='col-3 ml-auto'>
-                          <p>
-                            <FcInfo /> <span>Sent By You</span>
-                          </p>
+                        <div className='col-12'>
+                          <FcCalendar />
+                          &nbsp;&nbsp;
+                          {date.substring(0, 10)}
+                          &nbsp;&nbsp;&nbsp;&nbsp;
+                          <FcClock />
+                          &nbsp;&nbsp;
+                          {date.substring(11, 16)}
                         </div>
                       </div>
                     </div>
@@ -85,7 +84,13 @@ const MessageItem = ({
                       </footer>
                     </blockquote>
                     <p>
-                      <FcCalendar /> <span>{date}</span>
+                      <FcCalendar />
+                      &nbsp;&nbsp;
+                      {date.substring(0, 10)}
+                      &nbsp;&nbsp;&nbsp;&nbsp;
+                      <FcClock />
+                      &nbsp;&nbsp;
+                      {date.substring(11, 16)}
                     </p>
                   </div>
                 </div>

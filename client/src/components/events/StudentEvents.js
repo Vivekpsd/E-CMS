@@ -8,8 +8,10 @@ import { Link } from 'react-router-dom';
 import { allEvents } from '../../actions/event';
 import ProfilePic from '../layouts/ProfilePic';
 import { FaArrowLeft } from 'react-icons/fa';
-import EventBg from '../../img/login-background.jpg';
+import EventBg from '../../img/EventBg.png';
+import Event1Bg from '../../img/bgEvent1.png';
 import './event.css';
+import { FiAlertCircle } from 'react-icons/fi';
 
 const StudentEvents = ({
   allEvents,
@@ -36,14 +38,17 @@ const StudentEvents = ({
               }}
             >
               <div
-                className='container-fluid'
-                style={{ marginTop: '80px', paddingTop: '20px' }}
+                className='container'
+                style={{
+                  marginTop: '80px',
+                  paddingTop: '20px',
+                }}
               >
                 <div className='row'>
                   <div className='col-12'>
-                    <div style={{ paddingLeft: '240px' }}>
-                      <h2 className='large text-light'>Events</h2>
-                      <p className='lead text-light'>
+                    <div>
+                      <h2 className='large '>Events</h2>
+                      <p className='lead'>
                         <i className='fab fa-connectdevelop ' /> Browse and
                         Register for upcoming Events
                       </p>
@@ -61,45 +66,53 @@ const StudentEvents = ({
                       {events.length > 0 ? (
                         events.map((event) => (
                           <div
-                            className='card text-dark bg-light mb-3 p-3 mb-5 bg-white rounded col-8 offset-2'
+                            className='card text-dark  col-12 mb-3 pt-2'
                             style={{
                               border: '2px solid black',
                               borderRadius: '10px',
-                              backgroundColor: 'white',
+                              backgroundImage: `url(${Event1Bg})`,
                             }}
                           >
                             <div className='card-body'>
                               <span className='card-text'>
                                 <div className='container'>
                                   <div className='row'>
-                                    <div className='col-6'>
-                                      <h4>{event.title}</h4>
+                                    <div className='col-12'>
+                                      <h4>
+                                        <FiAlertCircle /> &nbsp; {event.title}
+                                      </h4>
                                       <hr></hr>
                                       <p className='text-muted'>
                                         {event.description}
                                       </p>
                                     </div>
-                                    <div className='col-4 ml-auto'>
-                                      <b>Start Date - </b>
+                                  </div>
+                                  <div className='row'>
+                                    <div className='col-9 ml-auto'>
+                                      <b className='badge badge-danger'>
+                                        Start Date -{' '}
+                                      </b>
+                                      &nbsp;
                                       {event.startDate}
                                       <br></br>
-                                      <b>End Date - </b>
+                                      <b className='badge badge-dark'>
+                                        End Date -{' '}
+                                      </b>
+                                      &nbsp;&nbsp;
                                       {event.endDate}
                                       <br></br>
-
                                       <br></br>
+                                    </div>
+                                    <div className='col-3 mr-auto'>
                                       <a
-                                        href='https://www.google.com/'
-                                        className='btn btn-info'
+                                        href={event.link}
                                         target='blank'
+                                        className='login-button'
                                       >
-                                        Register
+                                        Register Here
                                       </a>
                                     </div>
                                   </div>
-                                </div>
-                                <div>
-                                  <p className='my-1'></p>
                                 </div>
                               </span>
                             </div>
@@ -111,6 +124,8 @@ const StudentEvents = ({
                     </div>
                   </div>
                 </div>
+                <br></br>
+                <br></br>
               </div>
             </div>
           }

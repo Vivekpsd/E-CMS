@@ -57,7 +57,10 @@ const AssignmentFileStudent = ({
         <Spinner />
       ) : (
         <Fragment>
-          <div className='container' style={{ marginTop: '110px' }}>
+          <div
+            className='container'
+            style={{ marginTop: '110px', marginBottom: '200px' }}
+          >
             <div className='row'>
               <div className='col'>
                 <h3>List of Assignments </h3>
@@ -113,6 +116,8 @@ const AssignmentFileStudent = ({
               </div>
             </div>
           </div>
+          <br></br>
+          <br></br>
         </Fragment>
       )}
     </Fragment>

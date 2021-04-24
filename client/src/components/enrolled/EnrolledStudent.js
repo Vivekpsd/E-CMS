@@ -20,24 +20,33 @@ const EnrolledStudent = ({
   }, [getCourseById, getProfiles]);
 
   const test = (studentID) => {
-    return (
-      <div className='container'>
-        {profiles.length > 0 ? (
-          profiles.map((profile) => {
-            return (
-              <div className='container'>
-                {profile.user._id === studentID && (
-                  <ProfileItem key={profile.user._id} profile={profile} />
-                )}
-              </div>
-            );
-          })
-        ) : (
-          <h4>No profiles found...</h4>
-        )}
-        ;
-      </div>
+    return profiles.length > 0 ? (
+      profiles.map((profile) => {
+        return (
+          profile.user._id === studentID && (
+            <ProfileItem key={profile._id} profile={profile} />
+          )
+        );
+      })
+    ) : (
+      <h4 className='pt-5'>No profiles found...</h4>
     );
+
+    // <div className='container pt-4'>
+    //   {profiles.length > 0 ? (
+    //     profiles.map((profile) => {
+    //       return (
+    //         <div className='row'>
+    //           {profile.user._id === studentID && (
+    //             <ProfileItem key={profile.user._id} profile={profile} />
+    //           )}
+    //         </div>
+    //       );
+    //     })
+    //   ) : (
+    //     <h4>No profiles found...</h4>
+    //   )}
+    //</div>
   };
   return (
     <Fragment>
@@ -45,7 +54,34 @@ const EnrolledStudent = ({
         <Spinner />
       ) : (
         <Fragment>
-          <div className='container'>
+          <div className='container pt-5'>
+            <div className='row'>
+              <div className='col-12'>
+                <h2 className='large text-dark'>Developers</h2>
+                <p className='lead'>
+                  <i className='fab fa-connectdevelop' /> Browse and connect
+                  with developers
+                </p>
+                <Link to='/dashboard' className='btn btn-dark'>
+                  Back To Dashboard
+                </Link>
+
+                <br></br>
+                <br></br>
+
+                <div className='profiles row'>
+                  {course.enrolledStudent.length > 0 ? (
+                    course.enrolledStudent.map((student) => {
+                      return test(student);
+                    })
+                  ) : (
+                    <h4>No student found...</h4>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+          {/* <div className='container'>
             <div className='profiles'>
               {course.enrolledStudent.length > 0 ? (
                 course.enrolledStudent.map((student) => {
@@ -55,7 +91,7 @@ const EnrolledStudent = ({
                 <h4>No student found...</h4>
               )}
             </div>
-          </div>
+          </div> */}
         </Fragment>
       )}
     </Fragment>

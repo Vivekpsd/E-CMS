@@ -56,12 +56,13 @@ const UploadForm = ({
 
   return (
     <Fragment>
-      <div className='container'>
-        <Link to='view-assignments' className='btn btn-success'>
+      <div className='container pt-5'>
+        <Link to='view-assignments' className='course-btn'>
           View All Assignment
         </Link>
+        <br></br>
         <form onSubmit={onSubmit}>
-          <div className='form-group'>
+          <div className='form-group pt-4'>
             <label htmlFor='title'>Assignment Title</label>
             <input
               id='title'
@@ -138,6 +139,7 @@ const UploadForm = ({
             className='btn btn-primary btn-block mt-4'
           />
         </form>
+        <br></br>
       </div>
     </Fragment>
     // <Fragment>

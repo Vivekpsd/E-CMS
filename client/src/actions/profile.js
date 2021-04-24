@@ -148,6 +148,7 @@ export const sendMessage = (formDate, history) => async (dispatch) => {
 export const enrollStudent = (courseID, userID, history) => async (
   dispatch
 ) => {
+  console.log(courseID);
   try {
     const config = {
       header: {
@@ -156,18 +157,16 @@ export const enrollStudent = (courseID, userID, history) => async (
     };
     const body = { courseID, userID };
     const res = await axios.put(
-      `http://localhost:5000/api/profile/enroll`,
+      `http://localhost:5000/api/profile/enroll/${courseID}`,
       body,
-
       config
     );
-    console.log(courseID);
+
     dispatch({
       type: UPDATE_PROFILE,
       payload: res.data,
     });
     dispatch(setAlert('You are  Enrolled', 'success'));
-    history.push('/student-courses');
   } catch (err) {
     console.log('error');
     dispatch({

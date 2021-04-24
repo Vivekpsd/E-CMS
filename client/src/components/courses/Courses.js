@@ -8,6 +8,7 @@ import DashboardAction from '../dashboard/DashboardAction';
 import { Link } from 'react-router-dom';
 
 import CourseItem from './CourseItem';
+import StudentCourseItem from './StudentCourseItem';
 
 const Courses = ({
   getCourses,
@@ -25,7 +26,7 @@ const Courses = ({
         <Spinner />
       ) : (
         <Fragment>
-          <div className='container' style={{ paddingTop: '70px' }}>
+          <div className='container pt-5'>
             <div className='row'>
               <div className='col-12'>
                 <h2 className='large text-dark'>Courses</h2>
@@ -45,10 +46,14 @@ const Courses = ({
                 </div>
 
                 <br></br>
-                <div className='profiles'>
+                <div className='row'>
                   {courses.length > 0 ? (
                     courses.map((course) => (
-                      <CourseItem key={course._id} course={course} />
+                      <StudentCourseItem
+                        key={course._id}
+                        course={course}
+                        role={profile.user.role}
+                      />
                     ))
                   ) : (
                     <h4>No courses found...</h4>

@@ -68,7 +68,7 @@ router.post(
     if (startDate) courseFields.startDate = startDate;
     if (endDate) courseFields.endDate = endDate;
     if (prerequisite) courseFields.prerequisite = prerequisite;
-    if (img) courseFields.img = img;
+
     if (price) courseFields.price = price.toString();
 
     try {
@@ -84,6 +84,7 @@ router.post(
         return res.json(course);
       }
       //Create
+      if (img) courseFields.img = img;
       course = new Course(courseFields);
       await course.save();
       res.json(course);

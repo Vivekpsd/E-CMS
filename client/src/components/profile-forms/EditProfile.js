@@ -68,8 +68,8 @@ const EditProfile = ({
 
   return (
     <Fragment>
-      <div className='container'>
-        <h1 className='large text-dark'>Edit Your Profile</h1>
+      <div className='container pt-5'>
+        <h2 className='large text-dark'>Edit Your Profile</h2>
         <p className='lead'>
           <i className='fas fa-user' /> Add some changes to your profile
         </p>
@@ -218,6 +218,7 @@ const EditProfile = ({
           </Link>
         </form>
       </div>
+      <br></br>
     </Fragment>
   );
 };

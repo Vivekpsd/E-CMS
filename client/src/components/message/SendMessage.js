@@ -35,12 +35,12 @@ const SendMessage = ({
     <Fragment>
       <div className='container-fluid'>
         <div className='row'>
-          <div className='col-8 offset-2'>
+          <div className='col-8'>
             <div className='container'>
               <div className='row'>
                 <div className='col-sm-10 mx-auto mt-4'>
                   <div className='card text-dark bg-light mb-3 shadow p-3 mb-5 bg-white rounded'>
-                    <h1 className='display-4 text-center'>Send Message</h1>
+                    <h2 className='display-4 text-center'>Send Message</h2>
                     <div className='card-body'>
                       <span className='card-text'>
                         <hr></hr>
@@ -84,9 +84,10 @@ const SendMessage = ({
                           <br></br>
                           <input
                             type='submit'
-                            className='btn btn-info '
+                            className='login-button'
                             value='Send Message'
                           />
+                          <br></br>
                           <br></br>
                           <Link
                             className='btn btn-dark float-right'

@@ -72,18 +72,19 @@ const EditCourse = ({
 
   const onSubmit = (e) => {
     e.preventDefault();
-    createCourse(formData, history, userID);
+    createCourse(formData, history, userID, true);
   };
 
   return (
     <Fragment>
-      <div className='container'>
+      <div className='container pt-5 pb-5'>
         <div className='row'>
           <div className='col-12'>
-            <h1 className='large text-primary'>Edit Course</h1>
+            <h2 className='large text-dark'>Edit Course</h2>
             <p className='lead'>
               <i className='fas fa-user' /> Edit Course here
             </p>
+            <hr></hr>
             <form className='form' onSubmit={onSubmit}>
               <div className='form-group'>
                 <label htmlFor='title'>Course Title</label>

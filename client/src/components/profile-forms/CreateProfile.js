@@ -39,10 +39,10 @@ const CreateProfile = ({ createProfile, history }) => {
 
   return (
     <Fragment>
-      <div className='container-fluid'>
+      <div className='container pt-5'>
         <div className='row'>
           <div className='col-12'>
-            <h1 className='large text-primary'>Create Your Profile</h1>
+            <h2 className='large text-dark'>Create Your Profile</h2>
             <p className='lead'>
               <i className='fas fa-user' /> Create your profile here
             </p>
@@ -177,6 +177,7 @@ const CreateProfile = ({ createProfile, history }) => {
           </div>
         </div>
       </div>
+      <br></br>
     </Fragment>
   );
 };

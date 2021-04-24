@@ -36,10 +36,10 @@ const CreateEvent = ({
 
   return (
     <Fragment>
-      <div className='container'>
+      <div className='container pt-5 pb-5'>
         <div className='row'>
           <div className='col-12'>
-            <h1 className='large text-primary'>Create New Event</h1>
+            <h2 className='large text-primary'>Create New Event</h2>
             <p className='lead'>
               <i className='fas fa-user' /> Create your event here
             </p>
