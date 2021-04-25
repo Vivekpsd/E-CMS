@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import { getCurrentProfile } from '../../actions/profile';
 import { getCourses } from '../../actions/course';
 import Spinner from '../layouts/Spinner';
-import CourseItem from '../courses/StudentCourses';
 
 import DashboardImg1 from '../../img/dash1.png';
 import DashboardImg2 from '../../img/bgDashboardl.png';

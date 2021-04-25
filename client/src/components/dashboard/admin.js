@@ -3,10 +3,13 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getCurrentProfile } from '../../actions/profile';
-import DashboardActions from './DashboardAction';
+
+import DashboardImg1 from '../../img/dash1.png';
+import DashboardImg2 from '../../img/bgDashboardl.png';
 import Spinner from '../layouts/Spinner';
-import ProfilePic from '../layouts/ProfilePic';
-import UserPic from '../../img/user.png';
+
+import User from '../../img/user.png';
+import ProfileInfo from '../../img/profileInfo.png';
 import './dashboardCSS/dashboard.css';
 import {
   FaFacebook,
@@ -14,7 +17,9 @@ import {
   FaInstagram,
   FaTwitter,
   FaYoutube,
+  FaArrowRight,
 } from 'react-icons/fa';
+import { FiInfo, FiTarget } from 'react-icons/fi';
 
 const Admin = ({
   getCurrentProfile,
@@ -25,106 +30,104 @@ const Admin = ({
     getCurrentProfile();
   }, [getCurrentProfile]);
   return loading && profile === null ? (
-    <Spinner />
+    <div style={{ paddingBottom: '1000px' }}>
+      <Spinner />
+    </div>
   ) : (
     <Fragment>
-      <div className='container-fluid'>
-        <div className='row'>
-          <div className='col-12 mr-auto'>
-            <div className='card text-dark bg-light mb-3 p-3 bg-white rounded'>
-              <div className='card-body'>
-                <span className='card-text'>
-                  <div className='container-fluid'>
-                    <div className='row align-items-center'>
-                      <div className='col-4'>
+      <div
+        className='container-fluid'
+        style={{
+          backgroundImage: `url(${DashboardImg2})`,
+          backgroundSize: 'cover',
+          overflow: 'hidden',
+        }}
+      >
+        <div className='row align-items-center' style={{ paddingTop: '90px' }}>
+          <div className='col-6'>
+            <br></br>
+            <br></br>
+            <h1 className='pl-5'>
+              Welcome to Engineers Gurukul Training Center!
+              <br></br>
+              <br></br>
+              <Link to='student-courses' className='login-button'>
+                Browse Courses &nbsp;&nbsp; <FaArrowRight />
+              </Link>
+            </h1>
+          </div>
+          <div className='col-6'>
+            <img src={DashboardImg1} alt='Img1' height='400px' />
+          </div>
+        </div>
+        <div className='container-fluid mt-4'>
+          <div className='row'>
+            <div className='col-11'>
+              <div className=' text-dark bg-light mb-3 p-3 bg-white rounded'>
+                <div className='container-fluid'>
+                  <div className='row align-items-center'>
+                    <div className='col-1 pl-4'>
+                      {user.avatar ? (
                         <img
                           src={user.avatar}
                           alt='User'
                           className='rounded'
-                          height='200px'
+                          height='90px'
                         />
-                      </div>
-                      <div className='col-5'>
-                        <h4>{user && user.name.toUpperCase()}</h4>
-                        <p>
-                          Github -{' '}
-                          {profile === null ? 'N/A' : profile.githubusername}
-                        </p>
-                        <p className='text-muted'>
-                          {user.role.charAt(0).toUpperCase() +
-                            user.role.slice(1)}
-                        </p>
-                      </div>
-                      <div className='col-3 mr-auto'>
-                        {profile !== null ? (
-                          <Fragment>
-                            <Link
-                              to='/edit-profile'
-                              className='btn btn-outline-dark'
-                            >
-                              <i className='text-primary' /> Edit Profile
-                            </Link>
-                          </Fragment>
-                        ) : (
-                          <Fragment>
-                            <Link
-                              to='/create-profile'
-                              className='btn btn-outline-dark my-1'
-                            >
-                              Create Profile
-                            </Link>
-                          </Fragment>
-                        )}
-                      </div>
+                      ) : (
+                        <img
+                          src={User}
+                          alt='User'
+                          classNam='rounded'
+                          height='90px'
+                        />
+                      )}
                     </div>
-                    <hr></hr>
-                    {profile !== null && (
-                      <div className='row mt-5 justify-content-center align-items-center'>
-                        <div className='col-5'>
-                          <div className='card text-light bg-light mb-3  bg-dark rounded'>
-                            <div className='card-body'>
-                              <h4>Bio</h4>
-                              <hr></hr>
-                              <span className='card-text'>{profile.bio}</span>
-                            </div>
-                          </div>
-                        </div>
-                        <div className='col-5'>
-                          <div className='alert alert-info' role='alert'>
-                            <h4>Skills</h4>
-                            <hr></hr>
-                            <strong>{user.name}</strong> have knowledge about{' '}
-                            <strong>
-                              {profile.skills.map((skill) => {
-                                return skill + ', ';
-                              })}
-                            </strong>
-                          </div>
-                        </div>
-                      </div>
-                    )}
-                    <br></br>
-                    <br></br>
-                    {profile !== null && (
-                      <div className='row text-center'>
-                        <div className='col'>
-                          <h1>
-                            <FaFacebook />
-                            &nbsp;&nbsp;
-                            <FaTwitter />
-                            &nbsp;&nbsp;
-                            <FaInstagram />
-                            &nbsp;&nbsp;
-                            <FaGithub />
-                            &nbsp;&nbsp;
-                            <FaYoutube />
-                          </h1>
-                        </div>
-                      </div>
-                    )}
-
-                    <div className='row mt-3'>
-                      {profile === null && (
+                    <div className='col-3 pl-5'>
+                      <h4>{user && user.name.toUpperCase()}</h4>
+                      <p>
+                        Github -{' '}
+                        {profile === null ? 'N/A' : profile.githubusername}
+                      </p>
+                      <p className='text-muted'>
+                        {user.role.charAt(0).toUpperCase() + user.role.slice(1)}
+                      </p>
+                    </div>
+                    <div className='col-2 mr-auto'>
+                      {profile !== null ? (
+                        <Fragment>
+                          <Link
+                            to='/edit-profile'
+                            className='btn btn-outline-dark'
+                          >
+                            <i className='text-primary' /> Edit Profile
+                          </Link>
+                        </Fragment>
+                      ) : (
+                        <Fragment>
+                          <Link
+                            to='/create-profile'
+                            className='btn btn-outline-dark my-1'
+                          >
+                            Create Profile
+                          </Link>
+                        </Fragment>
+                      )}
+                    </div>
+                    <div className='col-5 mr-auto'>
+                      {profile !== null ? (
+                        <h1>
+                          <FaFacebook />
+                          &nbsp;&nbsp;
+                          <FaTwitter />
+                          &nbsp;&nbsp;
+                          <FaInstagram />
+                          &nbsp;&nbsp;
+                          <FaGithub />
+                          &nbsp;&nbsp;
+                          <FaYoutube />
+                        </h1>
+                      ) : (
                         <div className='alert alert-info' role='alert'>
                           <strong>Heads up! {user.name}, </strong> You have not
                           yet setup a profile, please create a new profile for
@@ -133,7 +136,47 @@ const Admin = ({
                       )}
                     </div>
                   </div>
-                </span>
+                  <hr></hr>
+                  {profile !== null && (
+                    <div className='row mt-5 justify-content-center align-items-center'>
+                      <div className='col-5'>
+                        <img src={ProfileInfo} alt='info' height='550' />
+                      </div>
+                      <div className='col-7'>
+                        <div className='card shadow-lg mb-3   rounded'>
+                          <div className='card-body'>
+                            <h4
+                              style={{
+                                color: 'rgb(122, 122, 250)',
+                              }}
+                            >
+                              {' '}
+                              <FiInfo />
+                              &nbsp; Bio
+                            </h4>
+                            <span className='card-text'>{profile.bio}</span>
+                            <hr></hr>
+                            <hr></hr>
+                            <h4
+                              style={{
+                                color: 'rgb(122, 122, 250)',
+                              }}
+                            >
+                              <FiTarget /> &nbsp;Skills
+                            </h4>
+                            <strong>{user.name}</strong> has knowledge about{' '}
+                            <strong>
+                              {profile.skills.map((skill) => {
+                                return skill + ', ';
+                              })}
+                            </strong>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                  <br></br>
+                </div>
               </div>
             </div>
           </div>

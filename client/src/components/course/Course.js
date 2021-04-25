@@ -94,9 +94,8 @@ const Course = ({
                               }}
                             ></div>
                             <center>
-                              <hr></hr>
-                              <div className='col-12'>
-                                <h3>Price - {course.price}</h3>
+                              <div className='col-12 login-button'>
+                                <h4>₹ {course.price}</h4>
                               </div>
                             </center>
                           </div>
