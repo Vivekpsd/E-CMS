@@ -203,27 +203,41 @@ const StudentCourse = ({
                     backgroundSize: 'cover',
                   }}
                 ></div>
-                <center>
-                  {course.enrolledStudent.find((enrolledStudent) => {
-                    if (enrolledStudent === profile.user._id) {
-                      return true;
-                    }
-                  }) ? (
-                    <button
-                      className='login-button disabled'
-                      style={{ backgroundColor: 'wheat' }}
-                    >
-                      Already Enrolled
-                    </button>
-                  ) : (
-                    <button
-                      className='login-button'
-                      onClick={(e) => onClick(e)}
-                    >
+                {profile !== null ? (
+                  <center>
+                    {course.enrolledStudent.find((enrolledStudent) => {
+                      if (enrolledStudent === profile.user._id) {
+                        return true;
+                      }
+                    }) ? (
+                      <button
+                        className='login-button disabled'
+                        style={{
+                          backgroundColor: 'lightgreen',
+                          color: 'black',
+                        }}
+                      >
+                        Already Enrolled
+                      </button>
+                    ) : (
+                      <button
+                        className='login-button'
+                        onClick={(e) => onClick(e)}
+                      >
+                        ₹{course.price}&nbsp;-&nbsp;Buy Now
+                      </button>
+                    )}
+                  </center>
+                ) : (
+                  <div>
+                    <button className='login-button'>
                       ₹{course.price}&nbsp;-&nbsp;Buy Now
                     </button>
-                  )}
-                </center>
+                    <small className='text-danger'>
+                      Create your profile to purchase this course
+                    </small>
+                  </div>
+                )}
               </div>
 
               <div className='col-8'>
@@ -344,78 +358,88 @@ const StudentCourse = ({
             <hr></hr>
             <div className='row'>
               <div className='col'>
-                <h4>All Reviews ({course.review.length})</h4>
-                {course.enrolledStudent.find((enrolledStudent) => {
-                  if (enrolledStudent === profile.user._id) {
-                    return true;
-                  }
-                }) ? (
-                  <form onSubmit={onSubmit} id='review-form'>
-                    <div className='form-group'>
-                      <label htmlFor='review'>Write your Review Here</label>
-                      <textarea
-                        className='form-control'
-                        id='comment'
-                        rows='3'
-                        name='comment'
-                        value={comment}
-                        onChange={(e) => onChange(e)}
-                      ></textarea>
-                      <label htmlFor='star'>Stars</label>
-                      <br></br>
-                      <input
-                        type='hidden'
-                        value={star}
-                        min='1'
-                        max='5'
-                        id='star'
-                        name='star'
-                        disabled
-                        required
-                        onChange={(e) => onChange(e)}
-                      />
-                      <ReactStars size={30} onChange={ratingChanged} />
-                    </div>
-                    <input
-                      type='submit'
-                      value='Add Review'
-                      className='course-btn'
-                    />
-                  </form>
+                {profile !== null ? (
+                  <Fragment>
+                    <h4>All Reviews ({course.review.length})</h4>
+                    {course.enrolledStudent.find((enrolledStudent) => {
+                      if (enrolledStudent === profile.user._id) {
+                        return true;
+                      }
+                    }) ? (
+                      <form onSubmit={onSubmit} id='review-form'>
+                        <div className='form-group'>
+                          <label htmlFor='review'>Write your Review Here</label>
+                          <textarea
+                            className='form-control'
+                            id='comment'
+                            rows='3'
+                            name='comment'
+                            value={comment}
+                            onChange={(e) => onChange(e)}
+                          ></textarea>
+                          <label htmlFor='star'>Stars</label>
+                          <br></br>
+                          <input
+                            type='hidden'
+                            value={star}
+                            min='1'
+                            max='5'
+                            id='star'
+                            name='star'
+                            disabled
+                            required
+                            onChange={(e) => onChange(e)}
+                          />
+                          <ReactStars size={30} onChange={ratingChanged} />
+                        </div>
+                        <input
+                          type='submit'
+                          value='Add Review'
+                          className='course-btn'
+                        />
+                      </form>
+                    ) : (
+                      <form onSubmit={onSubmit} id='review-form'>
+                        <div className='form-group'>
+                          <label htmlFor='review'>Write your Review Here</label>
+                          <textarea
+                            className='form-control'
+                            id='comment'
+                            rows='3'
+                            name='comment'
+                            value={comment}
+                            onChange={(e) => onChange(e)}
+                          ></textarea>
+                          <label htmlFor='star'>Stars</label>
+                          <br></br>
+                          <input
+                            type='hidden'
+                            value={star}
+                            min='1'
+                            max='5'
+                            id='star'
+                            name='star'
+                            disabled
+                            required
+                            onChange={(e) => onChange(e)}
+                          />
+                          <ReactStars size={30} onChange={ratingChanged} />
+                        </div>
+                        <input
+                          type='submit'
+                          value='Register to Review'
+                          className='course-btn disabled'
+                          disabled
+                        />
+                      </form>
+                    )}
+                  </Fragment>
                 ) : (
-                  <form onSubmit={onSubmit} id='review-form'>
-                    <div className='form-group'>
-                      <label htmlFor='review'>Write your Review Here</label>
-                      <textarea
-                        className='form-control'
-                        id='comment'
-                        rows='3'
-                        name='comment'
-                        value={comment}
-                        onChange={(e) => onChange(e)}
-                      ></textarea>
-                      <label htmlFor='star'>Stars</label>
-                      <br></br>
-                      <input
-                        type='hidden'
-                        value={star}
-                        min='1'
-                        max='5'
-                        id='star'
-                        name='star'
-                        disabled
-                        required
-                        onChange={(e) => onChange(e)}
-                      />
-                      <ReactStars size={30} onChange={ratingChanged} />
-                    </div>
-                    <input
-                      type='submit'
-                      value='Register to Review'
-                      className='course-btn disabled'
-                      disabled
-                    />
-                  </form>
+                  <div>
+                    <small className='alert alert-info'>
+                      Create your profile to review this course
+                    </small>
+                  </div>
                 )}
               </div>
             </div>
@@ -455,18 +479,20 @@ const StudentCourse = ({
                                   {review.date.substring(11, 16)}
                                 </span>
                               </span>
-                              <div className='float-right'>
-                                {profile.user._id === review.studentID && (
-                                  <button
-                                    className='btn btn-danger'
-                                    onClick={() => {
-                                      deleteReview(review._id);
-                                    }}
-                                  >
-                                    Delete
-                                  </button>
-                                )}
-                              </div>
+                              {profile !== null && (
+                                <div className='float-right'>
+                                  {profile.user._id === review.studentID && (
+                                    <button
+                                      className='btn btn-danger'
+                                      onClick={() => {
+                                        deleteReview(review._id);
+                                      }}
+                                    >
+                                      Delete
+                                    </button>
+                                  )}
+                                </div>
+                              )}
                             </div>
                           </div>
                         </div>

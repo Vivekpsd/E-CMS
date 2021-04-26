@@ -117,15 +117,45 @@ const Admin = ({
                     <div className='col-5 mr-auto'>
                       {profile !== null ? (
                         <h1>
-                          <FaFacebook />
+                          <a
+                            href='https://www.facebook.com'
+                            target='blank'
+                            style={{ textDecoration: 'none', color: 'black' }}
+                          >
+                            <FaFacebook />
+                          </a>
                           &nbsp;&nbsp;
-                          <FaTwitter />
+                          <a
+                            href='https://www.twitter.com'
+                            target='blank'
+                            style={{ textDecoration: 'none', color: 'black' }}
+                          >
+                            <FaTwitter />
+                          </a>
                           &nbsp;&nbsp;
-                          <FaInstagram />
+                          <a
+                            href='https://www.instagram.com'
+                            target='blank'
+                            style={{ textDecoration: 'none', color: 'black' }}
+                          >
+                            <FaInstagram />
+                          </a>
                           &nbsp;&nbsp;
-                          <FaGithub />
+                          <a
+                            href='https://www.github.com'
+                            target='blank'
+                            style={{ textDecoration: 'none', color: 'black' }}
+                          >
+                            <FaGithub />
+                          </a>
                           &nbsp;&nbsp;
-                          <FaYoutube />
+                          <a
+                            href='https://www.youtube.com'
+                            target='blank'
+                            style={{ textDecoration: 'none', color: 'black' }}
+                          >
+                            <FaYoutube />
+                          </a>
                         </h1>
                       ) : (
                         <div className='alert alert-info' role='alert'>

@@ -7,7 +7,9 @@ import {
   FaYoutube,
   FaArrowRight,
   FaEnvelope,
+  FaUser,
 } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 import { FiPhone } from 'react-icons/fi';
 import EgLogo from '../../img/EgLogo2.png';
 import ISO from '../../img/isologo.png';
@@ -41,13 +43,37 @@ const Footer = () => {
                 </h3>
               </div>
               <div class='col-xl-2 col-md-4 col-sm-4 col-12'>
-                <h6 class='mb-3 mb-lg-4 bold-text '>
+                <h6 class='mb-3 mb-lg-4 bold-text ml-3'>
                   <b>MENU</b>
                 </h6>
                 <ul class='list-unstyled'>
-                  <li>Home</li>
-                  <li>About</li>
-                  <li>Contact Us</li>
+                  <li>
+                    <Link
+                      className='nav-link'
+                      to='/'
+                      style={{ textDecoration: 'none', color: 'white' }}
+                    >
+                      Home
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      className='nav-link'
+                      to='/about'
+                      style={{ textDecoration: 'none', color: 'white' }}
+                    >
+                      About
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      className='nav-link'
+                      to='/contact'
+                      style={{ textDecoration: 'none', color: 'white' }}
+                    >
+                      Contact
+                    </Link>
+                  </li>
                 </ul>
               </div>
               <div class='col-xl-2 col-md-4 col-sm-4 col-12'>
@@ -63,13 +89,25 @@ const Footer = () => {
                 <p class='social text-muted mb-0 pb-0 bold-text'>
                   {' '}
                   <span class='mx-2'>
-                    <FaFacebook />
+                    <a
+                      href='https://www.facebook.com/engineersgurukultechnology/'
+                      target='blank'
+                      style={{ textDecoration: 'none', color: 'grey' }}
+                    >
+                      <FaFacebook />
+                    </a>
                   </span>{' '}
                   <span class='mx-2'>
                     <FaYoutube />
                   </span>{' '}
                   <span class='mx-2'>
-                    <FaInstagram />
+                    <a
+                      href='https://www.instagram.com/engineersgurukul/?hl=en'
+                      target='blank'
+                      style={{ textDecoration: 'none', color: 'grey' }}
+                    >
+                      <FaInstagram />
+                    </a>
                   </span>{' '}
                   <span class='mx-2'>
                     <FaTwitter />
@@ -86,9 +124,10 @@ const Footer = () => {
                 <small>
                   {' '}
                   <span>
-                    <FaEnvelope />
+                    <FaUser />
+                    &nbsp;
                   </span>{' '}
-                  Mail
+                  Engineers Gurukul
                 </small>
               </div>
               <div class='col-xl-2 col-md-4 col-sm-4 col-auto order-2 align-self-end mt-3 '>

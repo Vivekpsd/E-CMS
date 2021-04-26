@@ -84,7 +84,7 @@ function Home() {
           explore='Explore more >'
         />
       </Container>
-      <Footer />
+      <br></br>
     </div>
   );
 }

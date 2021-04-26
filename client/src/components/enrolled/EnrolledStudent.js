@@ -57,10 +57,10 @@ const EnrolledStudent = ({
           <div className='container pt-5'>
             <div className='row'>
               <div className='col-12'>
-                <h2 className='large text-dark'>Developers</h2>
+                <h2 className='large text-dark'>Enrolled Students</h2>
                 <p className='lead'>
-                  <i className='fab fa-connectdevelop' /> Browse and connect
-                  with developers
+                  <i className='fab fa-connectdevelop' /> View Profiles of
+                  Students Enrolled
                 </p>
                 <Link to='/dashboard' className='btn btn-dark'>
                   Back To Dashboard

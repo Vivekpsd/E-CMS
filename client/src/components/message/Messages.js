@@ -103,6 +103,7 @@ const Messages = ({ getCurrentProfile, profile: { profile, loading } }) => {
           </div>
         </div>
       </div>
+      <div style={{ height: '250px' }}></div>
     </Fragment>
   );
   //

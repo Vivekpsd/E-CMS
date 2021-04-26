@@ -59,49 +59,8 @@ const Courses = ({
                   <StudentCourseItem
                     course={course}
                     key={course._id}
-                    role={profile.user.role}
+                    role={profile !== null ? profile.user.role : 'student'}
                   />
-                  // <div className='col-4'>
-                  //   <div className='card'>
-                  //     <div
-                  //       style={{
-                  //         backgroundImage: `url(${
-                  //           process.env.PUBLIC_URL + '/courses/' + course.img
-                  //         })`,
-                  //         height: '300px',
-                  //         backgroundSize: 'cover',
-                  //       }}
-                  //     ></div>
-                  //     <div className='card-body'>
-                  //       <h5 className='card-title'>
-                  //         {course.title} &nbsp; &nbsp; &nbsp;{' '}
-                  //       </h5>
-                  //       <p className='card-text'>
-                  //         By {course.teacher}
-                  //         <span className='text-muted'>
-                  //           <span className='float-right'>
-                  //             {course.review.length === 0
-                  //               ? 'No Review'
-                  //               : getStarAverage(course)}{' '}
-                  //             ({course.review.length})
-                  //           </span>
-                  //         </span>
-                  //       </p>
-                  //       <pre>₹ {course.price}</pre>
-                  //       <p className='card-text'>
-                  //         <Link
-                  //           to={`/studentcourse/${course._id}`}
-                  //           className='course-btn'
-                  //           style={{ textDecoration: 'none' }}
-                  //         >
-                  //           View Course &nbsp;
-                  //           <FaArrowRight />
-                  //         </Link>
-                  //       </p>
-                  //     </div>
-                  //   </div>
-                  //   <hr></hr>
-                  // </div>
                 ))
               ) : (
                 <h4>No courses found...</h4>
