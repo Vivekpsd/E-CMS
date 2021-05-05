@@ -6,7 +6,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import DashboardAction from '../dashboard/DashboardAction';
 import { Link } from 'react-router-dom';
-
 import CourseItem from './CourseItem';
 import StudentCourseItem from './StudentCourseItem';
 

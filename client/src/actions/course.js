@@ -15,6 +15,7 @@ import {
 
 //Get all Courses
 export const getCourses = () => async (dispatch) => {
+  console.log('action all course');
   try {
     const res = await axios.get('http://localhost:5000/api/course');
 

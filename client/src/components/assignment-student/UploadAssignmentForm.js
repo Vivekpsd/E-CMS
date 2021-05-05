@@ -129,8 +129,7 @@ const UploadAssignmentForm = ({
             {course.assignment.map((assignment) => {
               return (
                 <div>
-                  {' '}
-                  {assignment.title === match.params.name &&
+                  {assignment.title + '.pdf' === match.params.name &&
                     !getTodayDate(assignment.endDate) && (
                       <div>
                         <div className='alert alert-danger'>

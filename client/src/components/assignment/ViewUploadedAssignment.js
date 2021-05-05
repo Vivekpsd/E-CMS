@@ -36,6 +36,8 @@ const ViewUploadedAssignment = ({
     getAssignmentCourse,
     getUploadedAssignment,
     getUploadedAssignments,
+    match.params.id,
+    match.params.name,
   ]);
 
   const download = async (file) => {

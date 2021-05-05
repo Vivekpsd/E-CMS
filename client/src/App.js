@@ -81,11 +81,7 @@ export default function App() {
               path='/teacher-courses'
               component={TeacherCourses}
             />
-            <PrivateRoute
-              exact
-              path='/studentcourse/:id'
-              component={StudentCourse}
-            />
+            <Route exact path='/studentcourse/:id' component={StudentCourse} />
             <Route exact path='/course/:id' component={Course} />
             <Route exact path='/event/:id' component={AdminEvent} />
             <RoleRoute exact path='/admin' role='admin' component={Admin} />

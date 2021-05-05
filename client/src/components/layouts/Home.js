@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, Fragment } from 'react';
 import './pages/pages.css';
 import Card from './card/card';
 import Navbar from './components/navbar';
@@ -8,52 +8,18 @@ import Titles from './components/bellowts';
 import FeaturedCource from './components/featuredCource';
 import Footer from './components/footer';
 import Svg from './assets/undraw_teaching_f1cm.svg';
+import Spinner from '../layouts/Spinner';
+import { getCourses } from '../../actions/course';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import StudentCourseItem from '../courses/StudentCourseItem';
+import { Alert } from '../layouts/Alert';
 
-function Home() {
-  const [cardState] = useState({
-    cards: [
-      {
-        id: '1',
-        title:
-          '2021 Complete Python Bootcamp 2021 Complete Python Bootcamp 2021 Complete Python Bootcamp',
-        instructor: 'joe Biden',
-        price: '$200',
-      },
-      {
-        id: '2',
-        title: '2021 Complete Python Bootcamp',
-        instructor: 'joe Biden',
-        price: '$200',
-      },
-      {
-        id: '3',
-        title: '2021 Complete Python Bootcamp',
-        instructor: 'joe Biden',
-        price: '$200',
-      },
-      {
-        id: '4',
-        title: '2021 Complete Python Bootcamp',
-        instructor: 'joe Biden',
-        price: '$200',
-      },
-    ],
-  });
-
-  let cards = (
-    <div className='cards-container'>
-      {cardState.cards.map((card, index) => {
-        return (
-          <Card
-            title={card.title}
-            instructor={card.instructor}
-            price={card.price}
-            key={card.id}
-          />
-        );
-      })}
-    </div>
-  );
+const Home = ({ getCourses, course: { courses, loading } }) => {
+  useEffect(() => {
+    getCourses();
+  }, [getCourses]);
 
   return (
     <div className='App'>
@@ -72,12 +38,24 @@ function Home() {
       <hr />
       <Container>
         <div className='heading-bts'>
-          <h3>The world's best selection of courses</h3>
+          <h3>The world's top selection of courses</h3>
           <p>
             Choose from various courses taught by the professional teachers.
           </p>
         </div>
-        {cards}
+        <div className='row'>
+          {courses.length > 0 ? (
+            courses.map((course) => (
+              <StudentCourseItem
+                course={course}
+                key={course._id}
+                role='student'
+              />
+            ))
+          ) : (
+            <h4>No courses found...</h4>
+          )}
+        </div>
         <FeaturedCource
           title='Expand your career opportunities with Python'
           description="Whether you work in machine learning or finance, or are pursuing a career in web development or data science, Python is one of the most important skills you can learn. Python's simple syntax is especially suited for desktop, web, and business applications. Python's design philosophy emphasizes readability and usability."
@@ -87,6 +65,14 @@ function Home() {
       <br></br>
     </div>
   );
-}
+};
+Home.propTypes = {
+  getCourses: PropTypes.func.isRequired,
+};
+const mapSatateToProps = (state) => ({
+  course: state.course,
+});
 
-export default Home;
+export default connect(mapSatateToProps, {
+  getCourses,
+})(Home);

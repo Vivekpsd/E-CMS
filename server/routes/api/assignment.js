@@ -178,7 +178,8 @@ router.get('/assignmentuploded/:id/:name', async (req, res) => {
   try {
     var courseID = req.params.id;
     var assignID = req.params.name;
-
+    console.log(assignID);
+    console.log(courseID);
     var directoryPath = path.join(
       __dirname + '\\..' + '\\..',
       '/uploads',
