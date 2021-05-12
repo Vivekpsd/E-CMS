@@ -2,32 +2,41 @@ import React, { Fragment, useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { sendMessage } from '../../actions/profile';
+import { getCurrentProfile, sendMessage } from '../../actions/profile';
 import { getCourses } from '../../actions/course';
-import DashboardActions from '../dashboard/DashboardAction';
 
 const SendMessage = ({
   getCourses,
+  getCurrentProfile,
+  profile: { profile },
   course: { courses },
   sendMessage,
   history,
 }) => {
+  useEffect(() => {
+    getCourses();
+    getCurrentProfile();
+  }, [getCourses, getCurrentProfile]);
+
   const [formData, setFormData] = useState({
     message: '',
-    sentBy: 'Test',
-    senderID: '01',
+    sentBy: '',
+    senderID: '',
     typeMsg: '',
   });
   const { message, sentBy, senderID, typeMsg } = formData;
-  useEffect(() => {
-    getCourses();
-  }, [getCourses]);
 
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const onSubmit = (e) => {
     e.preventDefault();
+    setFormData({
+      ...formData,
+      [sentBy]: profile.user.name,
+      [senderID]: profile.user._id,
+    });
+    console.log(sentBy);
     sendMessage(formData, history);
   };
 
@@ -112,12 +121,16 @@ const SendMessage = ({
 SendMessage.propTypes = {
   sendMessage: PropTypes.func.isRequired,
   getCourses: PropTypes.func.isRequired,
+  getCurrentProfile: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   course: state.course,
+  profile: state.profile,
 });
 
-export default connect(mapStateToProps, { sendMessage, getCourses })(
-  SendMessage
-);
+export default connect(mapStateToProps, {
+  sendMessage,
+  getCourses,
+  getCurrentProfile,
+})(SendMessage);

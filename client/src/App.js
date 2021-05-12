@@ -97,7 +97,7 @@ export default function App() {
               role='teacher'
               component={Teacher}
             />
-            <PrivateRoute exact path='/profile/:id' component={Profile} />
+            <Route exact path='/profile/:id' component={Profile} />
             <PrivateRoute exact path='/dashboard' component={Dashboard} />
             <PrivateRoute
               exact
@@ -105,11 +105,7 @@ export default function App() {
               component={CreateCourse}
             />
             <PrivateRoute exact path='/editcourse/:id' component={EditCourse} />
-            <PrivateRoute
-              exact
-              path='/create-profile'
-              component={CreateProfile}
-            />
+            <Route exact path='/create-profile' component={CreateProfile} />
             <PrivateRoute exact path='/edit-profile' component={EditProfile} />
             <PrivateRoute exact path='/message' component={Messages} />
             <PrivateRoute exact path='/sendmessage' component={SendMessage} />

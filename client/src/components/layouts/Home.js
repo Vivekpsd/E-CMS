@@ -56,11 +56,6 @@ const Home = ({ getCourses, course: { courses, loading } }) => {
             <h4>No courses found...</h4>
           )}
         </div>
-        <FeaturedCource
-          title='Expand your career opportunities with Python'
-          description="Whether you work in machine learning or finance, or are pursuing a career in web development or data science, Python is one of the most important skills you can learn. Python's simple syntax is especially suited for desktop, web, and business applications. Python's design philosophy emphasizes readability and usability."
-          explore='Explore more >'
-        />
       </Container>
       <br></br>
     </div>

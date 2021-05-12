@@ -52,7 +52,10 @@ const Profile = ({
                             />
                           </div>
                           <div className='col-5'>
-                            <h4>{user && user.name.toUpperCase()}</h4>
+                            <h4>
+                              {profile.user.name &&
+                                profile.user.name.toUpperCase()}
+                            </h4>
                             <p>
                               Github -{' '}
                               {profile === null
@@ -60,8 +63,8 @@ const Profile = ({
                                 : profile.githubusername}
                             </p>
                             <p className='text-muted'>
-                              {user.role.charAt(0).toUpperCase() +
-                                user.role.slice(1)}
+                              {profile.user.role.charAt(0).toUpperCase() +
+                                profile.user.role.slice(1)}
                             </p>
                           </div>
                           <div className='col-3 mr-auto'></div>
@@ -84,8 +87,8 @@ const Profile = ({
                               <div class='alert alert-info' role='alert'>
                                 <h4>Skills</h4>
                                 <hr></hr>
-                                <strong>{user.name}</strong> have knowledge
-                                about{' '}
+                                <strong>{profile.user.name}</strong> have
+                                knowledge about{' '}
                                 <strong>
                                   {profile.skills.map((skill) => {
                                     return skill + ', ';
@@ -118,9 +121,9 @@ const Profile = ({
                         <div className='row mt-3'>
                           {profile === null && (
                             <div class='alert alert-info' role='alert'>
-                              <strong>Heads up! {user.name}, </strong> You have
-                              not yet setup a profile, please create a new
-                              profile for your account.
+                              <strong>Heads up! {profile.user.name}, </strong>{' '}
+                              You have not yet setup a profile, please create a
+                              new profile for your account.
                             </div>
                           )}
                         </div>
