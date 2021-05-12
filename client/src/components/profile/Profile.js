@@ -13,7 +13,6 @@ import {
   FaTwitter,
   FaYoutube,
 } from 'react-icons/fa';
-import DashboardActions from '../dashboard/DashboardAction';
 
 const Profile = ({
   getProfileById,

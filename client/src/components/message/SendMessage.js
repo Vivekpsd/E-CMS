@@ -20,8 +20,8 @@ const SendMessage = ({
 
   const [formData, setFormData] = useState({
     message: '',
-    sentBy: '',
-    senderID: '',
+    sentBy: profile.user.name,
+    senderID: profile.user._id,
     typeMsg: '',
   });
   const { message, sentBy, senderID, typeMsg } = formData;
