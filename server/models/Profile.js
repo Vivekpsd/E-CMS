@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const moment = require('moment-timezone');
 
 const ProfileSchema = new mongoose.Schema({
   user: {
@@ -51,9 +52,10 @@ const ProfileSchema = new mongoose.Schema({
         required: true,
       },
       date: {
-        type: Date,
-        default: Date.now,
+        type: String,
+        default: moment().tz('Asia/Kolkata').format('MMMM Do YYYY, h:mm:ss a'),
       },
+
       senderID: {
         type: String,
       },

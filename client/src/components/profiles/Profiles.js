@@ -38,13 +38,10 @@ const Profiles = ({
                 <br></br>
                 <br></br>
                 <div className='profiles row'>
-                  {profiles.length > 0 ? (
+                  {profiles.length > 0 &&
                     profiles.map((profile) => (
                       <ProfileItem key={profile._id} profile={profile} />
-                    ))
-                  ) : (
-                    <h4 className='pt-5'>No profiles found...</h4>
-                  )}
+                    ))}
                 </div>
               </div>
             </div>

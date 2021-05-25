@@ -178,8 +178,8 @@ router.get('/assignmentuploded/:id/:name', async (req, res) => {
   try {
     var courseID = req.params.id;
     var assignID = req.params.name;
-    console.log(assignID);
-    console.log(courseID);
+    console.log(req.params.id + 'Testing...');
+    console.log(assignID + 'Testing...');
     var directoryPath = path.join(
       __dirname + '\\..' + '\\..',
       '/uploads',
@@ -221,7 +221,7 @@ router.get(
       `/${assignID}`,
       `/${file}`
     );
-    console.log('Download Running');
+    console.log(file);
     res.download(directoryPath);
   }
 );

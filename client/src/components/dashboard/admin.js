@@ -116,47 +116,74 @@ const Admin = ({
                     </div>
                     <div className='col-5 mr-auto'>
                       {profile !== null ? (
-                        <h1>
-                          <a
-                            href='https://www.facebook.com'
-                            target='blank'
-                            style={{ textDecoration: 'none', color: 'black' }}
-                          >
-                            <FaFacebook />
-                          </a>
-                          &nbsp;&nbsp;
-                          <a
-                            href='https://www.twitter.com'
-                            target='blank'
-                            style={{ textDecoration: 'none', color: 'black' }}
-                          >
-                            <FaTwitter />
-                          </a>
-                          &nbsp;&nbsp;
-                          <a
-                            href='https://www.instagram.com'
-                            target='blank'
-                            style={{ textDecoration: 'none', color: 'black' }}
-                          >
-                            <FaInstagram />
-                          </a>
-                          &nbsp;&nbsp;
-                          <a
-                            href='https://www.github.com'
-                            target='blank'
-                            style={{ textDecoration: 'none', color: 'black' }}
-                          >
-                            <FaGithub />
-                          </a>
-                          &nbsp;&nbsp;
-                          <a
-                            href='https://www.youtube.com'
-                            target='blank'
-                            style={{ textDecoration: 'none', color: 'black' }}
-                          >
-                            <FaYoutube />
-                          </a>
-                        </h1>
+                        profile.social && (
+                          <h1>
+                            {profile.social.facebook && (
+                              <a
+                                href={profile.social.facebook}
+                                target='blank'
+                                style={{
+                                  textDecoration: 'none',
+                                  color: 'black',
+                                }}
+                              >
+                                <FaFacebook />
+                              </a>
+                            )}
+                            &nbsp;&nbsp;
+                            {profile.social.twitter && (
+                              <a
+                                href={profile.social.twitter}
+                                target='blank'
+                                style={{
+                                  textDecoration: 'none',
+                                  color: 'black',
+                                }}
+                              >
+                                <FaTwitter />
+                              </a>
+                            )}
+                            &nbsp;&nbsp;
+                            {profile.social.instagram && (
+                              <a
+                                href={profile.social.instagram}
+                                target='blank'
+                                style={{
+                                  textDecoration: 'none',
+                                  color: 'black',
+                                }}
+                              >
+                                <FaInstagram />
+                              </a>
+                            )}
+                            &nbsp;&nbsp;
+                            {profile.githubusername && (
+                              <a
+                                href={`https://www.github.com/${profile.githubusername}`}
+                                target='blank'
+                                style={{
+                                  textDecoration: 'none',
+                                  color: 'black',
+                                }}
+                              >
+                                <FaGithub />
+                              </a>
+                            )}
+                            &nbsp;&nbsp;
+                            {profile.social.youtube && (
+                              <a
+                                href={profile.social.youtube}
+                                target='blank'
+                                style={{
+                                  textDecoration: 'none',
+                                  color: 'black',
+                                }}
+                              >
+                                <FaYoutube />
+                              </a>
+                            )}
+                          </h1>
+                        )
                       ) : (
                         <div className='alert alert-info' role='alert'>
                           <strong>Heads up! {user.name}, </strong> You have not

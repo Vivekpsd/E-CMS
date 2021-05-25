@@ -20,7 +20,8 @@ const EnrolledStudent = ({
   }, [getCourseById, getProfiles]);
 
   const test = (studentID) => {
-    return profiles.length > 0 ? (
+    return (
+      profiles.length > 0 &&
       profiles.map((profile) => {
         return (
           profile.user._id === studentID && (
@@ -28,8 +29,6 @@ const EnrolledStudent = ({
           )
         );
       })
-    ) : (
-      <h4 className='pt-5'>No profiles found...</h4>
     );
 
     // <div className='container pt-4'>

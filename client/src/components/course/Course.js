@@ -7,9 +7,12 @@ import { getCourseById } from '../../actions/course';
 import { deleteCourse } from '../../actions/course';
 import { FaClock, FaStar, FaStarHalf, FaTimes } from 'react-icons/fa';
 import { FcCustomerSupport, FcCalendar, FcClock } from 'react-icons/fc';
+import { getCurrentProfile } from '../../actions/profile';
 
 const Course = ({
   match,
+  getCurrentProfile,
+  profile: { profile },
   getCourseById,
   course: { course, loading },
   deleteCourse,
@@ -17,7 +20,8 @@ const Course = ({
 }) => {
   useEffect(() => {
     getCourseById(match.params.id);
-  }, [getCourseById]);
+    getCurrentProfile();
+  }, [getCourseById, getCurrentProfile]);
   function roundToTwo(num) {
     return +(Math.round(num + 'e+2') + 'e-2');
   }
@@ -154,12 +158,25 @@ const Course = ({
                         <div className='row mt-5'>
                           <div className='col'>
                             &nbsp;
-                            <Link
-                              to={`/editcourse/${course._id}`}
-                              className='btn btn-dark'
-                            >
-                              Edit Course
-                            </Link>
+                            {profile.user.role === 'admin' && (
+                              <Link
+                                to={`/editcourse/${course._id}`}
+                                className='btn btn-dark'
+                              >
+                                Edit Course
+                              </Link>
+                            )}
+                            &nbsp;
+                            {profile.user.role === 'admin' && (
+                              <button
+                                onClick={() =>
+                                  deleteCourse(course._id, history)
+                                }
+                                className='btn btn-danger'
+                              >
+                                Delete Course
+                              </button>
+                            )}
                             &nbsp;
                             <Link
                               to={`/viewstudent/${course._id}`}
@@ -167,13 +184,6 @@ const Course = ({
                             >
                               View Student
                             </Link>
-                            &nbsp;
-                            <button
-                              onClick={() => deleteCourse(course._id, history)}
-                              className='btn btn-danger'
-                            >
-                              Delete Course
-                            </button>
                           </div>
                         </div>
                       </div>
@@ -245,14 +255,17 @@ const Course = ({
 
 Course.propTypes = {
   getCourseById: PropTypes.func.isRequired,
+  getCurrentProfile: PropTypes.func.isRequired,
   course: PropTypes.object.isRequired,
   deleteCourse: PropTypes.func.isRequired,
 };
 const mapSatateToProps = (state) => ({
   course: state.course,
+  profile: state.profile,
 });
 
 export default connect(mapSatateToProps, {
   getCourseById,
   deleteCourse,
+  getCurrentProfile,
 })(withRouter(Course));

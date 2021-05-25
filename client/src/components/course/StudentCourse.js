@@ -472,11 +472,8 @@ const StudentCourse = ({
                                 <span>
                                   <FcCalendar />
                                   &nbsp;&nbsp;
-                                  {review.date.substring(0, 10)}
+                                  {review.date}
                                   &nbsp;&nbsp;&nbsp;&nbsp;
-                                  <FcClock />
-                                  &nbsp;&nbsp;
-                                  {review.date.substring(11, 16)}
                                 </span>
                               </span>
                               {profile !== null && (

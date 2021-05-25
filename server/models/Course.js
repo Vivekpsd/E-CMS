@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const moment = require('moment-timezone');
 
 const CourseSchema = new mongoose.Schema({
   title: {
@@ -44,8 +45,8 @@ const CourseSchema = new mongoose.Schema({
         type: String,
       },
       date: {
-        type: Date,
-        default: Date.now,
+        type: String,
+        default: moment().tz('Asia/Kolkata').format('MMMM Do YYYY, h:mm:ss a'),
       },
       studentID: {
         type: mongoose.Schema.Types.ObjectId,

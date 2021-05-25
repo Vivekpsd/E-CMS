@@ -63,57 +63,53 @@ const ViewUploadedAssignment = ({
         <Spinner />
       ) : (
         <Fragment>
-          {assignment.assignment.map((uploaded) => {
-            return (
-              <Fragment>
-                <div className='container pt-5'>
-                  <div className='row'>
-                    <div className='col'>
-                      <h3>Submitted Assignments</h3>
-                      <hr></hr>
-                      <table class='table '>
-                        <thead class='thead-dark'>
+          <div className='container pt-5'>
+            <div className='row'>
+              <div className='col'>
+                <h3>Submitted Assignments</h3>
+                <hr></hr>
+                <table class='table '>
+                  <thead class='thead-dark'>
+                    <tr>
+                      <th scope='col'>File Name</th>
+                      <th scope='col'>Student Name</th>
+                      <th scope='col'>Student Email</th>
+                      <th scope='col'>Download Assignment</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <Fragment>
+                      {assignment.assignment.map((uploaded) => {
+                        return (
                           <tr>
-                            <th scope='col'>File Name</th>
-                            <th scope='col'>Student Name</th>
-                            <th scope='col'>Student Email</th>
-                            <th scope='col'>Download Assignment</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <Fragment>
-                            <tr>
-                              <td>{uploaded}</td>
+                            <td>{uploaded}</td>
 
-                              <td>
-                                {uploaded.substr(0, uploaded.indexOf('_'))}
-                              </td>
-                              <td>
-                                {uploaded
-                                  .substring(uploaded.indexOf('_') + 1)
-                                  .slice(0, -4)}
-                              </td>
-                              <td>
-                                <Link
-                                  onClick={() => {
-                                    download(uploaded);
-                                  }}
-                                  className='course-btn'
-                                >
-                                  Download
-                                </Link>
-                              </td>
-                            </tr>
-                          </Fragment>
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                </div>
-                <div style={{ height: '250px' }}></div>
-              </Fragment>
-            );
-          })}
+                            <td>{uploaded.substr(0, uploaded.indexOf('_'))}</td>
+                            <td>
+                              {uploaded
+                                .substring(uploaded.indexOf('_') + 1)
+                                .slice(0, -4)}
+                            </td>
+                            <td>
+                              <Link
+                                onClick={() => {
+                                  download(uploaded);
+                                }}
+                                className='course-btn'
+                              >
+                                Download
+                              </Link>
+                            </td>
+                          </tr>
+                        );
+                      })}
+                    </Fragment>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div style={{ height: '250px' }}></div>
         </Fragment>
       )}
     </Fragment>

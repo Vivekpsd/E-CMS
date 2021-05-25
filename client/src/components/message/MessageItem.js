@@ -43,11 +43,7 @@ const MessageItem = ({
                         <div className='col-12'>
                           <FcCalendar />
                           &nbsp;&nbsp;
-                          {date.substring(0, 10)}
-                          &nbsp;&nbsp;&nbsp;&nbsp;
-                          <FcClock />
-                          &nbsp;&nbsp;
-                          {date.substring(11, 16)}
+                          {date}
                         </div>
                       </div>
                     </div>
@@ -86,11 +82,7 @@ const MessageItem = ({
                     <p>
                       <FcCalendar />
                       &nbsp;&nbsp;
-                      {date.substring(0, 10)}
-                      &nbsp;&nbsp;&nbsp;&nbsp;
-                      <FcClock />
-                      &nbsp;&nbsp;
-                      {date.substring(11, 16)}
+                      {date}
                     </p>
                   </div>
                 </div>

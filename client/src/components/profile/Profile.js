@@ -44,7 +44,11 @@ const Profile = ({
                         <div className='row align-items-center'>
                           <div className='col-4'>
                             <img
-                              src={UserPic}
+                              src={
+                                profile.user.avatar
+                                  ? profile.user.avatar
+                                  : UserPic
+                              }
                               className='rounded'
                               alt='user'
                               height='200px'
@@ -103,15 +107,85 @@ const Profile = ({
                           <div className='row text-center'>
                             <div className='col'>
                               <h1>
-                                <FaFacebook />
-                                &nbsp;&nbsp;
-                                <FaTwitter />
-                                &nbsp;&nbsp;
-                                <FaInstagram />
-                                &nbsp;&nbsp;
-                                <FaGithub />
-                                &nbsp;&nbsp;
-                                <FaYoutube />
+                                {profile !== null ? (
+                                  profile.social && (
+                                    <h1>
+                                      {profile.social.facebook && (
+                                        <a
+                                          href={profile.social.facebook}
+                                          target='blank'
+                                          style={{
+                                            textDecoration: 'none',
+                                            color: 'black',
+                                          }}
+                                        >
+                                          <FaFacebook />
+                                        </a>
+                                      )}
+                                      &nbsp;&nbsp;
+                                      {profile.social.twitter && (
+                                        <a
+                                          href={profile.social.twitter}
+                                          target='blank'
+                                          style={{
+                                            textDecoration: 'none',
+                                            color: 'black',
+                                          }}
+                                        >
+                                          <FaTwitter />
+                                        </a>
+                                      )}
+                                      &nbsp;&nbsp;
+                                      {profile.social.instagram && (
+                                        <a
+                                          href={profile.social.instagram}
+                                          target='blank'
+                                          style={{
+                                            textDecoration: 'none',
+                                            color: 'black',
+                                          }}
+                                        >
+                                          <FaInstagram />
+                                        </a>
+                                      )}
+                                      &nbsp;&nbsp;
+                                      {profile.githubusername && (
+                                        <a
+                                          href={`https://www.github.com/${profile.githubusername}`}
+                                          target='blank'
+                                          style={{
+                                            textDecoration: 'none',
+                                            color: 'black',
+                                          }}
+                                        >
+                                          <FaGithub />
+                                        </a>
+                                      )}
+                                      &nbsp;&nbsp;
+                                      {profile.social.youtube && (
+                                        <a
+                                          href={profile.social.youtube}
+                                          target='blank'
+                                          style={{
+                                            textDecoration: 'none',
+                                            color: 'black',
+                                          }}
+                                        >
+                                          <FaYoutube />
+                                        </a>
+                                      )}
+                                    </h1>
+                                  )
+                                ) : (
+                                  <div
+                                    className='alert alert-info'
+                                    role='alert'
+                                  >
+                                    <strong>Heads up! {user.name}, </strong> You
+                                    have not yet setup a profile, please create
+                                    a new profile for your account.
+                                  </div>
+                                )}
                               </h1>
                             </div>
                           </div>

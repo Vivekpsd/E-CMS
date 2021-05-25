@@ -70,31 +70,26 @@ export const getUploadedAssignments = (courseID, name) => async (dispatch) => {
 //File Uploaded By Student - By student
 
 //Assignment
-export const uploadAssignmentStudent = (
-  formData,
-  username,
-  email,
-  courseID,
-  assignID
-) => async (dispatch) => {
-  console.log('In Action');
-  try {
-    const res = await axios.post(
-      `http://localhost:5000/api/assignment/student/${courseID}/${assignID}/${username}/${email}`,
-      formData,
-      {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      }
-    );
+export const uploadAssignmentStudent =
+  (formData, username, email, courseID, assignID) => async (dispatch) => {
+    console.log('In Action');
+    try {
+      const res = await axios.post(
+        `http://localhost:5000/api/assignment/student/${courseID}/${assignID}/${username}/${email}`,
+        formData,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        }
+      );
 
-    // dispatch({
-    //   type: ADD_ASSIGNEMNT,
-    //   payload: res2.data,
-    // });
-    dispatch(setAlert('Assignment Uploaded', 'success'));
-  } catch (err) {
-    console.log(err.message);
-  }
-};
+      // dispatch({
+      //   type: ADD_ASSIGNEMNT,
+      //   payload: res2.data,
+      // });
+      dispatch(setAlert('Assignment Uploaded', 'success'));
+    } catch (err) {
+      console.log(err.message);
+    }
+  };

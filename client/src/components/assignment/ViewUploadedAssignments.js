@@ -41,7 +41,7 @@ const ViewUploadedAssignments = ({
           <div className='container pt-5 '>
             <div className='row'>
               <div className='col'>
-                <h3>List of Assignments </h3>
+                <h3>List of Assignments</h3>
                 <hr></hr>
                 <table class='table '>
                   <thead class='thead-dark'>
