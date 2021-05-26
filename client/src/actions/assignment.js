@@ -28,7 +28,6 @@ export const getAssignmentCourse = () => async (dispatch) => {
 };
 //Get all assignment uploaded by student
 export const getUploadedAssignment = (courseID) => async (dispatch) => {
-  console.log(courseID);
   try {
     const res = await axios.get(
       `http://localhost:5000/api/assignment/course-list/${courseID}`
@@ -48,8 +47,6 @@ export const getUploadedAssignment = (courseID) => async (dispatch) => {
 
 //Get uploaded assignments by student in specific courses - Teacher
 export const getUploadedAssignments = (courseID, name) => async (dispatch) => {
-  console.log(name);
-  console.log(courseID);
   try {
     const res = await axios.get(
       `http://localhost:5000/api/assignment/assignmentuploded/${courseID}/${name}`
@@ -72,7 +69,6 @@ export const getUploadedAssignments = (courseID, name) => async (dispatch) => {
 //Assignment
 export const uploadAssignmentStudent =
   (formData, username, email, courseID, assignID) => async (dispatch) => {
-    console.log('In Action');
     try {
       const res = await axios.post(
         `http://localhost:5000/api/assignment/student/${courseID}/${assignID}/${username}/${email}`,

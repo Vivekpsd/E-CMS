@@ -53,7 +53,7 @@ const ProfileSchema = new mongoose.Schema({
       },
       date: {
         type: String,
-        default: moment().tz('Asia/Kolkata').format('MMMM Do YYYY, h:mm:ss a'),
+        default: moment().tz('Asia/Kolkata').format('MMMM Do YYYY'),
       },
 
       senderID: {

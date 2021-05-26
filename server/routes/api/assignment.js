@@ -240,7 +240,7 @@ router.get(
       `/${courseID}`,
       `/${assignID}`
     );
-    console.log('Download Running');
+
     res.download(directoryPath);
   }
 );

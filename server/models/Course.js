@@ -46,7 +46,7 @@ const CourseSchema = new mongoose.Schema({
       },
       date: {
         type: String,
-        default: moment().tz('Asia/Kolkata').format('MMMM Do YYYY, h:mm:ss a'),
+        default: moment().tz('Asia/Kolkata').format('MMMM Do YYYY'),
       },
       studentID: {
         type: mongoose.Schema.Types.ObjectId,
